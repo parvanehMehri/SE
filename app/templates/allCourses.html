@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    Filter by name:
+    <form method="POST" action="">
+        <input name="course_name_filter" class="filter1" id="filter1">
+        <input type="submit">
+    </form>
+    {% for course in courses %}
+    <div><p>{{ course.name }} description: <b>{{ course.description }}</b></p></div>
+    {% endfor %}
+{% endblock %}

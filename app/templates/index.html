@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Hi, {{ current_user.username }}!</h1>
+    {% for post in current_user.posts %}
+    <div><p>{{ post.related.username }} says: <b>{{ post.body }}</b></p></div>
+    {% endfor %}
+    <a href="{{url_for('allCourses')}}"> All Courses</a>
+{% endblock %}
