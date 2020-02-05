@@ -11,14 +11,15 @@ def home():
     courses = Course.query.all()
     return render_template('home.html', title='Home' , courses = courses)
 
-@app.route('/about_us')  # bayad bere to home page(site landing page)
-def about_us():
-    return render_template('about_us.html', title='About_us' )
+@app.route('/landing_page')
+def landing_page():
+    courses = Course.query.all()
+    return render_template('landing_page/index.html', title='Landing Page' , courses = courses)
 
-# @app.route('/home')  # bayad bere to home page(site landing page)
-# def my_home():
-#     courses = Course.query.all()
-#     return render_template('landing_page/home.html', title='My_Home' , courses = courses)
+@app.route('/about_us')
+def about_us():
+    return render_template('landing_page/about_us.html', title='About_us' )
+
 
 @app.route('/index')  # manzoor az index va home hamon dashboard ast ... :)
 @login_required
