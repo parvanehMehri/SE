@@ -11,8 +11,8 @@ class User(UserMixin , db.Model):
     password_hash = db.Column(db.String(128))
     img_url = db.Column(db.String(140))
     friends = db.Column(db.String(140)) # we can split friend's ids with ',' to achieve user's friends
-    enrollments = db.relationship('Enrollment', backref='related', lazy='dynamic')
-    posts = db.relationship('Post', backref='related', lazy='dynamic')  #all posets that this user send or receive are here
+    enrollments = db.relationship('Enrollment', backref='related_user', lazy='dynamic')
+    posts = db.relationship('Post', backref='user_for_post', lazy='dynamic')  #all posets that this user send or receive are here
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -54,6 +54,7 @@ class Course(db.Model):
     description = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     img_url = db.Column(db.String(140))
+    enrollments = db.relationship('Enrollment', backref='related_course', lazy='dynamic')
 
     def __repr__(self):
         return '<Course {}>'.format(self.name)

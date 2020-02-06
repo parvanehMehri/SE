@@ -3,7 +3,7 @@ from werkzeug.utils import redirect
 from app import app , db
 from app.forms import LoginForm , RegistrationForm
 from flask_login import current_user, login_user, login_required , logout_user
-from app.models import User, Course
+from app.models import User, Course , Post , Enrollment
 from werkzeug.urls import url_parse
 
 @app.route('/home')  # bayad bere to home page(site landing page)
@@ -72,6 +72,35 @@ def allCourses():
             filtered_courses = Course.query.filter_by(name=filter)
             courses = filtered_courses
     return render_template('allCourses.html', title='all courses' , courses = courses)
+
+@app.route('/goals' , methods=['GET', 'POST'])
+@login_required
+def goals():
+    ens = current_user.enrollments
+    goal_courses= []
+    for enrollment in ens :
+        if enrollment.state == False :
+            goal_courses.append( Course.query.filter_by(id = enrollment.course_id).first() )
+
+    return render_template('goals.html', title='goals' , courses = goal_courses)
+
+# @app.route('/course#1' , methods=['GET', 'POST'])
+# @login_required
+# def course():
+#     if request.method == 'POST':
+#         # enroll
+#         crs = Course.query.get(1)
+#         en = Enrollment(related_course = crs , related_user = current_user , state = True)
+#         db.session.add(en)
+#         db.session.commit()
+#
+#         # read later
+#         crs = Course.query.get(1)
+#         en = Enrollment(related_course=crs, related_user=current_user, state=False)
+#         db.session.add(en)
+#         db.session.commit()
+#
+#     return render_template('course#1.html', title='Course#1')
 
 @app.errorhandler(404)
 def page_not_found(error):
