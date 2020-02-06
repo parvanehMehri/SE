@@ -1,4 +1,6 @@
-from flask import render_template, flash, url_for , request
+import os
+
+from flask import render_template, flash, url_for, request, send_from_directory
 from werkzeug.utils import redirect
 from app import app , db
 from app.forms import LoginForm , RegistrationForm
@@ -6,17 +8,17 @@ from flask_login import current_user, login_user, login_required , logout_user
 from app.models import User, Course , Post , Enrollment
 from werkzeug.urls import url_parse
 
-@app.route('/home')  # bayad bere to home page(site landing page)
+@app.route('/home' , methods=['GET', 'POST'])  # bayad bere to home page(site landing page)
 def home():
     courses = Course.query.all()
     return render_template('home.html', title='Home' , courses = courses)
 
-@app.route('/landing_page')
+@app.route('/landing_page' , methods=['GET', 'POST'])
 def landing_page():
     courses = Course.query.all()
-    return render_template('landing_page/index.html', title='Landing Page' , courses = courses)
+    return render_template('landing_page/index.html', courses = courses)
 
-@app.route('/about_us')
+@app.route('/about_us' , methods=['GET', 'POST'])
 def about_us():
     return render_template('landing_page/about_us.html', title='About_us' )
 
@@ -102,6 +104,13 @@ def goals():
 #
 #     return render_template('course#1.html', title='Course#1')
 
-@app.errorhandler(404)
-def page_not_found(error):
-    return render_template('page_not_found.html'), 404
+
+#
+# @app.errorhandler(404)
+# def page_not_found(error):
+#     return render_template('page_not_found.html'), 404
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='img/vnd.microsoft.icon')

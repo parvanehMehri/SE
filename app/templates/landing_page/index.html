@@ -4,20 +4,20 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!--        <link rel="icon" href="img/favicon.png" type="image/png">-->
-        <title>Learn IT Education</title>
+        <link rel="icon" href="../static/assets/landing_page/img/logo1.png" type="image/png">
+        <title>Coursera</title>
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" href="vendors/linericon/style.css">
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-        <link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css">
-        <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
-        <link rel="stylesheet" href="vendors/animate-css/animate.css">
-        <link rel="stylesheet" href="vendors/popup/magnific-popup.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/css/bootstrap.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/linericon/style.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/owl-carousel/owl.carousel.min.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/lightbox/simpleLightbox.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/nice-select/css/nice-select.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/animate-css/animate.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/popup/magnific-popup.css">
         <!-- main css -->
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/responsive.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/css/style.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/css/responsive.css">
     </head>
     <body>
         
@@ -43,7 +43,7 @@
             	<nav class="navbar navbar-expand-lg navbar-light">
 					<div class="container">
 						<!-- Brand and toggle get grouped for better mobile display -->
-						<a class="navbar-brand logo_h" href="{{ url_for('landing_page')}}"><img src="img/logo1.png" alt=""></a>
+						<a class="navbar-brand logo_h" href="{{ url_for('landing_page')}}"><img src="../static/assets/landing_page/img/logo1.png" alt=""></a>
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
@@ -53,9 +53,9 @@
 						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 							<ul class="nav navbar-nav menu_nav ml-auto">
 								<li class="nav-item active"><a class="nav-link" href="{{ url_for('landing_page')}}">Home</a></li>
-								<li class="nav-item"><a class="nav-link" href="{{ url_for('about-us')}}">About</a></li>
+								<li class="nav-item"><a class="nav-link" href="{{ url_for('about_us')}}">About</a></li>
 								<li class="nav-item"><a class="nav-link" href="{{url_for('login')}}">Login</a></li>
-								<li class="nav-item"><a class="nav-link" href="url_for('register')">Register</a></li>
+								<li class="nav-item"><a class="nav-link" href="{{url_for('register')}}">Register</a></li>
 							</ul>
 						</div> 
 					</div>
@@ -91,8 +91,9 @@
 					{% for course in courses %}
 					<div class="col-lg-3 col-md-6">
 						<div class="l_blog_item">
-							<img class="img-fluid" src="{{ course.img_url }}" alt="">
-							<a class="date" href="#">{{ course.timestamp }}</a>
+<!--							<img class="img-fluid" src="../static/assets/landing_page/img/courses/my_course1.jpg" alt="">-->
+							<img class="img-fluid" src={{ course.img_url }} alt="">
+							<a class="date" href= {{url_for('landing_page')}} >{{ course.timestamp }}</a>
 							<a href="login.html"><h4>{{ course.name }}</h4></a>
 							<p>{{ course.description }}</p>
 						</div>
@@ -115,7 +116,7 @@
         			<div class="col-lg-3 col-sm-6">
         				<div class="team_item">
         					<div class="team_img">
-        						<img class="rounded-circle" src="img/team/nika.jpg" alt="">
+        						<img class="rounded-circle" src="../static/assets/landing_page/img/team/nika.jpg" alt="">
         						<div class="hover">
         							<a href="#"><i class="fa fa-facebook"></i></a>
         							<a href="#"><i class="fa fa-twitter"></i></a>
@@ -131,7 +132,7 @@
         			<div class="col-lg-3 col-sm-6">
         				<div class="team_item">
         					<div class="team_img">
-        						<img class="rounded-circle" src="img/team/parvaneh.jpg" alt="">
+        						<img class="rounded-circle" src="../static/assets/landing_page/img/team/parvaneh.jpg" alt="">
         						<div class="hover">
         							<a href="#"><i class="fa fa-facebook"></i></a>
         							<a href="#"><i class="fa fa-twitter"></i></a>
@@ -147,7 +148,7 @@
         			<div class="col-lg-3 col-sm-6">
         				<div class="team_item">
         					<div class="team_img">
-        						<img class="rounded-circle" src="img/team/ensieh.jpg" alt="">
+        						<img class="rounded-circle" src="../static/assets/landing_page/img/team/ensieh.jpg" alt="">
         						<div class="hover">
         							<a href="#"><i class="fa fa-facebook"></i></a>
         							<a href="#"><i class="fa fa-twitter"></i></a>
@@ -163,7 +164,7 @@
         			<div class="col-lg-3 col-sm-6">
         				<div class="team_item">
         					<div class="team_img">
-        						<img class="rounded-circle" src="img/team/zahra.jpg" alt="">
+        						<img class="rounded-circle" src="../static/assets/landing_page/img/team/zahra.jpg" alt="">
         						<div class="hover">
         							<a href="#"><i class="fa fa-facebook"></i></a>
         							<a href="#"><i class="fa fa-twitter"></i></a>
@@ -266,20 +267,20 @@
         
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/popper.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/stellar.js"></script>
-        <script src="vendors/lightbox/simpleLightbox.min.js"></script>
-        <script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
-        <script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
-        <script src="vendors/isotope/isotope.pkgd.min.js"></script>
-        <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-        <script src="vendors/popup/jquery.magnific-popup.min.js"></script>
-        <script src="js/jquery.ajaxchimp.min.js"></script>
-        <script src="vendors/counter-up/jquery.waypoints.min.js"></script>
-        <script src="vendors/counter-up/jquery.counterup.js"></script>
-        <script src="js/mail-script.js"></script>
-        <script src="js/theme.js"></script>
+        <script src="../static/assets/landing_page/js/jquery-3.3.1.min.js"></script>
+        <script src="../static/assets/landing_page/js/popper.js"></script>
+        <script src="../static/assets/landing_page/js/bootstrap.min.js"></script>
+        <script src="../static/assets/landing_page/js/stellar.js"></script>
+        <script src="../static/assets/landing_page/vendors/lightbox/simpleLightbox.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/isotope/isotope.pkgd.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/owl-carousel/owl.carousel.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/popup/jquery.magnific-popup.min.js"></script>
+        <script src="../static/assets/landing_page/js/jquery.ajaxchimp.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/counter-up/jquery.waypoints.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/counter-up/jquery.counterup.js"></script>
+        <script src="../static/assets/landing_page/js/mail-script.js"></script>
+        <script src="../static/assets/landing_page/js/theme.js"></script>
     </body>
 </html>
