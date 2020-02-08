@@ -114,3 +114,15 @@ def goals():
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='img/vnd.microsoft.icon')
+
+@app.route('/friends' , methods=['GET', 'POST'])
+@login_required
+def allFriends():
+
+   frnds_id= User.get_friend(current_user)
+   friends_list=[]
+
+   for id in frnds_id:
+      friend_user= User.query.get(id)
+      friends_list.append(friend_user.username)
+   return render_template('Friends.html', title='Friends' , Friends=friends_list )

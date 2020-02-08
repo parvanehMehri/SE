@@ -20,13 +20,14 @@ class User(UserMixin , db.Model):
     def add_friend(self , id):
         self.friends = self.friends + str(id) + ','
 
-    def get_friend(self ):
+    def get_friend(self):
         frnds = self.friends.split(',')
         frnds.remove(frnds[len(frnds) - 1])
         int_frnds = []
         for f in frnds:
             int_frnds.append(int(f))
         return int_frnds  # return a list of user's friends's ids
+
 
     def set_img_url(self):
         if self.email is not None:
@@ -72,3 +73,5 @@ class Enrollment(db.Model):
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
+
