@@ -125,4 +125,4 @@ def allFriends():
    for id in frnds_id:
       friend_user= User.query.get(id)
       friends_list.append(friend_user.username)
-   return render_template('Friends.html', title='Friends' , Friends=friends_list )
+   return render_template('landing_page/contact.html', title='Friends' , Friends=friends_list )
