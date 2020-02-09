@@ -3,7 +3,7 @@ import os
 from flask import render_template, flash, url_for, request, send_from_directory
 from werkzeug.utils import redirect
 from app import app , db
-from app.forms import LoginForm , RegistrationForm
+from app.forms import LoginForm, RegistrationForm, SendMassage_addFriend
 from flask_login import current_user, login_user, login_required , logout_user
 from app.models import User, Course , Post , Enrollment
 from werkzeug.urls import url_parse
@@ -53,6 +53,7 @@ def register():
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
+        user.set_img_url()
         db.session.add(user)
         db.session.commit()
         flash('Congratulations, you are now a registered user!')
@@ -121,8 +122,34 @@ def allFriends():
 
    frnds_id= User.get_friend(current_user)
    friends_list=[]
+   form = SendMassage_addFriend()
 
    for id in frnds_id:
       friend_user= User.query.get(id)
-      friends_list.append(friend_user.username)
-   return render_template('landing_page/contact.html', title='Friends' , Friends=friends_list )
+      friends_list.append(friend_user)
+
+   if request.method == 'POST' and form.massage.data !='':
+        receiver_username =form.receiver.data
+        receiver =User.query.filter_by(username=receiver_username).first()
+        post_sender = Post(body=form.massage.data,user_id=current_user.id ,send_receive=False)
+        post_receiver = Post(body=form.massage.data,user_id=receiver.id, send_receive=True)
+        db.session.add(post_sender)
+        db.session.commit()
+        db.session.add(post_receiver)
+        db.session.commit()
+        flash('Massage send!')
+        form.massage.data=''
+
+   if request.method=='POST'and form.addfriend.data !='' :
+    fuser =request.form['addfriend']
+    new_friend = User.query.filter_by(username=fuser).first()
+    User.add_friend(current_user,new_friend.id)
+    db.session.commit()
+    flash('Friend aded!')
+
+   return render_template('Friends.html', title='Friends' , Friends=friends_list,form=form )
+
+
+
+
+

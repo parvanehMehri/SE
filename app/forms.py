@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, TextField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.models import User
 
@@ -26,3 +26,10 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Please use a different email address.')
+
+class SendMassage_addFriend(FlaskForm):
+    massage=TextAreaField('massage',validators=[DataRequired()])
+    receiver=StringField('receiver',validators=[DataRequired()])
+    addfriend=StringField('addfriend',validators=[DataRequired()])
+    add = SubmitField('addfriend')
+    submit = SubmitField('Send')

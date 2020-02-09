@@ -1,12 +1,34 @@
 {% extends "base.html" %}
-
 {% block content %}
- Friends :
+
+
+
+  <form action="" method="POST" novalidate>
+
+        {{ form.hidden_tag() }}
+
+         {{ form.addfriend }}
+        {{ form.add() }} <br>
+
+       <p>send massage :</p>
+
+    {{ form.massage }}<br>
+      to :<br>
+      {{form.receiver}}<br>
+    <p>{{ form.submit() }}
+
+ <p>Friends :</p>
 {% for friend in Friends %}
+
 <div><p>
     <ul>
-    <li>{{ friend }}</li>
+
+    <P><li>{{friend.username}}</li></p>
 </ul>
       </p> </div>
     {% endfor %}
+  </form>
+
+
 {% endblock %}
+
