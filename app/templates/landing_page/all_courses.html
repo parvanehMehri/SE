@@ -73,8 +73,8 @@
         <!--================Home Banner Area =================-->
         <section class="home_banner_area blog_banner">
             <div class="blog_b_text text-center">
-                <h2>Our All Courses</h2>
-                <p>There is all courses that available for you , you can add courses to your goals-list or enroll in it</p>
+                <h2>{{title}}</h2>
+                <p>There is {{title}} that available for you , you can add courses to your goals-list or enroll in it</p>
             </div>
         </section>
         <!--================End Home Banner Area =================-->
@@ -89,7 +89,15 @@
                             <img src={{ category.ctg_img_url }} alt="post">
                             <div class="categories_details">
                                 <div class="categories_text">
-                                    <a href={{url_for('all_courses')}}><h5>{{ category.ctg_name }}</h5></a>
+                                    {% if category.ctg_name == 'Physics' %}
+                                        <a href={{url_for('Physics_courses')}}><h5>{{ category.ctg_name }}</h5></a>
+                                    {% endif%}
+                                    {% if category.ctg_name == 'Computer Engineering' %}
+                                    <a href={{url_for('ComputerEngineering_courses')}}><h5>{{ category.ctg_name }}</h5></a>
+                                    {% endif%}
+                                    {% if category.ctg_name == 'Electrical Engineering' %}
+                                    <a href={{url_for('ElectricalEngineering_courses')}}><h5>{{ category.ctg_name }}</h5></a>
+                                    {% endif%}
                                     <div class="border_line"></div>
                                     <p>See Related Courses ... </p>
                                 </div>

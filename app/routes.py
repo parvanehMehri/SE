@@ -82,12 +82,80 @@ def all_courses():
     frns_id = current_user.get_friend()
     for id in frns_id:
         friends.append(User.query.filter_by(id=id).first())
+
     # if request.method == 'POST':
     #     filter = request.form['course_name_filter']
     #     if filter is not '':
     #         filtered_courses = Course.query.filter_by(name=filter)
     #         courses = filtered_courses
-    return render_template('landing_page/all_courses.html', title='all courses' , courses = courses , categories = categories , goals = goal_courses , friends = friends)
+
+    # if request.method == 'POST':
+    #     for category in categories:
+    #         if category.ctg_name in request.form:
+    #             courses = category.courses
+
+    return render_template('landing_page/all_courses.html', title='All Courses' , courses = courses , categories = categories , goals = goal_courses , friends = friends)
+
+@app.route('/all_courses/Computer_Engineering' , methods=['GET', 'POST'])
+@login_required
+def ComputerEngineering_courses():
+    courses = Category.query.filter_by(ctg_name = 'Computer Engineering').first().courses
+    categories = Category.query.all()
+
+    ens = current_user.enrollments
+    goal_courses = []
+    for enrollment in ens:
+        if enrollment.state == False:
+            goal_courses.append(Course.query.filter_by(id=enrollment.course_id).first())
+
+    friends = []
+    frns_id = current_user.get_friend()
+    for id in frns_id:
+        friends.append(User.query.filter_by(id=id).first())
+
+    return render_template('landing_page/all_courses.html', title='Computer Engineering Courses' , courses = courses ,
+                           categories = categories , goals = goal_courses , friends = friends)
+
+
+@app.route('/all_courses/Electrical_Engineering', methods=['GET', 'POST'])
+@login_required
+def ElectricalEngineering_courses():
+    courses = Category.query.filter_by(ctg_name='Electrical Engineering').first().courses
+    categories = Category.query.all()
+
+    ens = current_user.enrollments
+    goal_courses = []
+    for enrollment in ens:
+        if enrollment.state == False:
+            goal_courses.append(Course.query.filter_by(id=enrollment.course_id).first())
+
+    friends = []
+    frns_id = current_user.get_friend()
+    for id in frns_id:
+        friends.append(User.query.filter_by(id=id).first())
+
+    return render_template('landing_page/all_courses.html', title='Electrical Engineering Courses', courses=courses,
+                           categories=categories, goals=goal_courses, friends = friends)
+
+@app.route('/all_courses/Physics', methods=['GET', 'POST'])
+@login_required
+def Physics_courses():
+    courses = Category.query.filter_by(ctg_name='Physics').first().courses
+    categories = Category.query.all()
+
+    ens = current_user.enrollments
+    goal_courses = []
+    for enrollment in ens:
+        if enrollment.state == False:
+            goal_courses.append(Course.query.filter_by(id=enrollment.course_id).first())
+
+    friends = []
+    frns_id = current_user.get_friend()
+    for id in frns_id:
+        friends.append(User.query.filter_by(id=id).first())
+
+    return render_template('landing_page/all_courses.html', title='Physics Courses', courses=courses,
+                           categories=categories, goals=goal_courses, friends = friends)
 
 @app.route('/goals' , methods=['GET', 'POST'])
 @login_required
