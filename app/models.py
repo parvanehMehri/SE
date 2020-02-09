@@ -18,6 +18,8 @@ class User(UserMixin , db.Model):
         return '<User {}>'.format(self.username)
 
     def add_friend(self , id):
+        if self.friends is None:
+            self.friends = ''
         self.friends = self.friends + str(id) + ','
 
     def get_friend(self ):
