@@ -5,7 +5,7 @@ from werkzeug.utils import redirect
 from app import app , db
 from app.forms import LoginForm , RegistrationForm
 from flask_login import current_user, login_user, login_required , logout_user
-from app.models import User, Course , Post , Enrollment
+from app.models import User, Course, Post, Enrollment, Category
 from werkzeug.urls import url_parse
 
 @app.route('/home' , methods=['GET', 'POST'])  # bayad bere to home page(site landing page)
@@ -53,8 +53,10 @@ def register():
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
+        user.set_img_url()
         db.session.add(user)
         db.session.commit()
+
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
@@ -62,18 +64,30 @@ def register():
 @app.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('home'))
+    return redirect(url_for('landing_page'))
 
-@app.route('/allCourses' , methods=['GET', 'POST'])
+@app.route('/all_courses' , methods=['GET', 'POST'])
 @login_required
-def allCourses():
+def all_courses():
     courses = Course.query.all()
-    if request.method == 'POST':
-        filter = request.form['course_name_filter']
-        if filter is not '':
-            filtered_courses = Course.query.filter_by(name=filter)
-            courses = filtered_courses
-    return render_template('allCourses.html', title='all courses' , courses = courses)
+    categories = Category.query.all()
+
+    ens = current_user.enrollments
+    goal_courses = []
+    for enrollment in ens:
+        if enrollment.state == False:
+            goal_courses.append(Course.query.filter_by(id=enrollment.course_id).first())
+
+    friends = []
+    frns_id = current_user.get_friend()
+    for id in frns_id:
+        friends.append(User.query.filter_by(id=id).first())
+    # if request.method == 'POST':
+    #     filter = request.form['course_name_filter']
+    #     if filter is not '':
+    #         filtered_courses = Course.query.filter_by(name=filter)
+    #         courses = filtered_courses
+    return render_template('landing_page/all_courses.html', title='all courses' , courses = courses , categories = categories , goals = goal_courses , friends = friends)
 
 @app.route('/goals' , methods=['GET', 'POST'])
 @login_required

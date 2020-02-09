@@ -21,11 +21,14 @@ class User(UserMixin , db.Model):
         self.friends = self.friends + str(id) + ','
 
     def get_friend(self ):
+        if self.friends is None :
+            self.friends = ','
         frnds = self.friends.split(',')
         frnds.remove(frnds[len(frnds) - 1])
         int_frnds = []
         for f in frnds:
-            int_frnds.append(int(f))
+            if f is not "":
+                int_frnds.append(int(f))
         return int_frnds  # return a list of user's friends's ids
 
     def set_img_url(self):
@@ -55,9 +58,19 @@ class Course(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     img_url = db.Column(db.String(140))
     enrollments = db.relationship('Enrollment', backref='related_course', lazy='dynamic')
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
 
     def __repr__(self):
         return '<Course {}>'.format(self.name)
+
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    ctg_name = db.Column(db.String(140))
+    ctg_img_url = db.Column(db.String(140))
+    courses = db.relationship('Course', backref='related_category', lazy='dynamic')
+
+    def __repr__(self):
+        return '<Category {}>'.format(self.ctg_name)
 
 class Enrollment(db.Model):
     id = db.Column(db.Integer, primary_key=True)

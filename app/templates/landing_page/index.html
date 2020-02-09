@@ -97,7 +97,7 @@
 <!--							<img class="img-fluid" src="../static/assets/landing_page/img/courses/my_course1.jpg" alt="">-->
 							<img class="img-fluid" src={{ course.img_url }} alt="">
 							<a class="date" href= {{url_for('landing_page')}} >{{ course.timestamp }}</a>
-							<a href="login.html"><h4>{{ course.name }}</h4></a>
+							<a href="{{url_for('login')}}"><h4>{{ course.name }}</h4></a>
 							<p>{{ course.description }}</p>
 						</div>
 					</div>
