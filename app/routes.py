@@ -120,34 +120,37 @@ def favicon():
 @login_required
 def allFriends():
 
-   frnds_id= User.get_friend(current_user)
-   friends_list=[]
-   form = SendMassage_addFriend()
+ friends_list=[]
+ form = SendMassage_addFriend()
+ if (current_user.friends):
+       frnds_id= User.get_friend(current_user)
 
-   for id in frnds_id:
-      friend_user= User.query.get(id)
-      friends_list.append(friend_user)
+       for id in frnds_id:
+          friend_user= User.query.get(id)
+          friends_list.append(friend_user)
 
-   if request.method == 'POST' and form.massage.data !='':
-        receiver_username =form.receiver.data
-        receiver =User.query.filter_by(username=receiver_username).first()
-        post_sender = Post(body=form.massage.data,user_id=current_user.id ,send_receive=False)
-        post_receiver = Post(body=form.massage.data,user_id=receiver.id, send_receive=True)
-        db.session.add(post_sender)
-        db.session.commit()
-        db.session.add(post_receiver)
-        db.session.commit()
-        flash('Massage send!')
-        form.massage.data=''
+       if request.method == 'POST' and form.massage.data !='':
+            receiver_username =form.receiver.data
+            receiver =User.query.filter_by(username=receiver_username).first()
+            post_sender = Post(body=form.massage.data,user_id=current_user.id ,send_receive=False)
+            post_receiver = Post(body=form.massage.data,user_id=receiver.id, send_receive=True)
+            db.session.add(post_sender)
+            db.session.commit()
+            db.session.add(post_receiver)
+            db.session.commit()
+            flash('Massage send!')
+            form.massage.data=''
+ else: flash('no friend')
 
-   if request.method=='POST'and form.addfriend.data !='' :
+ if request.method=='POST'and form.addfriend.data !='' :
     fuser =request.form['addfriend']
     new_friend = User.query.filter_by(username=fuser).first()
     User.add_friend(current_user,new_friend.id)
     db.session.commit()
     flash('Friend aded!')
+    return redirect(url_for('allFriends'))
 
-   return render_template('Friends.html', title='Friends' , Friends=friends_list,form=form )
+ return render_template('Friends.html', title='Friends' , Friends=friends_list,form=form )
 
 
 
