@@ -1,6 +1,7 @@
 import os
 
 from flask import render_template, flash, url_for, request, send_from_directory
+from sqlalchemy import and_
 from werkzeug.utils import redirect
 from app import app , db
 from app.forms import LoginForm , RegistrationForm
@@ -32,7 +33,7 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('my_courses'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -42,14 +43,14 @@ def login():
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index')
+            next_page = url_for('my_courses')
         return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('my_courses'))
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
@@ -67,46 +68,126 @@ def logout():
     logout_user()
     return redirect(url_for('landing_page'))
 
-@app.route('/all_courses' , methods=['GET', 'POST'])
+@app.route('/dashboard' , methods=['GET', 'POST'])
 @login_required
-def all_courses():
+def my_courses():
     courses = Course.query.all()
     categories = Category.query.all()
 
     ens = current_user.enrollments
     goal_courses = []
     for enrollment in ens:
-        if enrollment.state == False:
+        if enrollment.user_id == current_user.id and enrollment.state == False:
             goal_courses.append(Course.query.filter_by(id=enrollment.course_id).first())
 
     friends = []
     frns_id = current_user.get_friend()
     for id in frns_id:
         friends.append(User.query.filter_by(id=id).first())
-
-    # if request.method == 'POST':
-    #     filter = request.form['course_name_filter']
-    #     if filter is not '':
-    #         filtered_courses = Course.query.filter_by(name=filter)
-    #         courses = filtered_courses
 
     # if request.method == 'POST':
     #     for category in categories:
     #         if category.ctg_name in request.form:
     #             courses = category.courses
 
-    return render_template('landing_page/all_courses.html', title='All Courses' , courses = courses , categories = categories , goals = goal_courses , friends = friends)
+    enrolled_courses = []
+    # count enrolled courses for current_user to draw chart
+    labels = []
+    for ctg in categories:
+        labels.append(ctg.ctg_name)
 
-@app.route('/all_courses/<int:category_id>' , methods=['GET', 'POST'])
+    values = []
+    for ctg in categories:
+        i = 0
+        for enrollment in ens:
+            crs = Course.query.filter_by(id=enrollment.course_id).first()
+            if crs.related_category == ctg:
+                i = i + 1
+            # enrolled courses for current_user
+            if enrollment.user_id == current_user.id and enrollment.state == True:
+                if crs not in enrolled_courses :
+                    enrolled_courses.append(crs)
+
+        values.append(i)
+    colors = ["#F7464A", "#46BFBD", "#FDB45C"]
+
+
+    if request.method == 'POST':
+        if 'course_name_filter' in request.form:
+            filteredCourses = []
+            filter = request.form['course_name_filter']
+            if filter is not '':
+                for crs in enrolled_courses:
+                    if filter.lower() in crs.name.lower():
+                        filteredCourses.append(crs)
+                enrolled_courses = filteredCourses
+        if 'course_name_desc_filter' in request.form:
+            filteredCourses = []
+            filter = request.form['course_name_desc_filter']
+            if filter is not '':
+                for crs in enrolled_courses:
+                    if filter.lower() in crs.name.lower() or filter.lower() in crs.description.lower():
+                        filteredCourses.append(crs)
+                enrolled_courses = filteredCourses
+        if 'goal_name_btn' in request.form:
+            goal_id =request.form['goal_name_cancel']
+            print('******************',goal_id,'*************________________***********')
+            g = Course.query.filter_by(id=goal_id).first()
+            en = Enrollment.query.filter(and_(Enrollment.related_course == g , Enrollment.related_user==current_user)).first()
+            db.session.delete(en)
+            db.session.commit()
+            return redirect(url_for('my_courses'))
+        if 'unfollow_btn' in request.form:
+            friend_id =request.form['friend_name_unfollow']
+            print('******************',friend_id,'*************________________***********')
+            current_user.remove_friend(friend_id)
+            db.session.add(current_user)
+            db.session.commit()
+            return redirect(url_for('my_courses'))
+
+    return render_template('landing_page/my_courses.html', title='Dashboard', courses=courses,
+                           enrolled_courses=enrolled_courses,
+                           categories=categories, goals=goal_courses, friends=friends,
+                           max=12, labels=labels, values=values, set=zip(values, labels, colors))
+
+@app.route('/all_courses' , methods=['GET', 'POST'])
 @login_required
-def filtered_courses(category_id):
-    courses = Category.query.filter_by(id = category_id).first().courses
+def all_courses():
+
+    courses = Course.query.all()
+
+    if request.method == 'POST':
+        if 'course_name_filter' in request.form :
+            filteredCourses=[]
+            filter = request.form['course_name_filter']
+            if filter is not '':
+                for crs in courses:
+                    if filter.lower() in crs.name.lower():
+                        filteredCourses.append(crs)
+                courses = filteredCourses
+        if 'course_name_desc_filter' in request.form:
+            filteredCourses = []
+            filter = request.form['course_name_desc_filter']
+            if filter is not '':
+                for crs in courses:
+                    if filter.lower() in crs.name.lower() or filter.lower() in crs.description.lower():
+                        filteredCourses.append(crs)
+                courses = filteredCourses
+        if 'goal_name_btn' in request.form:
+            goal_id =request.form['goal_name_cancel']
+            print('******************',goal_id,'*************________________***********')
+            g = Course.query.filter_by(id=goal_id).first()
+            en = Enrollment.query.filter(and_(Enrollment.related_course == g , Enrollment.related_user==current_user)).first()
+            db.session.delete(en)
+            db.session.commit()
+            return redirect(url_for('all_courses'))
+
     categories = Category.query.all()
-    title = Category.query.filter_by(id = category_id).first().ctg_name
+
     ens = current_user.enrollments
     goal_courses = []
     for enrollment in ens:
-        if enrollment.state == False:
+        if enrollment.user_id == current_user.id and enrollment.state == False:
             goal_courses.append(Course.query.filter_by(id=enrollment.course_id).first())
 
     friends = []
@@ -114,8 +195,89 @@ def filtered_courses(category_id):
     for id in frns_id:
         friends.append(User.query.filter_by(id=id).first())
 
-    return render_template('landing_page/all_courses.html', title=title , courses = courses ,
-                           categories = categories , goals = goal_courses , friends = friends)
+    # if request.method == 'POST':
+    #     for category in categories:
+    #         if category.ctg_name in request.form:
+    #             courses = category.courses
+
+
+    enrolled_courses = []
+    # count enrolled courses for current_user to draw chart
+    labels = []
+    for ctg in categories:
+        labels.append(ctg.ctg_name)
+
+    values = []
+    for ctg in categories:
+        i=0
+        for enrollment in ens:
+            crs = Course.query.filter_by(id = enrollment.course_id).first()
+            if crs.related_category == ctg :
+                i = i+1
+            # enrolled courses for current_user
+            if enrollment.user_id == current_user.id and enrollment.state == True:
+                if crs not in enrolled_courses:
+                    enrolled_courses.append(crs)
+
+        values.append(i)
+    colors = ["#F7464A", "#46BFBD", "#FDB45C"]
+
+    return render_template('landing_page/all_courses.html', title='All Courses' , courses = courses , enrolled_courses = enrolled_courses ,
+                           categories = categories , goals = goal_courses , friends = friends ,
+                           max=12, labels=labels, values=values , set=zip(values, labels, colors))
+
+@app.route('/all_courses/<int:category_id>' , methods=['GET', 'POST'])
+@login_required
+def filtered_courses(category_id):
+
+    courses = Category.query.filter_by(id = category_id).first().courses
+
+    if request.method == 'POST':
+        filteredCourses=[]
+        filter = request.form['course_name_filter']
+        if filter is not '':
+            for crs in courses:
+                if filter.lower() in crs.name.lower():
+                    filteredCourses.append(crs)
+            courses = filteredCourses
+
+    categories = Category.query.all()
+    title = Category.query.filter_by(id = category_id).first().ctg_name
+    ens = current_user.enrollments
+    goal_courses = []
+    for enrollment in ens:
+        if enrollment.user_id == current_user.id and enrollment.state == False:
+            goal_courses.append(Course.query.filter_by(id=enrollment.course_id).first())
+
+    friends = []
+    frns_id = current_user.get_friend()
+    for id in frns_id:
+        friends.append(User.query.filter_by(id=id).first())
+
+    enrolled_courses = []
+    # count enrolled courses for current_user to draw chart
+    labels = []
+    for ctg in categories:
+        labels.append(ctg.ctg_name)
+
+    values = []
+    for ctg in categories:
+        i=0
+        for enrollment in ens:
+            crs = Course.query.filter_by(id = enrollment.course_id).first()
+            if crs.related_category == ctg :
+                i = i+1
+            # enrolled courses for current_user
+            if enrollment.user_id == current_user.id and enrollment.state == True:
+                if crs not in enrolled_courses:
+                    enrolled_courses.append(crs)
+
+        values.append(i)
+    colors = ["#F7464A", "#46BFBD", "#FDB45C"]
+
+    return render_template('landing_page/all_courses.html', title=title , courses = courses , enrolled_courses = enrolled_courses ,
+                           categories = categories , goals = goal_courses , friends = friends,
+                           max=12, labels=labels, values=values , set=zip(values, labels, colors))
 
 @app.route('/goals' , methods=['GET', 'POST'])
 @login_required

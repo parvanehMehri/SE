@@ -33,6 +33,9 @@ class User(UserMixin , db.Model):
                 int_frnds.append(int(f))
         return int_frnds  # return a list of user's friends's ids
 
+    def remove_friend(self , f_id):
+        self.friends = self.friends.replace(str(f_id), '')
+
     def set_img_url(self):
         if self.email is not None:
             self.img_url = 'https://www.gravatar.com/avatar/'+md5(self.email.encode()).hexdigest()+'?d=identicon'

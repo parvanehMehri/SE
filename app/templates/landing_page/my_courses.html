@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="../static/assets/landing_page/css/responsive.css">
     </head>
     <body>
-        
+
         <!--================Header Menu Area =================-->
         <header class="header_area">
            	<div class="top_menu row m0">
@@ -37,8 +37,8 @@
 						<a class="dn_btn" href="tel:+989900032475">+989900032475</a>
 						<a class="dn_btn" href="mailto:parvaneh.m1376@gmail.com">support@our_coursera.com</a>
 					</div>
-           		</div>	
-           	</div>	
+           		</div>
+           	</div>
             <div class="main_menu">
             	<nav class="navbar navbar-expand-lg navbar-light">
 					<div class="container">
@@ -56,64 +56,38 @@
                                 <li class="nav-item"><a class="nav-link" href="{{ url_for('landing_page')}}">Home</a></li>
 								<li class="nav-item"><a class="nav-link" href="{{ url_for('about_us')}}">About</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Activity</a></li>
-								<li class="nav-item submenu dropdown">
-									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses</a>
-									<ul class="dropdown-menu">
-										<li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">All Courses</a>
-                                        <li class="nav-item"><a class="nav-link" href="{{ url_for('my_courses')}}">Enrolled Courses</a>
-										<li class="nav-item"><a class="nav-link" href="{{ url_for('my_courses')}}">Goals</a></li>
-									</ul>
-								</li> 
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">AllCourses</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Friends</a></li>
 							</ul>
-						</div> 
+						</div>
 					</div>
             	</nav>
             </div>
         </header>
         <!--================Header Menu Area =================-->
-        
+
 
         <!--================Home Banner Area =================-->
-<!--        <section class="home_banner_area blog_banner">-->
-        <div class="blog_b_text text-center">
-            <h2>{{title}}</h2>
-            <p>There is {{title}} that available for you , you can add courses to your goals-list or enroll in it</p>
-        </div>
-<!--        </section>-->
-        <!--================End Home Banner Area =================-->
-        
-        <!--================Blog Categorie Area =================-->
-        <section class="blog_categorie_area">
-            <div class="container">
-                <div class="row">
-                    {% for category in categories %}
-                    <div class="col-lg-4">
-                        <div class="categories_post">
-                            <img  width="275" height="183" src={{ category.ctg_img_url }} alt="post">
-                            <div class="categories_details">
-                                <div class="categories_text">
-                                    {% if category.ctg_name == 'Physics' %}
-                                        <a href={{url_for('filtered_courses' ,category_id=category.id)}}><h5>{{ category.ctg_name }}</h5></a>
-                                    {% endif%}
-                                    {% if category.ctg_name == 'Computer Engineering' %}
-                                    <a href={{url_for('filtered_courses' ,category_id=category.id)}}><h5>{{ category.ctg_name }}</h5></a>
-                                    {% endif%}
-                                    {% if category.ctg_name == 'Electrical Engineering' %}
-                                    <a href={{url_for('filtered_courses' ,category_id=category.id)}}><h5>{{ category.ctg_name }}</h5></a>
-                                    {% endif %}
-                                    <div class="border_line"></div>
-                                    <p>See Related Courses ... </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
+        <section class="banner_area">
+            <div class="blog_b_text text-center">
+                <h2>_____________________________________________________________________________________________________________________________________</h2>
+                <div class="br">.</div>
+            </div>
+            <div class="banner_inner d-flex align-items-center">
+            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+				<div class="container">
+					<div class="banner_content text-center">
+                        <h2>Your Dashboard</h2>
+					</div>
+				</div>
+            </div>
+            <div class="blog_b_text text-center">
+                <h2>_____________________________________________________________________________________________________________________________________</h2>
+                <div class="br"></div>
             </div>
         </section>
-        <!--================Blog Categorie Area =================-->
-        
+        <!--================End Home Banner Area =================-->
+
         <!--================Blog Area =================-->
         <section class="blog_area">
             <div class="container">
@@ -121,7 +95,7 @@
 
                     <div class="col-lg-8">
                         <div class="blog_left_sidebar">
-                            {% for course in courses %}
+                            {% for course in enrolled_courses %}
                             <article class="row blog_item">
                                 <div class="col-md-3">
                                    <div class="blog_info text-right">
@@ -142,12 +116,8 @@
                                         <div class="blog_details">
                                             <a href="{{url_for('all_courses')}}"><h2>{{course.name}}</h2></a>
                                             <p>{{course.description}}</p>
-                                            {% if course in enrolled_courses %}
                                             <a href="{{url_for('all_courses')}}" class="white_bg_btn">View More</a>
-                                            {% else %}
-                                            <a href="{{url_for('all_courses')}}" class="white_bg_btn">Enrollment</a>
-                                            {% endif %}
-
+                                            <a href="{{url_for('all_courses')}}" class="white_bg_btn">Suggest to friends</a>
                                         </div>
                                     </div>
                                 </div>
@@ -222,6 +192,7 @@
 <!--                                    </a>-->
                                     <div class="media-body">
                                         <a href="{{url_for('all_courses')}}"><h3>{{goal.name}}</h3></a>
+<!--                                        <a href="{{url_for('all_courses')}}" class="white_bg_btn">Cancel</a>-->
                                         <form  method="POST" action="" >
                                             <input name="goal_name_cancel" type="hidden" id="goal_id" name="goal_id" value={{goal.id}}>
                                             <button name='goal_name_btn' class="btn btn-default" type="submit">Cancel</button>
@@ -238,10 +209,15 @@
                                 <ul class="list cat-list">
                                     {% for friend in friends %}
                                     <li>
-                                        <img class="author_img rounded-circle" width="70" height="70" src={{friend.img_url}} alt="">
-                                        <a href="#" class="d-flex justify-content-between">
-                                            <p>{{friend.username}}</p>
-                                        </a>
+                                        <form  method="POST" action="" >
+                                            <img class="author_img rounded-circle" width="70" height="70" src={{friend.img_url}} alt="">
+                                            <a href="#" class="d-flex justify-content-between">
+                                                <p>{{friend.username}}</p>
+                                            </a>
+                                            <input name="friend_name_unfollow" type="hidden" id="friend_id" name="friend_id" value={{friend.id}}>
+                                            <button name='unfollow_btn' class="btn btn-default" type="submit">UnFollow</button>
+<!--                                        <p>02 Hours ago</p>-->  <!-- To Do -->
+                                        </form>
                                     </li>
                                     {% endfor %}
 
@@ -390,10 +366,10 @@
                             <aside class="single-sidebar-widget tag_cloud_widget">
                                 <h4 class="widget_title">Tag Clouds</h4>
                                 <ul class="list">
-                                    {% for category in categories %}
-                                    <li><a href="#">{{category.ctg_name}}</a></li>
-                                    {% endfor%}
-                                    {% for course in courses %}
+<!--                                    {% for category in categories %}-->
+<!--                                    <li><a href="#">{{category.ctg_name}}</a></li>-->
+<!--                                    {% endfor%}-->
+                                    {% for course in enrolled_courses %}
                                     <li><a href="#">{{course.name}}</a></li>
                                     {% endfor%}
                                 </ul>
@@ -404,7 +380,7 @@
             </div>
         </section>
         <!--================Blog Area =================-->
-        
+
         <!--================ start footer Area  =================-->
         <footer class="footer-area p_120">
             <div class="container">
@@ -485,10 +461,10 @@
             </div>
         </footer>
 		<!--================ End footer Area  =================-->
-        
-        
-        
-        
+
+
+
+
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="../static/assets/landing_page/js/jquery-3.3.1.min.js"></script>
