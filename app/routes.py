@@ -4,7 +4,7 @@ from flask import render_template, flash, url_for, request, send_from_directory
 from sqlalchemy import and_
 from werkzeug.utils import redirect
 from app import app , db
-from app.forms import LoginForm , RegistrationForm
+from app.forms import LoginForm, RegistrationForm, CourseForm
 from flask_login import current_user, login_user, login_required , logout_user
 from app.models import User, Course, Post, Enrollment, Category
 from werkzeug.urls import url_parse
@@ -313,7 +313,56 @@ def goals():
 # @app.errorhandler(404)
 # def page_not_found(error):
 #     return render_template('page_not_found.html'), 404
-#???????????????????????????????????????????????????????????
+@app.route('/allCourses/<int:courseId>' ,methods=['GET','POST'])
+@login_required
+def course(courseId) :
+
+    course = Course.query.get(courseId)
+    coursename = course.name
+    description = course.description
+
+    cform = CourseForm()
+
+    if (course) :
+        #enrolledcourses = Enrollment.query.filter_by(and_(Enrollment.related_user==current_user ,Enrollment.state==True))
+
+        if (request.method == 'POST') and ('enroll' in request.form) :
+            enrollment = Enrollment(course_id=course.id , user_id=current_user.id ,state=True )
+            db.session.add(enrollment)
+            db.session.commit()
+            flash('You are successfully enrolled in %s course!' %coursename)
+            return redirect(url_for('index'))
+
+        elif (request.method == 'POST') and ('remind' in request.form):
+            remind = Enrollment(course_id=course.id , user_id=current_user.id, state = False)
+            db.session.add(remind)
+            db.session.commit()
+            flash('You have added %s course to your goals.'%coursename )
+
+        return render_template('landing_page/course-details.html', title='%s' % coursename, course=course)
+    else:
+         return render_template('page_not_found.html'),404
+
+
+
+@app.route('/viewCourse/<int:courseId>', methods=['GET','POST'])
+@login_required
+def viewCourse(courseId) :
+
+    course = Course.query.get(courseId)
+
+    if (course) :
+        if (courseId==1):
+            return render_template('landing_page/AI.html', title = 'ArtificialIntelligence', courseId=course.id , course=course)
+
+        if(courseId==2):
+            return render_template('landing_page/NLP.html')
+        if(courseId==3):
+            return render_template('landing_page/LogicalCircuits.html')
+        if(courseId==4):
+            return render_template('landing_page/Signals.html')
+    return render_template('landing_page/AI.html', title='Artificial Intelligence', courseId=course.id, course=course)
+
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, '../static'),
