@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+        <link rel="icon" href="../static/assets/landing_page/img/icon/logo1.png" type="image/png">
+        <title>Learn IT Education</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="../static/assets/landing_page/css/bootstrap.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/linericon/style.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/owl-carousel/owl.carousel.min.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/lightbox/simpleLightbox.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/nice-select/css/nice-select.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/animate-css/animate.css">
+        <!-- main css -->
+        <link rel="stylesheet" href="../static/assets/landing_page/css/style.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/css/responsive.css">
+    </head>
+    <body>
+
+        <!--================Header Menu Area =================-->
+        <header class="header_area">
+           	<div class="top_menu row m0">
+           		<div class="container">
+					<div class="float-left">
+						<ul class="list header_social">
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+							<li><a href="#"><i class="fa fa-behance"></i></a></li>
+						</ul>
+					</div>
+					<div class="float-right">
+						<a class="dn_btn" href="tel:+989900032475">+989900032475</a>
+						<a class="dn_btn" href="mailto:parvaneh.m1376@gmail.com">support@our_coursera.com</a>
+					</div>
+           		</div>
+           	</div>
+            <div class="main_menu">
+            	<nav class="navbar navbar-expand-lg navbar-light">
+					<div class="container">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<a class="navbar-brand logo_h" href="{{ url_for('landing_page')}}"><img src="../static/assets/landing_page/img/icon/logo1.png" alt=""></a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+							<ul class="nav navbar-nav menu_nav ml-auto">
+								<li class="nav-item"><a class="nav-link" href="{{ url_for('logout')}}">Logout</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('landing_page')}}">Home</a></li>
+								<li class="nav-item"><a class="nav-link" href="{{ url_for('about_us')}}">About</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Activity</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">AllCourses</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Friends</a></li>
+							</ul>
+						</div>
+					</div>
+            	</nav>
+            </div>
+        </header>
+        <!--================Header Menu Area =================-->
+
+
+        <!--================Home Banner Area =================-->
+        <section class="banner_area">
+            <div class="blog_b_text text-center">
+                <h2>_____________________________________________________________________________________________________________________________________</h2>
+                <div class="br">.</div>
+            </div>
+            <div class="banner_inner d-flex align-items-center">
+            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+				<div class="container">
+					<div class="banner_content text-center">
+                        <h2>Your Dashboard</h2>
+					</div>
+				</div>
+            </div>
+            <div class="blog_b_text text-center">
+                <h2>_____________________________________________________________________________________________________________________________________</h2>
+                <div class="br"></div>
+            </div>
+        </section>
+        <!--================End Home Banner Area =================-->
+
+        <!--================Blog Area =================-->
+        <section class="blog_area">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-8">
+                        <div class="blog_left_sidebar">
+                            {% for course in enrolled_courses %}
+                            <article class="row blog_item">
+                                <div class="col-md-3">
+                                   <div class="blog_info text-right">
+                                        <div class="post_tag">
+                                            <a class="active" href="#">{{course.related_category}}</a>
+                                        </div>
+                                        <ul class="blog_meta list">
+                                            <li><a href="#">Admin<i class="lnr lnr-user"></i></a></li>
+                                            <li><a href="#">{{course.timestamp}}<i class="lnr lnr-calendar-full"></i></a></li>
+                                            <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>  <!-- To Do -->
+                                            <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li> <!-- To Do -->
+                                        </ul>
+                                    </div>
+                               </div>
+                                <div class="col-md-9">
+                                    <div class="blog_post">
+                                        <img width="545" height="330" src={{course.img_url}} alt="">
+                                        <div class="blog_details">
+                                            <a href="{{url_for('all_courses')}}"><h2>{{course.name}}</h2></a>
+                                            <p>{{course.description}}</p>
+                                            <a href="{{url_for('all_courses')}}" class="white_bg_btn">View More</a>
+                                            <a href="{{url_for('all_courses')}}" class="white_bg_btn">Suggest to friends</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                            {% endfor %}
+<!--                            <nav class="blog-pagination justify-content-center d-flex">-->
+<!--		                        <ul class="pagination">-->
+<!--		                            <li class="page-item">-->
+<!--		                                <a href="#" class="page-link" aria-label="Previous">-->
+<!--		                                    <span aria-hidden="true">-->
+<!--		                                        <span class="lnr lnr-chevron-left"></span>-->
+<!--		                                    </span>-->
+<!--		                                </a>-->
+<!--		                            </li>-->
+<!--		                            <li class="page-item"><a href="#" class="page-link">01</a></li>-->
+<!--		                            <li class="page-item active"><a href="#" class="page-link">02</a></li>-->
+<!--		                            <li class="page-item"><a href="#" class="page-link">03</a></li>-->
+<!--		                            <li class="page-item"><a href="#" class="page-link">04</a></li>-->
+<!--		                            <li class="page-item"><a href="#" class="page-link">09</a></li>-->
+<!--		                            <li class="page-item">-->
+<!--		                                <a href="#" class="page-link" aria-label="Next">-->
+<!--		                                    <span aria-hidden="true">-->
+<!--		                                        <span class="lnr lnr-chevron-right"></span>-->
+<!--		                                    </span>-->
+<!--		                                </a>-->
+<!--		                            </li>-->
+<!--		                        </ul>-->
+<!--		                    </nav>-->
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="blog_right_sidebar">
+
+                            <aside class="single_sidebar_widget author_widget">
+                                <img class="author_img rounded-circle" src={{current_user.img_url}} alt="">
+                                <h4>{{current_user.username}}</h4>
+                                <p>{{current_user.email}}</p>
+                                <div class="br"></div>
+                            </aside>
+
+                            <form method="POST" action="" >
+                                <aside class="single_sidebar_widget search_widget">
+                                    <div class="input-group">
+
+                                            <input name="course_name_filter" type="text" class="form-control" size="35" placeholder="Search Course by name">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" type="submit"><i class="lnr lnr-magnifier"></i></button>
+                                            </span>
+                                     </div><!-- /input-group -->
+<!--                                    <div class="br"></div>-->
+                                </aside>
+                                <p>_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_</p>
+                                <aside class="single_sidebar_widget search_widget">
+                                    <div class="input-group">
+                                        <input name="course_name_desc_filter" type="text" class="form-control" size="35" placeholder="Search Course by name & description">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="submit"><i class="lnr lnr-magnifier"></i></button>
+                                        </span>
+                                    </div><!-- /input-group -->
+                                    <div class="br"></div>
+                                </aside>
+                            </form>
+
+                            <aside class="single_sidebar_widget popular_post_widget">
+                                <h3 class="widget_title">Your Goals</h3>
+                                {% for goal in goals %}
+                                <div class="media post_item">
+                                    <img class="author_img rounded-circle" width="70" height="70" src={{goal.img_url}} alt="">
+<!--                                    <a href="#" class="d-flex justify-content-between">-->
+<!--                                        <p>{{goal.name}}</p>-->
+<!--                                    </a>-->
+                                    <div class="media-body">
+                                        <a href="{{url_for('all_courses')}}"><h3>{{goal.name}}</h3></a>
+<!--                                        <a href="{{url_for('all_courses')}}" class="white_bg_btn">Cancel</a>-->
+                                        <form  method="POST" action="" >
+                                            <input name="goal_name_cancel" type="hidden" id="goal_id" name="goal_id" value={{goal.id}}>
+                                            <button name='goal_name_btn' class="btn btn-default" type="submit">Cancel</button>
+<!--                                        <p>02 Hours ago</p>-->  <!-- To Do -->
+                                        </form>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <div class="br"></div>
+                            </aside>
+
+                            <aside class="single_sidebar_widget post_category_widget">
+                                <h4 class="widget_title">Your Friends</h4>
+                                <ul class="list cat-list">
+                                    {% for friend in friends %}
+                                    <li>
+                                        <form  method="POST" action="" >
+                                            <img class="author_img rounded-circle" width="70" height="70" src={{friend.img_url}} alt="">
+                                            <a href="#" class="d-flex justify-content-between">
+                                                <p>{{friend.username}}</p>
+                                            </a>
+                                            <input name="friend_name_unfollow" type="hidden" id="friend_id" name="friend_id" value={{friend.id}}>
+                                            <button name='unfollow_btn' class="btn btn-default" type="submit">UnFollow</button>
+<!--                                        <p>02 Hours ago</p>-->  <!-- To Do -->
+                                        </form>
+                                    </li>
+                                    {% endfor %}
+
+                                </ul>
+                                <div class="br"></div>
+                            </aside>
+<!-- bar chart -->
+                            <aside class="single-sidebar-widget tag_cloud_widget">
+                                <h4 class="widget_title">Bar Chart</h4>
+                                <center>
+                                    <canvas id="bar_chart" width="250" height="300"></canvas>
+                                    <script>
+                                      // bar chart data
+                                      var barData = {
+                                        labels : [
+                                          {% for item in labels %}
+                                           "{{ item }}",
+                                          {% endfor %}
+                                    ],
+
+                                        datasets : [{
+                                          fillColor: "rgba(151,187,205,0.2)",
+                                          strokeColor: "rgba(151,187,205,1)",
+                                          pointColor: "rgba(151,187,205,1)",
+                                          data : [
+                                            {% for item in values %}
+                                               "{{ item }}",
+                                              {% endfor %}
+                                        ]
+                                          }
+                                        ]
+                                      }
+
+                                     // get bar chart canvas
+                                     var bar_chart = document.getElementById("bar_chart").getContext("2d");
+
+                                       steps = 10
+                                       max = {{max}}
+
+                                     // draw bar chart
+                                     new Chart(bar_chart).Bar(barData, {
+                                       scaleOverride: true,
+                                       scaleSteps: steps,
+                                       scaleStepWidth: Math.ceil(max / steps),
+                                       scaleStartValue: 0,
+                                       scaleShowVerticalLines: true,
+                                       scaleShowGridLines : true,
+                                       barShowStroke : true,
+                                       scaleShowLabels: true
+                                       }
+                                     );
+
+                                    </script>
+                                  </center>
+                            </aside>
+<!-- bar chart -->
+<!-- pie chart -->
+                            <aside class="single-sidebar-widget tag_cloud_widget">
+                                <h4 class="widget_title">Pie Chart</h4>
+                                    <canvas id="pie_chart" width="250" height="300"></canvas>
+                                        <script>
+                                          var pieData = [
+                                            {% for item, label, colors in set %}
+                                              {
+                                                value: {{item}},
+                                                label: "{{label}}",
+                                                color : "{{colors}}"
+                                              },
+                                            {% endfor %}
+                                          ];
+
+                                          // get bar chart canvas
+                                          var pie_chart = document.getElementById("pie_chart").getContext("2d");
+                                          steps = 10
+                                          max = {{ max }}
+
+                                          // draw pie chart
+                                          new Chart(document.getElementById("pie_chart").getContext("2d")).Pie(pieData);
+
+                                        </script>
+                            </aside>
+<!-- pie chart -->
+
+<!-- line chart -->
+<!--                            <aside class="single-sidebar-widget tag_cloud_widget">-->
+<!--                                <h4 class="widget_title">Line Chart</h4>-->
+<!--                                <canvas id="chart" width="250" height="300"></canvas>-->
+<!--                                <script>-->
+
+<!--                                  // bar chart data-->
+<!--                                  var barData = {-->
+<!--                                    labels : [-->
+<!--                                      {% for item in labels %}-->
+<!--                                        "{{ item }}",-->
+<!--                                      {% endfor %}-->
+<!--                                    ],-->
+
+<!--                                    datasets : [{-->
+<!--                                      fillColor: "rgba(151,187,205,0.2)",-->
+<!--                                      strokeColor: "rgba(151,187,205,1)",-->
+<!--                                      pointColor: "rgba(151,187,205,1)",-->
+<!--                                      pointStrokeColor: "#fff",-->
+<!--                                      pointHighlightFill: "#fff",-->
+<!--                                      pointHighlightStroke: "rgba(151,187,205,1)",-->
+<!--                                      bezierCurve : false,-->
+<!--                                      data : [-->
+<!--                                    {% for item in values %}-->
+<!--                                          {{ item }},-->
+<!--                                        {% endfor %}]-->
+<!--                                      }-->
+<!--                                ]-->
+<!--                                  }-->
+
+<!--                                  Chart.defaults.global.animationSteps = 50;-->
+<!--                                  Chart.defaults.global.tooltipYPadding = 16;-->
+<!--                                  Chart.defaults.global.tooltipCornerRadius = 0;-->
+<!--                                  Chart.defaults.global.tooltipTitleFontStyle = "normal";-->
+<!--                                  Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";-->
+<!--                                  Chart.defaults.global.animationEasing = "easeOutBounce";-->
+<!--                                  Chart.defaults.global.responsive = false;-->
+<!--                                  Chart.defaults.global.scaleLineColor = "black";-->
+<!--                                  Chart.defaults.global.scaleFontSize = 16;-->
+
+<!--                                  // get bar chart canvas-->
+<!--                                  var mychart = document.getElementById("chart").getContext("2d");-->
+
+<!--                                  steps = 10-->
+<!--                                  max = {{ max }}-->
+<!--                                  // draw bar chart-->
+<!--                                  var LineChartDemo = new Chart(mychart).Line(barData, {-->
+<!--                                    scaleOverride: true,-->
+<!--                                    scaleSteps: steps,-->
+<!--                                    scaleStepWidth: Math.ceil(max / steps),-->
+<!--                                    scaleStartValue: 0,-->
+<!--                                    scaleShowVerticalLines: true,-->
+<!--                                    scaleShowGridLines : true,-->
+<!--                                    barShowStroke : true,-->
+<!--                                    scaleShowLabels: true,-->
+<!--                                    bezierCurve: false,-->
+<!--                                  });-->
+
+<!--                                </script>-->
+<!--                              </center>-->
+<!--                            </aside>-->
+<!-- line chart -->
+                            <aside class="single-sidebar-widget tag_cloud_widget">
+                                <h4 class="widget_title">Tag Clouds</h4>
+                                <ul class="list">
+<!--                                    {% for category in categories %}-->
+<!--                                    <li><a href="#">{{category.ctg_name}}</a></li>-->
+<!--                                    {% endfor%}-->
+                                    {% for course in enrolled_courses %}
+                                    <li><a href="#">{{course.name}}</a></li>
+                                    {% endfor%}
+                                </ul>
+                            </aside>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================Blog Area =================-->
+
+        <!--================ start footer Area  =================-->
+        <footer class="footer-area p_120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2  col-md-6 col-sm-6">
+                        <div class="single-footer-widget tp_widgets">
+                           <h6 class="footer_title">Top Products</h6>
+                            <ul class="list">
+                            	<li><a href="#">Managed Website</a></li>
+                            	<li><a href="#">Manage Reputation</a></li>
+                            	<li><a href="#">Power Tools</a></li>
+                            	<li><a href="#">Marketing Service</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2  col-md-6 col-sm-6">
+                        <div class="single-footer-widget tp_widgets">
+                           <h6 class="footer_title">Quick Links</h6>
+                            <ul class="list">
+                            	<li><a href="#">Jobs</a></li>
+                            	<li><a href="#">Brand Assets</a></li>
+                            	<li><a href="#">Investor Relations</a></li>
+                            	<li><a href="#">Terms of Service</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2  col-md-6 col-sm-6">
+                        <div class="single-footer-widget tp_widgets">
+                           <h6 class="footer_title">Features</h6>
+                            <ul class="list">
+                            	<li><a href="#">Jobs</a></li>
+                            	<li><a href="#">Brand Assets</a></li>
+                            	<li><a href="#">Investor Relations</a></li>
+                            	<li><a href="#">Terms of Service</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2  col-md-6 col-sm-6">
+                        <div class="single-footer-widget tp_widgets">
+                           <h6 class="footer_title">Resources</h6>
+                            <ul class="list">
+                            	<li><a href="#">Guides</a></li>
+                            	<li><a href="#">Research</a></li>
+                            	<li><a href="#">Experts</a></li>
+                            	<li><a href="#">Agencies</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <aside class="f_widget news_widget">
+        					<div class="f_title">
+        						<h3 class="footer_title">Newsletter</h3>
+        					</div>
+        					<p>Stay updated with our latest trends</p>
+        					<div id="mc_embed_signup">
+                                <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative">
+                                	<div class="input-group d-flex flex-row">
+                                        <input name="EMAIL" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">
+                                        <button class="btn sub-btn"><span class="lnr lnr-arrow-right"></span></button>
+                                    </div>
+                                    <div class="mt-10 info"></div>
+                                </form>
+                            </div>
+        				</aside>
+                    </div>
+                </div>
+                <div class="row footer-bottom d-flex justify-content-between align-items-center">
+<!--                    <p class="col-lg-8 col-md-8 footer-text m-0">&lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;-->
+<!--Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>-->
+<!--&lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;</p>-->
+                    <div class="col-lg-4 col-md-4 footer-social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-dribbble"></i></a>
+                        <a href="#"><i class="fa fa-behance"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+		<!--================ End footer Area  =================-->
+
+
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="../static/assets/landing_page/js/jquery-3.3.1.min.js"></script>
+        <script src="../static/assets/landing_page/js/popper.js"></script>
+        <script src="../static/assets/landing_page/js/bootstrap.min.js"></script>
+        <script src="../static/assets/landing_page/js/stellar.js"></script>
+        <script src="../static/assets/landing_page/vendors/lightbox/simpleLightbox.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/isotope/isotope.pkgd.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/owl-carousel/owl.carousel.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/jquery-ui/jquery-ui.js"></script>
+        <script src="../static/assets/landing_page/js/jquery.ajaxchimp.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/popup/jquery.magnific-popup.min.js"></script>
+        <script src="../static/assets/landing_page/js/mail-script.js"></script>
+        <script src="../static/assets/landing_page/vendors/counter-up/jquery.waypoints.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/counter-up/jquery.counterup.js"></script>
+        <script src="../static/assets/landing_page/js/theme.js"></script>
+    </body>
+</html>
