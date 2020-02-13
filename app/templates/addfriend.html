@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+
+
+  <form action="" method="POST" novalidate>
+
+
+                  {{ form.hidden_tag() }}
+
+
+      <input name="addfriend">
+      {% for error in form.addfriend.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+
+                  {{ form.add }}
+
+
+
+
+
+ </form>
+
+{% endblock %}
