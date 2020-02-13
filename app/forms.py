@@ -31,5 +31,8 @@ class SendMassage_addFriend(FlaskForm):
     massage=TextAreaField('massage',validators=[DataRequired()])
     receiver=StringField('receiver',validators=[DataRequired()])
     addfriend=StringField('addfriend',validators=[DataRequired()])
-    add = SubmitField('addfriend')
+    add = SubmitField('add')
     submit = SubmitField('Send')
+
+
+
