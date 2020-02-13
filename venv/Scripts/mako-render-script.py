@@ -1,4 +1,4 @@
-#!c:\users\parvaneh\pycharmprojects\se_project\venv\scripts\python.exe
+#!C:\main_SE\venv\Scripts\python.exe
 # EASY-INSTALL-ENTRY-SCRIPT: 'Mako==1.1.1','console_scripts','mako-render'
 __requires__ = 'Mako==1.1.1'
 import re
