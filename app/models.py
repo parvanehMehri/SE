@@ -104,6 +104,13 @@ class VideoViews(db.Model):
     timestamp = db.Column(db.DateTime(), default=datetime.utcnow, index=True)
 
 
+class VideoRates(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    course_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    rate = db.Column(db.String(10))
+
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
