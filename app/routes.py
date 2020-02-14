@@ -6,7 +6,7 @@ from werkzeug.utils import redirect
 from app import app , db
 from app.forms import LoginForm , RegistrationForm
 from flask_login import current_user, login_user, login_required , logout_user
-from app.models import User, Course, Post, Enrollment, Category
+from app.models import User, Course, Post, Enrollment, Category, Comment
 from werkzeug.urls import url_parse
 
 # @app.route('/home' , methods=['GET', 'POST'])  # bayad bere to home page(site landing page)
@@ -24,21 +24,73 @@ def landing_page():
 def about_us():
     return render_template('landing_page/about_us.html', title='About_us' )
 
+
 @app.route('/course_video', methods=['GET', 'POST'])
+@login_required
 def comments():
-    return render_template('landing_page/video.html', title='course_video')
+    if request.method == 'GET':
+        temp_comments = Comment.query.filter_by(course_id=0).all()
+        return render_template('landing_page/video.html', title='course_video', temp_comments=temp_comments)
+    elif request.method == 'POST':
+        course_id = request.form['course_id']
+        email = request.form['email']
+        author = request.form['author']
+        text = request.form['text']
+        temp_comment = Comment(text=text, author=author, email=email, course_id=course_id)
+        db.session.add(temp_comment)
+        db.session.commit()
+        return redirect(url_for('comments'))
+
 
 @app.route('/course_video1', methods=['GET', 'POST'])
+@login_required
 def comments1():
-    return render_template('landing_page/video1.html', title='course_video')
+    if request.method == 'GET':
+        temp_comments = Comment.query.filter_by(course_id=1).all()
+        return render_template('landing_page/video1.html', title='course_video', temp_comments=temp_comments)
+    elif request.method == 'POST':
+        course_id = request.form['course_id']
+        email = request.form['email']
+        author = request.form['author']
+        text = request.form['text']
+        temp_comment = Comment(text=text, author=author, email=email, course_id=course_id)
+        db.session.add(temp_comment)
+        db.session.commit()
+        return redirect(url_for('comments1'))
+
 
 @app.route('/course_video2', methods=['GET', 'POST'])
+@login_required
 def comments2():
-    return render_template('landing_page/video2.html', title='course_video')
+    if request.method == 'GET':
+        temp_comments = Comment.query.filter_by(course_id=2).all()
+        return render_template('landing_page/video2.html', title='course_video', temp_comments=temp_comments)
+    elif request.method == 'POST':
+        course_id = request.form['course_id']
+        email = request.form['email']
+        author = request.form['author']
+        text = request.form['text']
+        temp_comment = Comment(text=text, author=author, email=email, course_id=course_id)
+        db.session.add(temp_comment)
+        db.session.commit()
+        return redirect(url_for('comments2'))
+
 
 @app.route('/course_video3', methods=['GET', 'POST'])
+@login_required
 def comments3():
-    return render_template('landing_page/video3.html', title='course_video')
+    if request.method == 'GET':
+        temp_comments = Comment.query.filter_by(course_id=3).all()
+        return render_template('landing_page/video3.html', title='course_video', temp_comments=temp_comments)
+    elif request.method == 'POST':
+        course_id = request.form['course_id']
+        email = request.form['email']
+        author = request.form['author']
+        text = request.form['text']
+        temp_comment = Comment(text=text, author=author, email=email, course_id=course_id)
+        db.session.add(temp_comment)
+        db.session.commit()
+        return redirect(url_for('comments3'))
 
 @app.route('/index')  # manzoor az index va home hamon dashboard ast ... :)
 @login_required

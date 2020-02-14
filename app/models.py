@@ -87,17 +87,14 @@ class Enrollment(db.Model):
     def __repr__(self):
         return '<Enrollment {}>'.format(self.course_id , self.user_id , self.state)
 
-# class Comment(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     text = db.Column(db.String(140))
-#     author = db.Column(db.String(32))
-#     timestamp = db.Column(db.DateTime(), default=datetime.utcnow, index=True)
-#     parent_id = db.Column(db.Integer, db.ForeignKey('comment.id'))
-#     replies = db.relationship(
-#         'Comment', backref=db.backref('parent', remote_side=[id]),
-#         lazy='dynamic')
 
-
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String(400))
+    author = db.Column(db.String(100))
+    email = db.Column(db.String(100))
+    timestamp = db.Column(db.DateTime(), default=datetime.utcnow, index=True)
+    course_id = db.Column(db.Integer)
 
 
 @login.user_loader
