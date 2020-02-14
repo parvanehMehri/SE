@@ -24,6 +24,21 @@ def landing_page():
 def about_us():
     return render_template('landing_page/about_us.html', title='About_us' )
 
+@app.route('/course_video', methods=['GET', 'POST'])
+def comments():
+    return render_template('landing_page/video.html', title='course_video')
+
+@app.route('/course_video1', methods=['GET', 'POST'])
+def comments1():
+    return render_template('landing_page/video1.html', title='course_video')
+
+@app.route('/course_video2', methods=['GET', 'POST'])
+def comments2():
+    return render_template('landing_page/video2.html', title='course_video')
+
+@app.route('/course_video3', methods=['GET', 'POST'])
+def comments3():
+    return render_template('landing_page/video3.html', title='course_video')
 
 @app.route('/index')  # manzoor az index va home hamon dashboard ast ... :)
 @login_required
@@ -316,5 +331,5 @@ def goals():
 
 @app.route('/favicon.ico')
 def favicon():
-    return send_from_directory(os.path.join(app.root_path, '../static'),
-                               'favicon.ico', mimetype='img/vnd.microsoft.icon')
+    return send_from_directory(os.path.join(app.root_path, '../static'), 'favicon.ico', mimetype='img/vnd.microsoft.icon')
+
