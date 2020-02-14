@@ -4,6 +4,7 @@ $(document).ready(function () {
         $(value).on('change', function (event) {
             const rate = $(this).val();
             $.post('/rate_video', {rate: rate, course_id:course_id}, function (result) {
+                $('#avg_rate').text('avg rate : ' + result);
             })
         })
     })

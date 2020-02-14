@@ -25,6 +25,18 @@ def about_us():
     return render_template('landing_page/about_us.html', title='About_us' )
 
 
+def calc_avg_rate(course_id, user_id):
+    avg_rate = 0
+    video_rate = VideoRates.query.filter_by(course_id=course_id, user_id=user_id).all()
+    if len(video_rate):
+        for rate in video_rate:
+            avg_rate += float(rate.rate)
+        avg_rate /= len(video_rate)
+    else:
+        avg_rate = 0
+    return str(avg_rate)
+
+
 @app.route('/rate_video', methods=['POST'])
 @login_required
 def rate_video():
@@ -36,7 +48,8 @@ def rate_video():
         temp_rate = VideoRates(course_id=request.form['course_id'], user_id=current_user.id, rate=request.form['rate'])
         db.session.add(temp_rate)
         db.session.commit()
-    return 'DONE'
+
+    return calc_avg_rate(request.form['course_id'], current_user.id)
 
 
 @app.route('/course_video', methods=['GET', 'POST'])
@@ -53,7 +66,10 @@ def comments():
         db.session.commit()
         all_views = VideoViews.query.filter_by(course_id=0).all()
         temp_comments = Comment.query.filter_by(course_id=0).all()
-        return render_template('landing_page/video.html', title='course_video', temp_comments=temp_comments, all_views=all_views, temp_rate=temp_rate)
+        return render_template('landing_page/video.html', title='course_video', temp_comments=temp_comments,
+                               all_views=all_views,
+                               temp_rate=temp_rate,
+                               avg_rate=calc_avg_rate(0, current_user.id))
     elif request.method == 'POST':
         course_id = request.form['course_id']
         email = request.form['email']
@@ -79,7 +95,11 @@ def comments1():
         db.session.commit()
         all_views = VideoViews.query.filter_by(course_id=1).all()
         temp_comments = Comment.query.filter_by(course_id=1).all()
-        return render_template('landing_page/video1.html', title='course_video', temp_comments=temp_comments, all_views=all_views, temp_rate=temp_rate)
+        return render_template('landing_page/video1.html', title='course_video',
+                               temp_comments=temp_comments,
+                               all_views=all_views,
+                               temp_rate=temp_rate,
+                               avg_rate=calc_avg_rate(1, current_user.id))
     elif request.method == 'POST':
         course_id = request.form['course_id']
         email = request.form['email']
@@ -105,7 +125,11 @@ def comments2():
         db.session.commit()
         all_views = VideoViews.query.filter_by(course_id=2).all()
         temp_comments = Comment.query.filter_by(course_id=2).all()
-        return render_template('landing_page/video2.html', title='course_video', temp_comments=temp_comments, all_views=all_views, temp_rate=temp_rate)
+        return render_template('landing_page/video2.html', title='course_video',
+                               temp_comments=temp_comments,
+                               all_views=all_views,
+                               temp_rate=temp_rate,
+                               avg_rate=calc_avg_rate(2, current_user.id))
     elif request.method == 'POST':
         course_id = request.form['course_id']
         email = request.form['email']
@@ -131,7 +155,11 @@ def comments3():
         db.session.commit()
         all_views = VideoViews.query.filter_by(course_id=3).all()
         temp_comments = Comment.query.filter_by(course_id=3).all()
-        return render_template('landing_page/video3.html', title='course_video', temp_comments=temp_comments, all_views=all_views, temp_rate=temp_rate)
+        return render_template('landing_page/video3.html', title='course_video',
+                               temp_comments=temp_comments,
+                               all_views=all_views,
+                               temp_rate=temp_rate,
+                               avg_rate=calc_avg_rate(3, current_user.id))
     elif request.method == 'POST':
         course_id = request.form['course_id']
         email = request.form['email']
