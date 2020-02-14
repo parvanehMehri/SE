@@ -97,6 +97,13 @@ class Comment(db.Model):
     course_id = db.Column(db.Integer)
 
 
+class VideoViews(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    course_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    timestamp = db.Column(db.DateTime(), default=datetime.utcnow, index=True)
+
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))

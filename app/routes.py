@@ -6,7 +6,7 @@ from werkzeug.utils import redirect
 from app import app , db
 from app.forms import LoginForm , RegistrationForm
 from flask_login import current_user, login_user, login_required , logout_user
-from app.models import User, Course, Post, Enrollment, Category, Comment
+from app.models import User, Course, Post, Enrollment, Category, Comment, VideoViews
 from werkzeug.urls import url_parse
 
 # @app.route('/home' , methods=['GET', 'POST'])  # bayad bere to home page(site landing page)
@@ -29,8 +29,12 @@ def about_us():
 @login_required
 def comments():
     if request.method == 'GET':
+        temp_view = VideoViews(course_id=0, user_id=current_user.id)
+        db.session.add(temp_view)
+        db.session.commit()
+        all_views = VideoViews.query.filter_by(course_id=0).all()
         temp_comments = Comment.query.filter_by(course_id=0).all()
-        return render_template('landing_page/video.html', title='course_video', temp_comments=temp_comments)
+        return render_template('landing_page/video.html', title='course_video', temp_comments=temp_comments, all_views=all_views)
     elif request.method == 'POST':
         course_id = request.form['course_id']
         email = request.form['email']
@@ -46,8 +50,12 @@ def comments():
 @login_required
 def comments1():
     if request.method == 'GET':
+        temp_view = VideoViews(course_id=1, user_id=current_user.id)
+        db.session.add(temp_view)
+        db.session.commit()
+        all_views = VideoViews.query.filter_by(course_id=1).all()
         temp_comments = Comment.query.filter_by(course_id=1).all()
-        return render_template('landing_page/video1.html', title='course_video', temp_comments=temp_comments)
+        return render_template('landing_page/video1.html', title='course_video', temp_comments=temp_comments, all_views=all_views)
     elif request.method == 'POST':
         course_id = request.form['course_id']
         email = request.form['email']
@@ -63,8 +71,12 @@ def comments1():
 @login_required
 def comments2():
     if request.method == 'GET':
+        temp_view = VideoViews(course_id=2, user_id=current_user.id)
+        db.session.add(temp_view)
+        db.session.commit()
+        all_views = VideoViews.query.filter_by(course_id=2).all()
         temp_comments = Comment.query.filter_by(course_id=2).all()
-        return render_template('landing_page/video2.html', title='course_video', temp_comments=temp_comments)
+        return render_template('landing_page/video2.html', title='course_video', temp_comments=temp_comments, all_views=all_views)
     elif request.method == 'POST':
         course_id = request.form['course_id']
         email = request.form['email']
@@ -80,8 +92,12 @@ def comments2():
 @login_required
 def comments3():
     if request.method == 'GET':
+        temp_view = VideoViews(course_id=3, user_id=current_user.id)
+        db.session.add(temp_view)
+        db.session.commit()
+        all_views = VideoViews.query.filter_by(course_id=3).all()
         temp_comments = Comment.query.filter_by(course_id=3).all()
-        return render_template('landing_page/video3.html', title='course_video', temp_comments=temp_comments)
+        return render_template('landing_page/video3.html', title='course_video', temp_comments=temp_comments, all_views=all_views)
     elif request.method == 'POST':
         course_id = request.form['course_id']
         email = request.form['email']
