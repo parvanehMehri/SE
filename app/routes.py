@@ -277,37 +277,6 @@ def filtered_courses(category_id):
     return render_template('landing_page/all_courses.html', title=title , courses = courses , enrolled_courses = enrolled_courses ,
                            categories = categories , goals = goal_courses , friends = friends,
                            max=12, labels=labels, values=values , set=zip(values, labels, colors))
-
-@app.route('/goals' , methods=['GET', 'POST'])
-@login_required
-def goals():
-    ens = current_user.enrollments
-    goal_courses= []
-    for enrollment in ens :
-        if enrollment.state == False :
-            goal_courses.append( Course.query.filter_by(id = enrollment.course_id).first() )
-
-    return render_template('goals.html', title='goals' , courses = goal_courses)
-
-# @app.route('/course#1' , methods=['GET', 'POST'])
-# @login_required
-# def course():
-#     if request.method == 'POST':
-#         # enroll
-#         crs = Course.query.get(1)
-#         en = Enrollment(related_course = crs , related_user = current_user , state = True)
-#         db.session.add(en)
-#         db.session.commit()
-#
-#         # read later
-#         crs = Course.query.get(1)
-#         en = Enrollment(related_course=crs, related_user=current_user, state=False)
-#         db.session.add(en)
-#         db.session.commit()
-#
-#     return render_template('course#1.html', title='Course#1')
-
-
 #
 # @app.errorhandler(404)
 # def page_not_found(error):
@@ -321,40 +290,38 @@ def favicon():
 @app.route('/friends' , methods=['GET', 'POST'])
 @login_required
 def allFriends():
- form = SendMassage_addFriend()
- state=''
- friends_list=[]
- friends_id= User.get_friend(current_user)
+    form = SendMassage_addFriend()
+    state=''
+    friends_list=[]
+    friends_id= User.get_friend(current_user)
 
- for id in friends_id:
+    for id in friends_id:
      friend=User.query.get(id)
      friends_list.append(friend)
 
- if (request.method=='POST') and ('add' in request.form ) :
-                    friendusername =request.form['addfriend']
-                    new_friend = User.query.filter_by(username=friendusername).first()
-                    if (new_friend):
-                                if new_friend.id not in friends_id:
-                                    User.add_friend(current_user,new_friend.id)
-                                    db.session.commit()
-                                    flash('Friend aded!')
-                                    state='add'
-                                    redirect(url_for('allFriends'))
-                                    return redirect(url_for('allFriends'))
+    if (request.method=='POST') and ('add' in request.form ) :
+        friendusername =request.form['addfriend']
+        new_friend = User.query.filter_by(username=friendusername).first()
+        if (new_friend):
+            if new_friend.id not in friends_id:
+                User.add_friend(current_user,new_friend.id)
+                db.session.commit()
+                flash('Friend aded!')
+                state='add'
+                redirect(url_for('allFriends'))
+                return redirect(url_for('allFriends'))
 
-                                else:
-                                    flash('Friend already exists!')
-                                    state='exists'
-                                    return redirect(url_for('allFriends'))
+            else:
+                flash('Friend already exists!')
+                state='exists'
+                return redirect(url_for('allFriends'))
 
-                    else:
-                      flash('not find!')
-                      state='notfind'
-                      return redirect(url_for('allFriends'))
+        else:
+          flash('not find!')
+          state='notfind'
+          return redirect(url_for('allFriends'))
 
-
-
- return render_template('landing_page/Friends.html', title='Friends' , Friends=friends_list, form=form , state=state)
+    return render_template('landing_page/Friends.html', title='Friends' , Friends=friends_list, form=form , state=state)
 
 
 @app.route('/friends/<username>' , methods=['GET', 'POST'])
@@ -369,19 +336,17 @@ def chat(username):
 
     if (request.method == 'POST') and ( 'submit' in request.form ) :
         if (form.massage.data !=''):
-                    receiver =User.query.filter_by(username=username).first()
-                    post_sender= Post(body=form.massage.data,user_id=current_user.id ,user2_id=receiver.id,send_receive=False)
-                    post_receiver = Post(body=form.massage.data,user_id=receiver.id,user2_id=current_user.id, send_receive=True)
-                    db.session.add(post_sender)
-                    db.session.commit()
-                    db.session.add(post_receiver)
-                    db.session.commit()
-                    flash('Massage send!')
-                    form.massage.data=''
-                    form.receiver.data=''
+            receiver =User.query.filter_by(username=username).first()
+            post_sender= Post(body=form.massage.data,user_id=current_user.id ,user2_id=receiver.id,send_receive=False)
+            post_receiver = Post(body=form.massage.data,user_id=receiver.id,user2_id=current_user.id, send_receive=True)
+            db.session.add(post_sender)
+            db.session.commit()
+            db.session.add(post_receiver)
+            db.session.commit()
+            flash('Massage send!')
+            form.massage.data=''
+            form.receiver.data=''
         else:     flash('empty!')
-
-
 
     return render_template('landing_page/Chats.html',posts=posts,form=form,user=current_user,friend=friend)
 
