@@ -180,6 +180,7 @@ def chat(username):
                     form.massage.data=''
                     form.receiver.data=''
         else:     flash('empty!')
+        
 
 
     return render_template('landing_page/Chats.html',posts=posts,form=form,user=current_user,friend=friend)
