@@ -48,6 +48,7 @@ class User(UserMixin , db.Model):
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    user2_id = db.Column(db.Integer)
     send_receive = db.Column(db.Boolean, index=True, default=True)  #True for receiver and False for sender
     body = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)

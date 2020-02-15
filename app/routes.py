@@ -45,7 +45,7 @@ def login():
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('my_courses')
         return redirect(next_page)
-    return render_template('login.html', title='Sign In', form=form)
+    return render_template('landing_page/login.html', title='Sign In', form=form)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -61,7 +61,7 @@ def register():
 
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
-    return render_template('register.html', title='Register', form=form)
+    return render_template('landing_page/register.html', title='Register', form=form)
 
 @app.route('/logout')
 def logout():
