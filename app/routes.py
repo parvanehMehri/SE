@@ -4,9 +4,9 @@ from flask import render_template, flash, url_for, request, send_from_directory
 from sqlalchemy import and_
 from werkzeug.utils import redirect
 from app import app , db
-from app.forms import LoginForm , RegistrationForm
+from app.forms import LoginForm, RegistrationForm, SendMassage_addFriend
 from flask_login import current_user, login_user, login_required , logout_user
-from app.models import User, Course, Post, Enrollment, Category
+from app.models import User, Course ,Category, Post , Enrollment
 from werkzeug.urls import url_parse
 
 # @app.route('/home' , methods=['GET', 'POST'])  # bayad bere to home page(site landing page)
@@ -14,7 +14,6 @@ from werkzeug.urls import url_parse
 #     courses = Course.query.all()
 #     return render_template('home.html', title='Home' , courses = courses)
 
-@app.route('/' , methods=['GET', 'POST'])
 @app.route('/landing_page' , methods=['GET', 'POST'])
 def landing_page():
     courses = Course.query.all()
@@ -318,3 +317,83 @@ def goals():
 def favicon():
     return send_from_directory(os.path.join(app.root_path, '../static'),
                                'favicon.ico', mimetype='img/vnd.microsoft.icon')
+
+@app.route('/friends' , methods=['GET', 'POST'])
+@login_required
+def allFriends():
+ form = SendMassage_addFriend()
+ state=''
+ friends_list=[]
+ friends_id= User.get_friend(current_user)
+
+ for id in friends_id:
+     friend=User.query.get(id)
+     friends_list.append(friend)
+
+ if (request.method=='POST') and ('add' in request.form ) :
+                    friendusername =request.form['addfriend']
+                    new_friend = User.query.filter_by(username=friendusername).first()
+                    if (new_friend):
+                                if new_friend.id not in friends_id:
+                                    User.add_friend(current_user,new_friend.id)
+                                    db.session.commit()
+                                    flash('Friend aded!')
+                                    state='add'
+                                    redirect(url_for('allFriends'))
+                                    return redirect(url_for('allFriends'))
+
+                                else:
+                                    flash('Friend already exists!')
+                                    state='exists'
+                                    return redirect(url_for('allFriends'))
+
+                    else:
+                      flash('not find!')
+                      state='notfind'
+                      return redirect(url_for('allFriends'))
+
+
+
+ return render_template('landing_page/Friends.html', title='Friends' , Friends=friends_list, form=form , state=state)
+
+
+@app.route('/friends/<username>' , methods=['GET', 'POST'])
+@login_required
+def chat(username):
+    form = SendMassage_addFriend()
+    friend=User.query.filter_by(username=username).first()
+    currentpost=Post.query.filter(and_(Post.user_id == current_user.id, Post.user2_id == friend.id,Post.send_receive == False ))
+    friendpost=Post.query.filter(and_(Post.user_id == friend.id, Post.user2_id == current_user.id , Post.send_receive == False))
+    posts=currentpost.union(friendpost)
+    posts.order_by('post.timestamp')
+
+    if (request.method == 'POST') and ( 'submit' in request.form ) :
+        if (form.massage.data !=''):
+                    receiver =User.query.filter_by(username=username).first()
+                    post_sender= Post(body=form.massage.data,user_id=current_user.id ,user2_id=receiver.id,send_receive=False)
+                    post_receiver = Post(body=form.massage.data,user_id=receiver.id,user2_id=current_user.id, send_receive=True)
+                    db.session.add(post_sender)
+                    db.session.commit()
+                    db.session.add(post_receiver)
+                    db.session.commit()
+                    flash('Massage send!')
+                    form.massage.data=''
+                    form.receiver.data=''
+        else:     flash('empty!')
+
+
+
+    return render_template('landing_page/Chats.html',posts=posts,form=form,user=current_user,friend=friend)
+
+
+
+
+
+
+
+
+
+
+
+
+
