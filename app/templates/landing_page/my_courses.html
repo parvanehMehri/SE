@@ -18,6 +18,7 @@
         <!-- main css -->
         <link rel="stylesheet" href="../static/assets/landing_page/css/style.css">
         <link rel="stylesheet" href="../static/assets/landing_page/css/responsive.css">
+        <script type="text/javascript" src='../static/assets/landing_page/js/chart_loader.js'></script>
     </head>
     <body>
 
@@ -94,6 +95,8 @@
                 <div class="row">
 
                     <div class="col-lg-8">
+                        <div id="pie_div" style="height: 50%"></div>
+                        <div id="columnchart_values" style="height: 50%"></div>
                         <div class="blog_left_sidebar">
                             {% for course in enrolled_courses %}
                             <article class="row blog_item">
@@ -447,5 +450,6 @@
         <script src="../static/assets/landing_page/vendors/counter-up/jquery.waypoints.min.js"></script>
         <script src="../static/assets/landing_page/vendors/counter-up/jquery.counterup.js"></script>
         <script src="../static/assets/landing_page/js/theme.js"></script>
+        <script type="text/javascript" src='../static/assets/landing_page/js/dashboard_scripts.js'></script>
     </body>
 </html>
