@@ -9,6 +9,10 @@ from flask_login import current_user, login_user, login_required , logout_user
 from app.models import User, Course ,Category, Post , Enrollment, Comment, VideoViews, VideoRates
 from werkzeug.urls import url_parse
 
+# @app.route('/home' , methods=['GET', 'POST'])  # bayad bere to home page(site landing page)
+# def home():
+#     courses = Course.query.all()
+#     return render_template('home.html', title='Home' , courses = courses)
 
 @app.route('/' , methods=['GET', 'POST'])
 @app.route('/landing_page' , methods=['GET', 'POST'])
@@ -175,6 +179,11 @@ def comments3():
         db.session.add(temp_comment)
         db.session.commit()
         return redirect(url_for('comments3'))
+
+@app.route('/index')  # manzoor az index va home hamon dashboard ast ... :)
+@login_required
+def index():
+    return render_template('index.html', title='Index')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
