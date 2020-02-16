@@ -89,6 +89,30 @@ class Enrollment(db.Model):
     def __repr__(self):
         return '<Enrollment {}>'.format(self.course_id , self.user_id , self.state)
 
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String(400))
+    author = db.Column(db.String(100))
+    email = db.Column(db.String(100))
+    timestamp = db.Column(db.DateTime(), default=datetime.utcnow, index=True)
+    course_id = db.Column(db.Integer)
+
+
+class VideoViews(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    course_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    timestamp = db.Column(db.DateTime(), default=datetime.utcnow, index=True)
+
+
+class VideoRates(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    course_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    rate = db.Column(db.String(10))
+
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
