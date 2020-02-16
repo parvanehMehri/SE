@@ -1,5 +1,5 @@
 import os
-
+import json
 from flask import render_template, flash, url_for, request, send_from_directory
 from sqlalchemy import and_
 from werkzeug.utils import redirect
@@ -50,6 +50,16 @@ def rate_video():
         db.session.commit()
 
     return calc_avg_rate(request.form['course_id'], current_user.id)
+
+
+@app.route('/my_course_views', methods=['GET'])
+@login_required
+def my_course_views():
+    all_views = VideoViews.query.filter_by(user_id=current_user.id).all()
+    views_list = [0, 0, 0, 0]
+    for view in all_views:
+        views_list[view.course_id] += 1
+    return json.dumps(views_list)
 
 
 @app.route('/course_video', methods=['GET', 'POST'])
