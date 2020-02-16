@@ -95,7 +95,8 @@
 					<div class="col-lg-3 col-md-6">
 						<div class="l_blog_item">
 <!--							<img class="img-fluid" src="../static/assets/landing_page/img/courses/my_course1.jpg" alt="">-->
-							<img class="img-fluid" src={{ course.img_url }} alt="">
+							<img  class="img-fluid" width="300" height="200" src={{ course.img_url }} alt="">
+							<span style=" margin: 0 10px;"></span>
 							<a class="date" href= {{url_for('landing_page')}} >{{ course.timestamp }}</a>
 							<a href="{{url_for('login')}}"><h4>{{ course.name }}</h4></a>
 							<p>{{ course.description }}</p>
@@ -159,7 +160,7 @@
         						</div>
         					</div>
         					<div class="team_name">
-        						<h4>Ensieh Shamsnouraee</h4>
+        						<h4>Ensieh Shamsnooraee</h4>
 <!--        						<p>...</p>-->
         					</div>
         				</div>

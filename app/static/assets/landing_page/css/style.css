@@ -909,11 +909,12 @@ button:focus {
     color: #777777;
     margin-bottom: 0px; }
   .comments-area .btn-reply {
+    font-family: "Roboto", sans-serif;
     background-color: #fff;
     color: #222222;
     border: 1px solid #eee;
-    padding: 2px 18px;
-    font-size: 12px;
+    padding: 8px 18px;
+    font-size: 16px;
     display: block;
     font-weight: 600;
     transition: all 300ms linear 0s; }
@@ -1019,6 +1020,7 @@ button:focus {
   font-weight: 300;
   color: #999999; }
   .reservation_form .form-group input.placeholder {
+    text-align :center;
     font-size: 13px;
     font-family: "Roboto", sans-serif;
     font-weight: 300;
@@ -1122,6 +1124,7 @@ button:focus {
 .contact_form .submit_btn {
   margin-top: 20px;
   cursor: pointer; }
+
 
 /* Contact Success and error Area css
 ============================================================================================ */
@@ -2420,10 +2423,10 @@ h6 {
   width: auto;
   display: inline-block;
   background: #4dbf1c;
-  padding: 0px 50px;
+  padding: 0px 35px;
   color: #fff;
   font-family: "Roboto", sans-serif;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 50px;
   border-radius: 5px;
@@ -2435,7 +2438,7 @@ h6 {
   transition: all 300ms linear 0s; }
   .submit_btn:hover {
     background: transparent;
-    color: #4dbf1c; }
+    color: black; }
 
 .white_bg_btn {
   display: inline-block;

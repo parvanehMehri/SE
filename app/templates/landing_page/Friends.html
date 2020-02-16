@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" href="../static/assets/landing_page/img/icon/logo1.png" type="image/png">
+        <title>Learn IT Education</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="../static/assets/landing_page/css/bootstrap.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/linericon/style.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/owl-carousel/owl.carousel.min.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/lightbox/simpleLightbox.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/nice-select/css/nice-select.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/animate-css/animate.css">
+        <!-- main css -->
+        <link rel="stylesheet" href="../static/assets/landing_page/css/style.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/css/responsive.css">
+
+
+    </head>
+    <body>
+
+        <!--================Header Menu Area =================-->
+        <header class="header_area">
+           	<div class="top_menu row m0">
+           		<div class="container">
+					<div class="float-left">
+						<ul class="list header_social">
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+							<li><a href="#"><i class="fa fa-behance"></i></a></li>
+						</ul>
+					</div>
+					<div class="float-right">
+						<a class="dn_btn" href="tel:+989900032475">+989900032475</a>
+						<a class="dn_btn" href="mailto:parvaneh.m1376@gmail.com">support@our_coursera.com</a>
+					</div>
+           		</div>
+           	</div>
+            <div class="main_menu">
+            	<nav class="navbar navbar-expand-lg navbar-light">
+					<div class="container">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<a class="navbar-brand logo_h" href="{{ url_for('landing_page')}}"><img src="../static/assets/landing_page/img/icon/logo1.png" alt=""></a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+							<ul class="nav navbar-nav menu_nav ml-auto">
+								<li class="nav-item"><a class="nav-link" href="{{ url_for('logout')}}">Logout</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('landing_page')}}">Home</a></li>
+								<li class="nav-item"><a class="nav-link" href="{{ url_for('about_us')}}">About</a></li>
+								<li class="nav-item submenu dropdown">
+									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MyCourses</a>
+									<ul class="dropdown-menu">
+										<li class="nav-item"><a class="nav-link" href="{{ url_for('index')}}">Enrolled Courses</a>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+            	</nav>
+            </div>
+        </header>
+        <!--================Header Menu Area =================-->
+
+
+        <!--================Home Banner Area =================-->
+
+        <section class="home_banner_area">
+            <div class="banner_inner d-flex align-items-center">
+                                <img class="overlay bg-parallax" src=../static/assets/landing_page/img/banner/friend.jpg alt="">
+				<div class="container">
+					<div class="banner_content text-center">
+						<h3>{{title}}</h3>
+						<p style="weight:bold; font-size:20px" >Find and See your friends</p>
+					</div>
+            </div>
+            </div>
+        </section>
+        <!--================End Home Banner Area =================-->
+
+
+        <!--================Blog Area =================-->
+          <section class="blog_area">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-8">
+
+                        <div class="blog_details">
+                        </div>
+                        <br>
+                        <br>
+                          <h4 style="text-align:center;color:black;font-family:Comic Sans MS" ><strong>ADD NEW FRIEND</strong></h4>
+
+                        <div class="comments-area " style="background-color:#fff7f8;">
+
+                              <form action="" method="POST" novalidate>
+
+
+                                <div class="form-group">
+                                    <input type="text"  name="addfriend" class="form-control" id="subject" placeholder="Enter Username " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Username'"  >
+                                </div>
+                                <p style="text-align:center"> <button type="submit" name="add" class="primary-btn submit_btn" onlclick="myFunction()" style="background-color:#FFB6C1;border:none">ADD</button></p>
+
+                            </form>
+                        </div>
+                        <br>
+                        <br>
+                          <h4 style="text-align:center;color:black;font-family:Comic Sans MS" ><strong> F R I E N D S </strong></h4>
+
+                        <div class="comments-area " style="height: 300px;overflow-y:scroll;">
+
+
+                              {% for friend in Friends %}
+                                <div class=" justify-content-between d-flex ">
+                                    <div class="user justify-content-between d-flex">
+                                        <div class="thumb">
+                                            <img src="{{friend.img_url}}" alt="">
+                                        </div>
+                                        <div class="desc">
+                                            <h5 ><a href="friends/{{friend.username}}">{{friend.username}}</a></h5>
+                                            <p class="date">{{friend.email}} </p>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="reply-btn">
+                                        <br>
+                                           <a href="friends/{{friend.username}}" class="btn-reply text-uppercase" style="height:40px;font-size:small;text-align:center" >Start Chat</a>
+                                    </div>
+
+                                </div>
+
+                                    <div class="arrow">
+                                        <a href="#"><span class="lnr text-white lnr-arrow-left"></span></a>
+                                    </div>
+
+                            {% endfor %}
+
+
+
+                            </div>
+                        <br>
+                        <br>
+
+
+
+
+                    </div>
+
+
+                    <div class="col-lg-4">
+                    <br>
+                    <br>
+                        <br>
+                        <div class="blog_right_sidebar">
+                            <aside class="single_sidebar_widget search_widget">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search Goals">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
+                                    </span>
+                                </div><!-- /input-group -->
+                                <div class="br"></div>
+                            </aside>
+                            <aside class="single_sidebar_widget author_widget">
+                                <img class="author_img rounded-circle" src={{current_user.img_url}} alt="">
+                                <h4>{{current_user.username}}</h4>
+                                <p>{{current_user.email}}</p>
+<!--                                <div class="social_icon">-->
+<!--                                    <a href="#"><i class="fa fa-facebook"></i></a>-->
+<!--                                    <a href="#"><i class="fa fa-twitter"></i></a>-->
+<!--                                    <a href="#"><i class="fa fa-github"></i></a>-->
+<!--                                    <a href="#"><i class="fa fa-behance"></i></a>-->
+<!--                                </div>-->
+<!--                                <p>...</p>-->
+                                <div class="br"></div>
+                            </aside>
+
+                            <aside class="single_sidebar_widget popular_post_widget">
+                                <a href="goals"><h3 class="widget_title">Your Goals</h3></a>
+                               <div class="br"></div>
+                            </aside>
+
+                            <aside class="single_sidebar_widget post_category_widget">
+                               <a href="friends"><h4 class="widget_title">Your Friends</h4></a>
+                                <div class="br"></div>
+
+                            </aside>
+
+                        </div>
+                    <br>
+                    <br>
+                    <br>
+
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </section>
+        <!--================Blog Area =================-->
+
+
+
+
+
+
+
+
+
+        <!--================ start footer Area  =================-->
+
+        <footer class="footer-area p_120">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2  col-md-6 col-sm-6" style="text-align:center">
+                        <div class="single-footer-widget tp_widgets" style="text-align:center">
+                           <h6 class="footer_title">Top Products</h6>
+                            <ul class="list">
+                            	<li><a href="#">Managed Website</a></li>
+                            	<li><a href="#">Manage Reputation</a></li>
+                            	<li><a href="#">Power Tools</a></li>
+                            	<li><a href="#">Marketing Service</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2  col-md-6 col-sm-6">
+                        <div class="single-footer-widget tp_widgets">
+                           <h6 class="footer_title">Quick Links</h6>
+                            <ul class="list">
+                            	<li><a href="#">Jobs</a></li>
+                            	<li><a href="#">Brand Assets</a></li>
+                            	<li><a href="#">Investor Relations</a></li>
+                            	<li><a href="#">Terms of Service</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2  col-md-6 col-sm-6">
+                        <div class="single-footer-widget tp_widgets">
+                           <h6 class="footer_title">Features</h6>
+                            <ul class="list">
+                            	<li><a href="#">Jobs</a></li>
+                            	<li><a href="#">Brand Assets</a></li>
+                            	<li><a href="#">Investor Relations</a></li>
+                            	<li><a href="#">Terms of Service</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2  col-md-6 col-sm-6">
+                        <div class="single-footer-widget tp_widgets">
+                           <h6 class="footer_title">Resources</h6>
+                            <ul class="list">
+                            	<li><a href="#">Guides</a></li>
+                            	<li><a href="#">Research</a></li>
+                            	<li><a href="#">Experts</a></li>
+                            	<li><a href="#">Agencies</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row footer-bottom d-flex justify-content-between align-items-center">
+<!--                    <p class="col-lg-8 col-md-8 footer-text m-0">&lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;-->
+<!--Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>-->
+<!--&lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;</p>-->
+
+                </div>
+            </div>
+        </footer>
+		<!--================ End footer Area  =================-->
+
+
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="../static/assets/landing_page/js/jquery-3.3.1.min.js"></script>
+        <script src="../static/assets/landing_page/js/popper.js"></script>
+        <script src="../static/assets/landing_page/js/bootstrap.min.js"></script>
+        <script src="../static/assets/landing_page/js/stellar.js"></script>
+        <script src="../static/assets/landing_page/vendors/lightbox/simpleLightbox.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/isotope/isotope.pkgd.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/owl-carousel/owl.carousel.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/jquery-ui/jquery-ui.js"></script>
+        <script src="../static/assets/landing_page/js/jquery.ajaxchimp.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/popup/jquery.magnific-popup.min.js"></script>
+        <script src="../static/assets/landing_page/js/mail-script.js"></script>
+        <script src="../static/assets/landing_page/vendors/counter-up/jquery.waypoints.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/counter-up/jquery.counterup.js"></script>
+        <script src="../static/assets/landing_page/js/theme.js"></script>
+    </body>
+</html>
