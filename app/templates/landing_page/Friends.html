@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" href="../static/assets/landing_page/img/icon/logo1.png" type="image/png">
-        <title>Learn IT Education</title>
+        <title>Friends</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../static/assets/landing_page/css/bootstrap.css">
         <link rel="stylesheet" href="../static/assets/landing_page/vendors/linericon/style.css">
@@ -56,13 +56,10 @@
 								<li class="nav-item"><a class="nav-link" href="{{ url_for('logout')}}">Logout</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url_for('landing_page')}}">Home</a></li>
 								<li class="nav-item"><a class="nav-link" href="{{ url_for('about_us')}}">About</a></li>
-								<li class="nav-item submenu dropdown">
-									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MyCourses</a>
-									<ul class="dropdown-menu">
-										<li class="nav-item"><a class="nav-link" href="{{ url_for('index')}}">Enrolled Courses</a>
-									</ul>
-								</li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Activity</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">AllCourses</a></li>
 							</ul>
+						</div>
 						</div>
 					</div>
             	</nav>
@@ -78,8 +75,7 @@
                                 <img class="overlay bg-parallax" src=../static/assets/landing_page/img/banner/friend.jpg alt="">
 				<div class="container">
 					<div class="banner_content text-center">
-						<h3>{{title}}</h3>
-						<p style="weight:bold; font-size:20px" >Find and See your friends</p>
+						<h3>F R I E N D S</h3>
 					</div>
             </div>
             </div>
@@ -144,7 +140,7 @@
                                         <a href="#"><span class="lnr text-white lnr-arrow-left"></span></a>
                                     </div>
 
-                            {% endfor %}
+                              {% endfor %}
 
 
 

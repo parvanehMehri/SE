@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
         <link rel="icon" href="../static/assets/landing_page/img/icon/logo1.png" type="image/png">
-        <title>Learn IT Education</title>
+        <title>ALL COURSES</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../static/assets/landing_page/css/bootstrap.css">
         <link rel="stylesheet" href="../static/assets/landing_page/vendors/linericon/style.css">
@@ -64,7 +64,7 @@
 										<li class="nav-item"><a class="nav-link" href="{{ url_for('my_courses')}}">Goals</a></li>
 									</ul>
 								</li> 
-                                <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Friends</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('allFriends')}}">Friends</a></li>
 							</ul>
 						</div> 
 					</div>
@@ -75,12 +75,18 @@
         
 
         <!--================Home Banner Area =================-->
-<!--        <section class="home_banner_area blog_banner">-->
-        <div class="blog_b_text text-center">
-            <h2>{{title}}</h2>
-            <p>There is {{title}} that available for you , you can add courses to your goals-list or enroll in it</p>
-        </div>
-<!--        </section>-->
+      <section class="home_banner_area">
+            <div class="banner_inner d-flex align-items-center">
+				<img class="overlay bg-parallax" src=../static/assets/landing_page/img/banner/home.jpg alt="">
+
+				<div class="container">
+					<div class="banner_content text-center">
+						<h3 style="color:blue"> LEARN ONLINE</h3>
+						<p style="color:blue">Use Online Resources to learn what you want</p>
+					</div>
+				</div>
+            </div>
+        </section>
         <!--================End Home Banner Area =================-->
         
         <!--================Blog Categorie Area =================-->
