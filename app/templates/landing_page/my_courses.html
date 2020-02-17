@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
         <link rel="icon" href="../static/assets/landing_page/img/icon/logo1.png" type="image/png">
-        <title>Learn IT Education</title>
+        <title>MY COURSES</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../static/assets/landing_page/css/bootstrap.css">
         <link rel="stylesheet" href="../static/assets/landing_page/vendors/linericon/style.css">
@@ -57,7 +57,7 @@
 								<li class="nav-item"><a class="nav-link" href="{{ url_for('about_us')}}">About</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Activity</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">AllCourses</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Friends</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('allFriends')}}">Friends</a></li>
 							</ul>
 						</div>
 					</div>
@@ -68,22 +68,15 @@
 
 
         <!--================Home Banner Area =================-->
-        <section class="banner_area">
-            <div class="blog_b_text text-center">
-                <h2>_____________________________________________________________________________________________________________________________________</h2>
-                <div class="br">.</div>
-            </div>
+           <section class="home_banner_area">
             <div class="banner_inner d-flex align-items-center">
-            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+				<img class="overlay bg-parallax" src=../static/assets/landing_page/img/banner/banner-2.jpg alt="">
+
 				<div class="container">
 					<div class="banner_content text-center">
-                        <h2>Your Dashboard</h2>
+						<h3 >W E L C O M E </h3>
 					</div>
 				</div>
-            </div>
-            <div class="blog_b_text text-center">
-                <h2>_____________________________________________________________________________________________________________________________________</h2>
-                <div class="br"></div>
             </div>
         </section>
         <!--================End Home Banner Area =================-->
@@ -150,9 +143,11 @@
                     </div>
 
                     <div class="col-lg-4">
+                        <br>
+                        <br>
                         <div class="blog_right_sidebar">
-
                             <aside class="single_sidebar_widget author_widget">
+
                                 <img class="author_img rounded-circle" src={{current_user.img_url}} alt="">
                                 <h4>{{current_user.username}}</h4>
                                 <p>{{current_user.email}}</p>
@@ -375,6 +370,8 @@
                                 </ul>
                             </aside>
                         </div>
+                           <br>
+                        <br>
                     </div>
                 </div>
             </div>
@@ -382,7 +379,7 @@
         <!--================Blog Area =================-->
 
         <!--================ start footer Area  =================-->
-       <footer class="footer-area p_120"style="text-align:center">
+        <footer class="footer-area p_120"style="text-align:center">
             <div class="container"style="text-align:center">
                 <div class="row">
                     <div class="col-lg-2  col-md-6 col-sm-6" >
@@ -424,7 +421,8 @@
 
                 </div>
             </div>
-        </footer>========= End footer Area  =================-->
+        </footer>
+		<!--================ End footer Area  =================-->
 
 
 

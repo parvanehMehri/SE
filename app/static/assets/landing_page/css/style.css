@@ -76,7 +76,9 @@ button:focus {
 
 .p_120 {
   padding-top: 120px;
-  padding-bottom: 120px; }
+  padding-bottom: 120px;
+     padding-left:450px; }
+}
 
 .pad_top {
   padding-top: 120px; }
@@ -381,7 +383,6 @@ button:focus {
     background: #04091e;
     z-index: 1; }
     .banner_area .banner_inner .overlay {
-      background: url(../../login_register/img/b3.jpg) repeat scroll center center;
       position: absolute;
       left: 0;
       right: 0;
