@@ -503,25 +503,28 @@ def course(courseId) :
 
     cform = CourseForm()
 
-    if (course) :
-        #enrolledcourses = Enrollment.query.filter_by(and_(Enrollment.related_user==current_user ,Enrollment.state==True))
+    # if (course) :
+    #     #enrolledcourses = Enrollment.query.filter_by(and_(Enrollment.related_user==current_user ,Enrollment.state==True))
 
-        if (request.method == 'POST') and ('enroll' in request.form) :
+    if (request.method == 'POST') :
+
+        if  'enroll' in request.form :
             enrollment = Enrollment(course_id=course.id , user_id=current_user.id ,state=True )
             db.session.add(enrollment)
             db.session.commit()
             flash('You are successfully enrolled in %s course!' %coursename)
-            return redirect(url_for('index'))
+            return redirect(url_for('viewCourse' , courseId=course.id))
 
-        elif (request.method == 'POST') and ('remind' in request.form):
+        if 'remind' in request.form:
             remind = Enrollment(course_id=course.id , user_id=current_user.id, state = False)
             db.session.add(remind)
             db.session.commit()
             flash('You have added %s course to your goals.'%coursename )
+            return redirect(url_for('my_courses'))
 
-        return render_template('landing_page/course-details.html', title='%s' % coursename, course=course)
-    else:
-         return render_template('page_not_found.html'),404
+    return render_template('landing_page/course-details.html', title='%s' % coursename, course=course)
+    # else:
+    #      return render_template('page_not_found.html'),404
 
 
 

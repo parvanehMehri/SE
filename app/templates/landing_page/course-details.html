@@ -104,8 +104,12 @@
 									<br></br>
 									<h5> {{course.name}}  : {{course.description}}</h5>
                                     <br></br>
-							        <a class="submit_btn"style="width: 210px;  ">Enroll Me</a>
-							         <a class="submit_btn" style="width: 210px;">Remind Me Later</a>
+							        <form method="POST" action="">
+                                        <button type="submit" name="enroll">Enroll me</button>
+<!--                                        <a href="{{url_for('viewCourse' , courseId=course.id)}}" class="submit_btn"style="width: 210px;  ">Enroll Me</button>-->
+<!--                                        <a href="{{url_for('my_courses')}}" class="submit_btn" style="width: 210px;">Remind Me Later</a>-->
+                                        <button type="submit" name="remind">Remind me later</button>
+                                    </form>
 						            <br></br>
 								</div>
 					</div>
