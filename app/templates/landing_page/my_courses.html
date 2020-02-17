@@ -85,8 +85,9 @@
         <section class="blog_area">
             <div class="container">
                 <div class="row">
-
                     <div class="col-lg-8">
+                        <br>
+                        <br>
                         <div class="blog_left_sidebar">
                             {% for course in enrolled_courses %}
                             <article class="row blog_item">
@@ -98,8 +99,8 @@
                                         <ul class="blog_meta list">
                                             <li><a href="#">Admin<i class="lnr lnr-user"></i></a></li>
                                             <li><a href="#">{{course.timestamp}}<i class="lnr lnr-calendar-full"></i></a></li>
-                                            <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>  <!-- To Do -->
-                                            <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li> <!-- To Do -->
+                                            <li><a href="#">Views<i class="lnr lnr-eye"></i></a></li>  <!-- To Do -->
+                                            <li><a href="#">Comments<i class="lnr lnr-bubble"></i></a></li> <!-- To Do -->
                                         </ul>
                                     </div>
                                </div>
@@ -107,38 +108,15 @@
                                     <div class="blog_post">
                                         <img width="545" height="330" src={{course.img_url}} alt="">
                                         <div class="blog_details">
-                                            <a href="{{url_for('all_courses')}}"><h2>{{course.name}}</h2></a>
+                                            <a href="{{url_for('my_courses')}}"><h2>{{course.name}}</h2></a>
                                             <p>{{course.description}}</p>
-                                            <a href="{{url_for('all_courses')}}" class="white_bg_btn">View More</a>
-                                            <a href="{{url_for('all_courses')}}" class="white_bg_btn">Suggest to friends</a>
+                                            <a href="{{url_for('viewCourse', courseId=course.id)}}" class="white_bg_btn">View More</a>
+                                            <a href="{{url_for('allFriends')}}" class="white_bg_btn">Suggest to friends</a>
                                         </div>
                                     </div>
                                 </div>
                             </article>
                             {% endfor %}
-<!--                            <nav class="blog-pagination justify-content-center d-flex">-->
-<!--		                        <ul class="pagination">-->
-<!--		                            <li class="page-item">-->
-<!--		                                <a href="#" class="page-link" aria-label="Previous">-->
-<!--		                                    <span aria-hidden="true">-->
-<!--		                                        <span class="lnr lnr-chevron-left"></span>-->
-<!--		                                    </span>-->
-<!--		                                </a>-->
-<!--		                            </li>-->
-<!--		                            <li class="page-item"><a href="#" class="page-link">01</a></li>-->
-<!--		                            <li class="page-item active"><a href="#" class="page-link">02</a></li>-->
-<!--		                            <li class="page-item"><a href="#" class="page-link">03</a></li>-->
-<!--		                            <li class="page-item"><a href="#" class="page-link">04</a></li>-->
-<!--		                            <li class="page-item"><a href="#" class="page-link">09</a></li>-->
-<!--		                            <li class="page-item">-->
-<!--		                                <a href="#" class="page-link" aria-label="Next">-->
-<!--		                                    <span aria-hidden="true">-->
-<!--		                                        <span class="lnr lnr-chevron-right"></span>-->
-<!--		                                    </span>-->
-<!--		                                </a>-->
-<!--		                            </li>-->
-<!--		                        </ul>-->
-<!--		                    </nav>-->
                         </div>
                     </div>
 
@@ -178,7 +156,7 @@
                             </form>
 
                             <aside class="single_sidebar_widget popular_post_widget">
-                                <h3 class="widget_title">Your Goals</h3>
+                                <h3 class="widget_title">Goals</h3>
                                 {% for goal in goals %}
                                 <div class="media post_item">
                                     <img class="author_img rounded-circle" width="70" height="70" src={{goal.img_url}} alt="">
@@ -186,7 +164,7 @@
 <!--                                        <p>{{goal.name}}</p>-->
 <!--                                    </a>-->
                                     <div class="media-body">
-                                        <a href="{{url_for('all_courses')}}"><h3>{{goal.name}}</h3></a>
+                                        <a href="{{url_for('course', courseId=goal.id)}}"><h3>{{goal.name}}</h3></a>
 <!--                                        <a href="{{url_for('all_courses')}}" class="white_bg_btn">Cancel</a>-->
                                         <form  method="POST" action="" >
                                             <input name="goal_name_cancel" type="hidden" id="goal_id" name="goal_id" value={{goal.id}}>
@@ -200,17 +178,19 @@
                             </aside>
 
                             <aside class="single_sidebar_widget post_category_widget">
-                                <h4 class="widget_title">Your Friends</h4>
+                                <h4 class="widget_title">Friends</h4>
                                 <ul class="list cat-list">
                                     {% for friend in friends %}
                                     <li>
                                         <form  method="POST" action="" >
                                             <img class="author_img rounded-circle" width="70" height="70" src={{friend.img_url}} alt="">
-                                            <a href="#" class="d-flex justify-content-between">
-                                                <p>{{friend.username}}</p>
+                                            <a href="{{url_for('chat', username=friend.username)}}" class="d-flex justify-content-between">
+                                                <span>{{friend.username}}</span>
                                             </a>
                                             <input name="friend_name_unfollow" type="hidden" id="friend_id" name="friend_id" value={{friend.id}}>
-                                            <button name='unfollow_btn' class="btn btn-default" type="submit">UnFollow</button>
+                                            <button name='unfollow_btn' class="btn btn-default" type="submit" style="float: right;">UnFollow</button>
+                                            <br>
+
 <!--                                        <p>02 Hours ago</p>-->  <!-- To Do -->
                                         </form>
                                     </li>
@@ -221,7 +201,7 @@
                             </aside>
 <!-- bar chart -->
                             <aside class="single-sidebar-widget tag_cloud_widget">
-                                <h4 class="widget_title">Bar Chart</h4>
+                                <h4 class="widget_title">Activity</h4>
                                 <center>
                                     <canvas id="bar_chart" width="250" height="300"></canvas>
                                     <script>
@@ -270,94 +250,31 @@
                             </aside>
 <!-- bar chart -->
 <!-- pie chart -->
-                            <aside class="single-sidebar-widget tag_cloud_widget">
-                                <h4 class="widget_title">Pie Chart</h4>
-                                    <canvas id="pie_chart" width="250" height="300"></canvas>
-                                        <script>
-                                          var pieData = [
-                                            {% for item, label, colors in set %}
-                                              {
-                                                value: {{item}},
-                                                label: "{{label}}",
-                                                color : "{{colors}}"
-                                              },
-                                            {% endfor %}
-                                          ];
-
-                                          // get bar chart canvas
-                                          var pie_chart = document.getElementById("pie_chart").getContext("2d");
-                                          steps = 10
-                                          max = {{ max }}
-
-                                          // draw pie chart
-                                          new Chart(document.getElementById("pie_chart").getContext("2d")).Pie(pieData);
-
-                                        </script>
-                            </aside>
-<!-- pie chart -->
-
-<!-- line chart -->
 <!--                            <aside class="single-sidebar-widget tag_cloud_widget">-->
-<!--                                <h4 class="widget_title">Line Chart</h4>-->
-<!--                                <canvas id="chart" width="250" height="300"></canvas>-->
-<!--                                <script>-->
+<!--                                <h4 class="widget_title">Pie Chart</h4>-->
+<!--                                    <canvas id="pie_chart" width="250" height="300"></canvas>-->
+<!--                                        <script>-->
+<!--                                          var pieData = [-->
+<!--                                            {% for item, label, colors in set %}-->
+<!--                                              {-->
+<!--                                                value: {{item}},-->
+<!--                                                label: "{{label}}",-->
+<!--                                                color : "{{colors}}"-->
+<!--                                              },-->
+<!--                                            {% endfor %}-->
+<!--                                          ];-->
 
-<!--                                  // bar chart data-->
-<!--                                  var barData = {-->
-<!--                                    labels : [-->
-<!--                                      {% for item in labels %}-->
-<!--                                        "{{ item }}",-->
-<!--                                      {% endfor %}-->
-<!--                                    ],-->
+<!--                                          // get bar chart canvas-->
+<!--                                          var pie_chart = document.getElementById("pie_chart").getContext("2d");-->
+<!--                                          steps = 10-->
+<!--                                          max = {{ max }}-->
 
-<!--                                    datasets : [{-->
-<!--                                      fillColor: "rgba(151,187,205,0.2)",-->
-<!--                                      strokeColor: "rgba(151,187,205,1)",-->
-<!--                                      pointColor: "rgba(151,187,205,1)",-->
-<!--                                      pointStrokeColor: "#fff",-->
-<!--                                      pointHighlightFill: "#fff",-->
-<!--                                      pointHighlightStroke: "rgba(151,187,205,1)",-->
-<!--                                      bezierCurve : false,-->
-<!--                                      data : [-->
-<!--                                    {% for item in values %}-->
-<!--                                          {{ item }},-->
-<!--                                        {% endfor %}]-->
-<!--                                      }-->
-<!--                                ]-->
-<!--                                  }-->
+<!--                                          // draw pie chart-->
+<!--                                          new Chart(document.getElementById("pie_chart").getContext("2d")).Pie(pieData);-->
 
-<!--                                  Chart.defaults.global.animationSteps = 50;-->
-<!--                                  Chart.defaults.global.tooltipYPadding = 16;-->
-<!--                                  Chart.defaults.global.tooltipCornerRadius = 0;-->
-<!--                                  Chart.defaults.global.tooltipTitleFontStyle = "normal";-->
-<!--                                  Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";-->
-<!--                                  Chart.defaults.global.animationEasing = "easeOutBounce";-->
-<!--                                  Chart.defaults.global.responsive = false;-->
-<!--                                  Chart.defaults.global.scaleLineColor = "black";-->
-<!--                                  Chart.defaults.global.scaleFontSize = 16;-->
-
-<!--                                  // get bar chart canvas-->
-<!--                                  var mychart = document.getElementById("chart").getContext("2d");-->
-
-<!--                                  steps = 10-->
-<!--                                  max = {{ max }}-->
-<!--                                  // draw bar chart-->
-<!--                                  var LineChartDemo = new Chart(mychart).Line(barData, {-->
-<!--                                    scaleOverride: true,-->
-<!--                                    scaleSteps: steps,-->
-<!--                                    scaleStepWidth: Math.ceil(max / steps),-->
-<!--                                    scaleStartValue: 0,-->
-<!--                                    scaleShowVerticalLines: true,-->
-<!--                                    scaleShowGridLines : true,-->
-<!--                                    barShowStroke : true,-->
-<!--                                    scaleShowLabels: true,-->
-<!--                                    bezierCurve: false,-->
-<!--                                  });-->
-
-<!--                                </script>-->
-<!--                              </center>-->
+<!--                                        </script>-->
 <!--                            </aside>-->
-<!-- line chart -->
+<!-- pie chart -->
                             <aside class="single-sidebar-widget tag_cloud_widget">
                                 <h4 class="widget_title">Tag Clouds</h4>
                                 <ul class="list">

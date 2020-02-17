@@ -54,14 +54,16 @@
 								<li class="nav-item"><a class="nav-link" href="{{ url_for('logout')}}">Logout</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url_for('landing_page')}}">Home</a></li>
 								<li class="nav-item"><a class="nav-link" href="{{ url_for('about_us')}}">About</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Activity</a></li>
 								<li class="nav-item submenu dropdown">
-									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MyCourses</a>
+									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses</a>
 									<ul class="dropdown-menu">
-										<li class="nav-item"><a class="nav-link" href="{{ url_for('index')}}">Enrolled Courses</a>
-										<li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Goals</a></li>
+										<li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">All Courses</a>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url_for('my_courses')}}">Enrolled Courses</a>
+										<li class="nav-item"><a class="nav-link" href="{{ url_for('my_courses')}}">Goals</a></li>
 									</ul>
 								</li>
-                                <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Friends</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('allFriends')}}">Friends</a></li>
 							</ul>
 						</div>
 					</div>
@@ -74,7 +76,7 @@
         <section class="banner_area">
             <div class="banner_inner d-flex align-items-center">
             	<!--<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>-->
-				<img class="overlay " src="../../static/assets/landing_page/img/logC-pg/dgC-banner.jpg"img width="1550">
+				<img class="overlay " src="../static/assets/landing_page/img/logC-pg/dgC-banner.jpg"img width="1550">
             </div>
         </section>
         <!--================End Home Banner Area =================-->
@@ -87,7 +89,7 @@
                         <div class="single-post row">
                             <div class="col-lg-3  col-md-3">
                                 <div class="blog_info text-right">
-                                    <img class="img-fluid" style="height: 330px" src="../../static/assets/landing_page/img/logC-pg/logcl.png" alt="">
+                                    <img class="img-fluid" style="height: 330px" src="../static/assets/landing_page/img/logC-pg/logcl.png" alt="">
                                 </div>
                             </div>
 
@@ -111,10 +113,10 @@
                                     s (metal–oxide–semiconductor field-effect transistors).</div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <img class="img-fluid" src="../../static/assets/landing_page/img/logC-pg/lc-dl.png" alt="">
+                                        <img class="img-fluid" src="../static/assets/landing_page/img/logC-pg/lc-dl.png" alt="">
                                     </div>
                                     <div class="text-justify">
-                                        <img class="img-fluid" src="../../static/assets/landing_page/img/logC-pg/lc-dr.png" alt="">
+                                        <img class="img-fluid" src="../static/assets/landing_page/img/logC-pg/lc-dr.png" alt="">
                                     </div>
                                 </div>
                                 <br></br>
@@ -142,7 +144,7 @@
                                 <div class="br"></div>
                             </aside>
                             <aside class="single_sidebar_widget author_widget">
-                                <img height="200px" width="200px" class="author_img rounded-circle"  src="../../static/assets/landing_page/img/logC-pg/1999_konrad_zuse.jpg" alt="">
+                                <img height="200px" width="200px" class="author_img rounded-circle"  src="../static/assets/landing_page/img/logC-pg/1999_konrad_zuse.jpg" alt="">
                                 <h4> Konard Zuse </h4>
                                 <p>co-inventor the world's first programmable computer</p>
                                 <br></br>
@@ -211,20 +213,20 @@
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/popper.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/stellar.js"></script>
-        <script src="vendors/lightbox/simpleLightbox.min.js"></script>
-        <script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
-        <script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
-        <script src="vendors/isotope/isotope.pkgd.min.js"></script>
-        <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-        <script src="js/jquery.ajaxchimp.min.js"></script>
-        <script src="vendors/counter-up/jquery.waypoints.min.js"></script>
-        <script src="vendors/popup/jquery.magnific-popup.min.js"></script>
-        <script src="vendors/counter-up/jquery.counterup.js"></script>
-        <script src="js/mail-script.js"></script>
-        <script src="js/theme.js"></script>
+        <script src="../static/assets/landing_page/js/jquery-3.3.1.min.js"></script>
+        <script src="../static/assets/landing_page/js/popper.js"></script>
+        <script src="../static/assets/landing_page/js/bootstrap.min.js"></script>
+        <script src="../static/assets/landing_page/js/stellar.js"></script>
+        <script src="../static/assets/landing_page/vendors/lightbox/simpleLightbox.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/isotope/isotope.pkgd.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/owl-carousel/owl.carousel.min.js"></script>
+        <script src="../static/assets/landing_page/js/jquery.ajaxchimp.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/counter-up/jquery.waypoints.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/popup/jquery.magnific-popup.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/counter-up/jquery.counterup.js"></script>
+        <script src="../static/assets/landing_page/js/mail-script.js"></script>
+        <script src="../static/assets/landing_page/js/theme.js"></script>
     </body>
 </html>

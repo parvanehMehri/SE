@@ -51,19 +51,24 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <!-- Collect the nav links, forms, and other content for toggling -->
-                        <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                            <ul class="nav navbar-nav menu_nav ml-auto">
-                                <li class="nav-item"><a class="nav-link" href="{{ url_for('landing_page')}}">Home</a>
-                                </li>
-                                <li class="nav-item"><a class="nav-link" href="{{ url_for('about_us')}}">About</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ url_for('login')}}">Login</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ url_for('register')}}">Register</a>
-                                </li>
-                                <li class="nav-item active"><a class="nav-link"
-                                                               href="{{ url_for('comments')}}">Videos</a></li>
-                            </ul>
-                        </div>
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+							<ul class="nav navbar-nav menu_nav ml-auto">
+								<li class="nav-item"><a class="nav-link" href="{{ url_for('logout')}}">Logout</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('landing_page')}}">Home</a></li>
+								<li class="nav-item"><a class="nav-link" href="{{ url_for('about_us')}}">About</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Activity</a></li>
+								<li class="nav-item submenu dropdown">
+									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses</a>
+									<ul class="dropdown-menu">
+										<li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">All Courses</a>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url_for('my_courses')}}">Enrolled Courses</a>
+										<li class="nav-item"><a class="nav-link" href="{{ url_for('my_courses')}}">Goals</a></li>
+									</ul>
+								</li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('allFriends')}}">Friends</a></li>
+							</ul>
+						</div>
                     </div>
                 </nav>
             </div>
@@ -74,9 +79,9 @@
         <section class="banner_area">
             <div class="banner_inner d-flex align-items-center">
                 <div class="container">
-                    <div class="banner_content text-lg-left text-justify ">
-                        <img class="overlay" src="../../static/assets/landing_page/img/AI-pg/AI_Banner.jpg" height="1034" width="1550"  alt="">
-                        <h2 style="color: white;">Artificial <br> intelligence</h2>
+                    <div class="banner_content text-center">
+                        <img class="overlay" src="../static/assets/landing_page/img/AI-pg/AI_Banner.jpg" height="1034" width="1550"  alt="">
+                        <h2 style="color: white;">Artificial <br> Intelligence</h2>
                     </div>
                 </div>
             </div>
