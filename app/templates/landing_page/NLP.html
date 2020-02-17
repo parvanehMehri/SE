@@ -54,14 +54,16 @@
 								<li class="nav-item"><a class="nav-link" href="{{ url_for('logout')}}">Logout</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url_for('landing_page')}}">Home</a></li>
 								<li class="nav-item"><a class="nav-link" href="{{ url_for('about_us')}}">About</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Activity</a></li>
 								<li class="nav-item submenu dropdown">
-									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MyCourses</a>
+									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses</a>
 									<ul class="dropdown-menu">
-										<li class="nav-item"><a class="nav-link" href="{{ url_for('index')}}">Enrolled Courses</a>
-										<li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Goals</a></li>
+										<li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">All Courses</a>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url_for('my_courses')}}">Enrolled Courses</a>
+										<li class="nav-item"><a class="nav-link" href="{{ url_for('my_courses')}}">Goals</a></li>
 									</ul>
 								</li>
-                                <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Friends</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('allFriends')}}">Friends</a></li>
 							</ul>
 						</div>
 					</div>
@@ -74,8 +76,7 @@
         <section class="banner_area">
             <div class="banner_inner d-flex align-items-center">
             	<!--<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>-->
-				<img class="overlay " src="https://www.mmnlp.com/wp-content/uploads/2019/11/shutterstock_1257901324-e1574816329388.jpg"
-					 img width="1600">
+				<img class="overlay " src="../static/assets/landing_page/img/NLP-pg/NLP-banner.jpg" height="1034" width="1550"/>
             </div>
         </section>
         <!--================End Home Banner Area =================-->
@@ -88,12 +89,12 @@
                         <div class="single-post row">
                             <div class="col-lg-12">
                                 <div class="feature-img">
-                                    <img class="img-fluid" src="https://www.nlpacademy.co.uk/images/uploads/whatisnlp.jpg" alt="">
+                                    <img class="img-fluid"  style="height: 330px; width: border-box" src="../static/assets/landing_page/img/NLP-pg/whatisnlp.jpg" alt="">
                                 </div>
                             </div>
                             <div class="col-lg-3  col-md-3">
                                 <div class="blog_info text-right">
-                                    <img class="img-fluid" style="height: 330px" src="https://www.mindtools.co.th/wp-content/uploads/elementor/thumbs/mindtools-personal-development-neuro-linguistic-programming-nlp-milton-model-analogue-marking-oc0ffc9pqhi6ba5in9xh3tnrcpzp1ix7pckn1eyu2g.png" alt="">
+                                    <img class="img-fluid" style="height: 330px" src="../static/assets/landing_page/img/NLP-pg/nlp-question.png" alt="">
                                 </div>
                             </div>
 
@@ -117,7 +118,7 @@
                                     extract meaning associated with every sentence and collect the essential data from them.</div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <img class="img-fluid" src=https://res.cloudinary.com/rsmglobal/image/fetch/t_default%2Cf_auto%2Cq_auto/https://www.rsm.global/singapore/sites/default/files/media/Publications/Our%20Expert%20Insights/rsm-tmt-nlp.jpg alt="">
+                                        <img class="img-fluid" src="../static/assets/landing_page/img/NLP-pg/nlpBrain.jpg" alt="">
                                     </div>
                                     <div class="text-justify">
                                         <p style="font-size: smaller">
@@ -133,32 +134,10 @@
                                     </h5>
                                     <br>
                                     <div class="text-center">
-                                     <a href="#" class="primary-btn submit_btn">Watch Video</a>
+                                        <a href="{{url_for('comments1')}}" class="primary-btn submit_btn" name="watch">Watch Video</a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-
-                        <div class="comment-form">
-                            <h4>Leave a Reply</h4>
-                            <form>
-                                <div class="form-group form-inline">
-                                  <div class="form-group col-lg-6 col-md-6 name">
-                                    <input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
-                                  </div>
-                                  <div class="form-group col-lg-6 col-md-6 email">
-                                    <input type="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="subject" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
-                                </div>
-                                <div class="form-group">
-                                    <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
-                                </div>
-                                <a href="#" class="primary-btn submit_btn">Post Comment</a>
-                            </form>
                         </div>
                     </div>
 
@@ -172,7 +151,7 @@
                                 <div class="br"></div>
                             </aside>
                             <aside class="single_sidebar_widget author_widget">
-                                <img height="200px" width="200px" class="author_img rounded-circle"  src="https://www.tagumcooperative.coop/wp-content/uploads/2019/05/unknown-profile-1.jpg" alt="">
+                                <img height="200px" width="200px" class="author_img rounded-circle"  src="../static/assets/landing_page/img/NLP-pg/unknown-pro.jpg" alt="">
                                 <h4> Leand Romaf </h4>
                                 <p>an experienced software engineer who is passionate at teaching people how artificial intelligence systems work</p>
                                 <br></br>
@@ -240,20 +219,20 @@
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/popper.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/stellar.js"></script>
-        <script src="vendors/lightbox/simpleLightbox.min.js"></script>
-        <script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
-        <script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
-        <script src="vendors/isotope/isotope.pkgd.min.js"></script>
-        <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-        <script src="js/jquery.ajaxchimp.min.js"></script>
-        <script src="vendors/counter-up/jquery.waypoints.min.js"></script>
-        <script src="vendors/popup/jquery.magnific-popup.min.js"></script>
-        <script src="vendors/counter-up/jquery.counterup.js"></script>
-        <script src="js/mail-script.js"></script>
-        <script src="js/theme.js"></script>
+        <script src="../static/assets/landing_page/js/jquery-3.3.1.min.js"></script>
+        <script src="../static/assets/landing_page/js/popper.js"></script>
+        <script src="../static/assets/landing_page/js/bootstrap.min.js"></script>
+        <script src="../static/assets/landing_page/js/stellar.js"></script>
+        <script src="../static/assets/landing_page/vendors/lightbox/simpleLightbox.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/isotope/isotope.pkgd.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/owl-carousel/owl.carousel.min.js"></script>
+        <script src="../static/assets/landing_page/js/jquery.ajaxchimp.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/counter-up/jquery.waypoints.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/popup/jquery.magnific-popup.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/counter-up/jquery.counterup.js"></script>
+        <script src="../static/assets/landing_page/js/mail-script.js"></script>
+        <script src="../static/assets/landing_page/js/theme.js"></script>
     </body>
 </html>

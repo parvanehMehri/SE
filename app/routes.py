@@ -361,6 +361,13 @@ def all_courses():
             db.session.delete(en)
             db.session.commit()
             return redirect(url_for('all_courses'))
+        if 'unfollow_btn' in request.form:
+            friend_id =request.form['friend_name_unfollow']
+            print('******************',friend_id,'*************________________***********')
+            current_user.remove_friend(friend_id)
+            db.session.add(current_user)
+            db.session.commit()
+            return redirect(url_for('all_courses'))
 
     categories = Category.query.all()
 
@@ -509,18 +516,30 @@ def course(courseId) :
     if (request.method == 'POST') :
 
         if  'enroll' in request.form :
-            enrollment = Enrollment(course_id=course.id , user_id=current_user.id ,state=True )
-            db.session.add(enrollment)
-            db.session.commit()
-            flash('You are successfully enrolled in %s course!' %coursename)
-            return redirect(url_for('viewCourse' , courseId=course.id))
+            en = Enrollment.query.filter(and_(Enrollment.related_course == course, Enrollment.related_user == current_user)).first()
+            if en is None:
+                enrollment = Enrollment(course_id=course.id , user_id=current_user.id ,state=True )
+                db.session.add(enrollment)
+                db.session.commit()
+                flash('You are successfully enrolled in %s course!' %coursename)
+                return redirect(url_for('viewCourse' , courseId=course.id))
+            else:
+                if en.state == False:
+                    en.state = True
+                    db.session.add(en)
+                    db.session.commit()
+                    return redirect(url_for('viewCourse', courseId=course.id))
 
         if 'remind' in request.form:
-            remind = Enrollment(course_id=course.id , user_id=current_user.id, state = False)
-            db.session.add(remind)
-            db.session.commit()
-            flash('You have added %s course to your goals.'%coursename )
-            return redirect(url_for('my_courses'))
+            en = Enrollment.query.filter(and_(Enrollment.related_course == course , Enrollment.related_user==current_user)).first()
+            if en is None:
+                remind = Enrollment(course_id=course.id , user_id=current_user.id, state = False)
+                db.session.add(remind)
+                db.session.commit()
+                flash('You have added %s course to your goals.'%coursename )
+                return redirect(url_for('my_courses'))
+            else:
+                return redirect(url_for('my_courses'))
 
     return render_template('landing_page/course-details.html', title='%s' % coursename, course=course)
     # else:

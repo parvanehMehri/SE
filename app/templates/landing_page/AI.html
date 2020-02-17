@@ -48,20 +48,22 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<!-- Collect the nav links, forms, and other content for toggling -->
+                        <!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 							<ul class="nav navbar-nav menu_nav ml-auto">
 								<li class="nav-item"><a class="nav-link" href="{{ url_for('logout')}}">Logout</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url_for('landing_page')}}">Home</a></li>
 								<li class="nav-item"><a class="nav-link" href="{{ url_for('about_us')}}">About</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Activity</a></li>
 								<li class="nav-item submenu dropdown">
-									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MyCourses</a>
+									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses</a>
 									<ul class="dropdown-menu">
-										<li class="nav-item"><a class="nav-link" href="{{ url_for('index')}}">Enrolled Courses</a>
-										<li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Goals</a></li>
+										<li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">All Courses</a>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url_for('my_courses')}}">Enrolled Courses</a>
+										<li class="nav-item"><a class="nav-link" href="{{ url_for('my_courses')}}">Goals</a></li>
 									</ul>
 								</li>
-                                <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Friends</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('allFriends')}}">Friends</a></li>
 							</ul>
 						</div>
 					</div>
@@ -74,8 +76,7 @@
         <section class="banner_area">
             <div class="banner_inner d-flex align-items-center">
             	<!--<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>-->
-				<img class="overlay " src="https://static.stambol.com/wordpress/wp-content/uploads/2017/11/Mixed-Reality-and-Artificial-Intelligence.jpg"
-					 img width="1600">
+				<img class="overlay " src="../static/assets/landing_page/img/AI-pg/AI_Banner.jpg" height="1034" width="1550"  alt="">
             </div>
         </section>
         <!--================End Home Banner Area =================-->
@@ -86,14 +87,9 @@
                 <div class="row">
                     <div class="col-lg-8 posts-list">
                         <div class="single-post row">
-                            <div class="col-lg-12">
-                                <div class="feature-img">
-                                    <img class="img-fluid" src="img/blog/feature-img1.jpg" alt="">
-                                </div>
-                            </div>
                             <div class="col-lg-3  col-md-3">
                                 <div class="blog_info text-right">
-                                    <img class="img-fluid" style="height: 330px" src="https://www.bing.com/th?id=OIP.6Kw_tIEkE-NwfsufIMa0pQHaHe&pid=Api&w=1024&h=1034&rs=1" alt="">
+                                    <img class="img-fluid" style="height: 330px; width: border-box" src="../static/assets/landing_page/img/AI-pg/AI_lLogo.jpeg" alt="">
                                 </div>
                             </div>
 
@@ -116,12 +112,12 @@
                                     followed by disappointment and the loss of funding (known as an "AI winter"),
                                     followed by new approaches, success and renewed funding
                                     <br></br>
-                                    <img src="http://image.slidesharecdn.com/philiprathletalk-graphboostedartificialintelligence-170914221751/95/philip-rathle-graph-boosted-artificial-intelligence-27-638.jpg?cb=1505511124" alt="">
+                                    <img src="../static/assets/landing_page/img/AI-pg/AI_graph.jpg" alt="">
 
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <img class="img-fluid" src="https://upload.wikimedia.org/wikipedia/commons/6/68/Overfitted_Data.png" alt="">
+                                        <img class="img-fluid" src="../static/assets/landing_page/img/AI-pg/AI_chart.png" alt="">
                                     </div>
                                     <div class="text-justify">
                                         <p style="font-size: smaller">
@@ -140,36 +136,15 @@
 								    </h5>
                                     <br>
                                     <div class="text-center">
-                                     <a href="#" class="primary-btn submit_btn">Watch Video</a>
+                                        <a href="{{url_for('comments')}}" class="primary-btn submit_btn" name="watch">Watch Video</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-
-                        <div class="comment-form">
-                            <h4>Leave a Reply</h4>
-                            <form>
-                                <div class="form-group form-inline">
-                                  <div class="form-group col-lg-6 col-md-6 name">
-                                    <input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
-                                  </div>
-                                  <div class="form-group col-lg-6 col-md-6 email">
-                                    <input type="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="subject" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
-                                </div>
-                                <div class="form-group">
-                                    <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
-                                </div>
-                                <a href="#" class="primary-btn submit_btn">Post Comment</a>
-                            </form>
-                        </div>
                     </div>
-                    
 
+                   <!--=========Quote Area =========-->
                     <div class="col-lg-4">
                         <div class="blog_right_sidebar">
                             <aside class="single_sidebar_widget search_widget">
@@ -178,7 +153,7 @@
                                 <div class="br"></div>
                             </aside>
                             <aside class="single_sidebar_widget author_widget">
-                                <img height="200px" width="200px" class="author_img rounded-circle"  src="https://www.bing.com/th?id=OIP.CYwcAaed7m82G7Xjt_Q1dAAAAA&pid=Api&rs=1" alt="">
+                                <img height="200px" width="200px" class="author_img rounded-circle"  src="../static/assets/landing_page/img/AI-pg/AI_quote.jpeg" alt="">
                                 <h4> Stephen Hawking </h4>
                                 <p>Theorical Physicist</p>
                                 <br></br>
@@ -246,20 +221,20 @@
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="js/jquery-3.3.1.min.js"></script>
-        <script src="js/popper.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/stellar.js"></script>
-        <script src="vendors/lightbox/simpleLightbox.min.js"></script>
-        <script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
-        <script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
-        <script src="vendors/isotope/isotope.pkgd.min.js"></script>
-        <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-        <script src="js/jquery.ajaxchimp.min.js"></script>
-        <script src="vendors/counter-up/jquery.waypoints.min.js"></script>
-        <script src="vendors/popup/jquery.magnific-popup.min.js"></script>
-        <script src="vendors/counter-up/jquery.counterup.js"></script>
-        <script src="js/mail-script.js"></script>
-        <script src="js/theme.js"></script>
+        <script src="../static/assets/landing_page/js/jquery-3.3.1.min.js"></script>
+        <script src="../static/assets/landing_page/js/popper.js"></script>
+        <script src="../static/assets/landing_page/js/bootstrap.min.js"></script>
+        <script src="../static/assets/landing_page/js/stellar.js"></script>
+        <script src="../static/assets/landing_page/vendors/lightbox/simpleLightbox.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/isotope/isotope.pkgd.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/owl-carousel/owl.carousel.min.js"></script>
+        <script src="../static/assets/landing_page/js/jquery.ajaxchimp.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/counter-up/jquery.waypoints.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/popup/jquery.magnific-popup.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/counter-up/jquery.counterup.js"></script>
+        <script src="../static/assets/landing_page/js/mail-script.js"></script>
+        <script src="../static/assets/landing_page/js/theme.js"></script>
     </body>
 </html>
