@@ -4,6 +4,7 @@ from flask import render_template, flash, url_for, request, send_from_directory
 from sqlalchemy import and_
 from werkzeug.utils import redirect
 from app import app , db
+from app.forms import LoginForm, RegistrationForm, SendMassage_addFriend, ProfileForm
 from app.forms import LoginForm, RegistrationForm, SendMassage_addFriend, CourseForm
 from flask_login import current_user, login_user, login_required , logout_user
 from app.models import User, Course ,Category, Post , Enrollment, Comment, VideoViews, VideoRates
@@ -183,7 +184,8 @@ def comments3():
 @app.route('/index')  # manzoor az index va home hamon dashboard ast ... :)
 @login_required
 def index():
-    return render_template('index.html', title='Index')
+    form = ProfileForm()
+    return render_template('profile.html', title='Index' ,form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -222,6 +224,29 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('landing_page'))
+
+@app.route('/profile' , methods=['GET', 'POST'])
+@login_required
+def profile():
+    # form = ProfileForm()
+    if request.method=='POST' :
+        if 'submitProfile' in request.form  :
+            current_user.firstName = request.form['firstname']
+            current_user.lastName = request.form['lastname']
+            current_user.studyField = request.form['field_selection']
+            print(request.form['field_selection'])
+            current_user.university = request.form['university_selection']
+            print(request.form['university_selection'])
+            current_user.bio = request.form['bio']
+            current_user.complete = True
+            db.session.add(current_user)
+            db.session.commit()
+            # if 'changePassword' in request.form :
+            #     current_user.set_password(form.password.data)
+            #     db.session.add(current_user)
+            #     db.session.commit()
+
+    return render_template('landing_page/profile.html', title='Friends' )
 
 @app.route('/dashboard' , methods=['GET', 'POST'])
 @login_required
@@ -478,25 +503,28 @@ def course(courseId) :
 
     cform = CourseForm()
 
-    if (course) :
-        #enrolledcourses = Enrollment.query.filter_by(and_(Enrollment.related_user==current_user ,Enrollment.state==True))
+    # if (course) :
+    #     #enrolledcourses = Enrollment.query.filter_by(and_(Enrollment.related_user==current_user ,Enrollment.state==True))
 
-        if (request.method == 'POST') and ('enroll' in request.form) :
+    if (request.method == 'POST') :
+
+        if  'enroll' in request.form :
             enrollment = Enrollment(course_id=course.id , user_id=current_user.id ,state=True )
             db.session.add(enrollment)
             db.session.commit()
             flash('You are successfully enrolled in %s course!' %coursename)
-            return redirect(url_for('index'))
+            return redirect(url_for('viewCourse' , courseId=course.id))
 
-        elif (request.method == 'POST') and ('remind' in request.form):
+        if 'remind' in request.form:
             remind = Enrollment(course_id=course.id , user_id=current_user.id, state = False)
             db.session.add(remind)
             db.session.commit()
             flash('You have added %s course to your goals.'%coursename )
+            return redirect(url_for('my_courses'))
 
-        return render_template('landing_page/course-details.html', title='%s' % coursename, course=course)
-    else:
-         return render_template('page_not_found.html'),404
+    return render_template('landing_page/course-details.html', title='%s' % coursename, course=course)
+    # else:
+    #      return render_template('page_not_found.html'),404
 
 
 

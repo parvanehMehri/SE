@@ -4,17 +4,17 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.models import User
 
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    username = StringField('username', validators=[DataRequired()])
+    password = PasswordField('password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    username = StringField('username', validators=[DataRequired()])
+    email = StringField('email', validators=[DataRequired(), Email()])
+    password = PasswordField('password', validators=[DataRequired()])
     password2 = PasswordField(
-        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
+        'Password2', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register')
 
     def validate_username(self, username):
@@ -37,5 +37,18 @@ class SendMassage_addFriend(FlaskForm):
 class CourseForm(FlaskForm) :
     enroll = SubmitField('Enroll Me')
     remind = SubmitField('Remind Me Later')
+
+class ProfileForm(FlaskForm):
+    firstName = StringField('firstname', validators=[DataRequired()])
+    lastName = StringField('lastname', validators=[DataRequired()])
+    studyField = StringField('field_selection', validators=[DataRequired()])
+    university = StringField('university_select', validators=[DataRequired()])
+    bio = StringField('bio', validators=[DataRequired()])
+    submitProfile = SubmitField('submitProfile')
+
+    password = PasswordField('password', validators=[DataRequired()])
+    password2 = PasswordField(
+        'Password2', validators=[DataRequired(), EqualTo('password')])
+    changePassword = SubmitField('changePassword')
 
 

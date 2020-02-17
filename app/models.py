@@ -14,6 +14,13 @@ class User(UserMixin , db.Model):
     enrollments = db.relationship('Enrollment', backref='related_user', lazy='dynamic')
     posts = db.relationship('Post', backref='user_for_post', lazy='dynamic')  #all posets that this user send or receive are here
 
+    complete = db.Column(db.Boolean)
+    firstName = db.Column(db.String(64), index=True)
+    lastName = db.Column(db.String(64), index=True)
+    university = db.Column(db.String(128))
+    studyField = db.Column(db.String(128))
+    bio = db.Column(db.String(140))
+
     def __repr__(self):
         return '<User {}>'.format(self.username)
 

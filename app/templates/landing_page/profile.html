@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="icon" href="../static/assets/landing_page/img/icon/logo1.png" type="image/png">
+        <title>Learn IT Education</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="../static/assets/landing_page/css/bootstrap.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/linericon/style.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/owl-carousel/owl.carousel.min.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/lightbox/simpleLightbox.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/nice-select/css/nice-select.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/vendors/animate-css/animate.css">
+        <!-- main css -->
+        <link rel="stylesheet" href="../static/assets/landing_page/css/style.css">
+        <link rel="stylesheet" href="../static/assets/landing_page/css/responsive.css">
+
+
+    </head>
+    <body>
+
+        <!--================Header Menu Area =================-->
+        <header class="header_area">
+           	<div class="top_menu row m0">
+           		<div class="container">
+					<div class="float-left">
+						<ul class="list header_social">
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+							<li><a href="#"><i class="fa fa-behance"></i></a></li>
+						</ul>
+					</div>
+					<div class="float-right">
+						<a class="dn_btn" href="tel:+989900032475">+989900032475</a>
+						<a class="dn_btn" href="mailto:parvaneh.m1376@gmail.com">support@our_coursera.com</a>
+					</div>
+           		</div>
+           	</div>
+            <div class="main_menu">
+            	<nav class="navbar navbar-expand-lg navbar-light">
+					<div class="container">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<a class="navbar-brand logo_h" href="{{ url_for('landing_page')}}"><img src="../static/assets/landing_page/img/icon/logo1.png" alt=""></a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+							<ul class="nav navbar-nav menu_nav ml-auto">
+								<li class="nav-item"><a class="nav-link" href="{{ url_for('logout')}}">Logout</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('landing_page')}}">Home</a></li>
+								<li class="nav-item"><a class="nav-link" href="{{ url_for('about_us')}}">About</a></li>
+								<li class="nav-item submenu dropdown">
+									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MyCourses</a>
+									<ul class="dropdown-menu">
+										<li class="nav-item"><a class="nav-link" href="{{ url_for('index')}}">Enrolled Courses</a>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+            	</nav>
+            </div>
+        </header>
+        <!--================Header Menu Area =================-->
+
+        <!--================Home Banner Area =================-->
+            <div class="blog_b_text text-center">
+                <h2>_____________________________________________________________________________________________________________________________________</h2>
+            </div>
+            <center>
+                <h2> Edit Your Profile </h2>
+                <div>
+                    you can help us to better suggestion & ... by complete your profile information !
+                </div>
+            </center>
+            <div class="blog_b_text text-center">
+                <h2>_____________________________________________________________________________________________________________________________________</h2>
+            </div>
+        <!--================End Home Banner Area =============-->
+
+        <!--================Blog Area =================-->
+          <section class="blog_area">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-8">
+
+                        <div class="blog_details">
+                        </div>
+                        <br>
+                        <br>
+
+                        <div class="comment-form">
+                            <h4>Edit Profile</h4>
+                            <form action="" method="POST">
+                                <div class="form-group form-inline">
+                                  <div class="form-group col-lg-6 col-md-6 name">
+                                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'">
+                                  </div>
+                                  <div class="form-group col-lg-6 col-md-6 email">
+                                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'">
+                                  </div>
+                                </div>
+                                <div class="form-group form-inline">
+                                     <div class="form-group col-lg-6 col-md-6 name">
+                                        <select id="field_selection" name="field_selection"  style="width: 170px">
+                                            <option value="studyField" selected>Study Field</option>
+                                            <option value="computerEngineering">Computer Engineering</option>
+                                            <option value="electricalEngineering">Electrical Engineering</option>
+                                        </select>
+                                     </div>
+<!--                                  <div class="form-group col-lg-6 col-md-6 name">-->
+<!--                                    <input type="text" class="form-control" id="studyField" placeholder="Study Field" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Study Field'">-->
+<!--                                  </div>-->
+<!--                                  <div class="form-group col-lg-6 col-md-6 email">-->
+<!--                                    <input type="text" class="form-control" id="university" placeholder="University" onfocus="this.placeholder = ''" onblur="this.placeholder = 'University">-->
+<!--                                  </div>-->
+                                    <div class="form-group col-lg-6 col-md-6 email">
+                                        <select id="university_selection" name="university_selection" style="width: 170px">
+                                            <option value="university" selected>University</option>
+                                            <option value="university of zanjan">university of zanjan</option>
+                                            <option value="university of tehran">university of tehran</option>
+                                            <option value="university of qazvin">university of qazvin</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="bio" name="bio" placeholder="Bio" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Bio'">
+                                </div>
+<!--                                <div class="form-group">-->
+<!--                                    <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>-->
+<!--                                </div>-->
+                                <button type="submit" id="submitProfile" name="submitProfile" >Submit</button>
+
+                                <div class="br"></div>
+
+<!--                                <div class="form-group form-inline">-->
+<!--                                  <div class="form-group col-lg-6 col-md-6 name">-->
+<!--                                    <input type="text" class="form-control" id="password" name="password" placeholder="New Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'New Password'">-->
+<!--                                  </div>-->
+<!--                                  <div class="form-group col-lg-6 col-md-6 email">-->
+<!--                                    <input type="text" class="form-control" id="password2" name="password2" placeholder="Repeat New Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Repeat New Password'">-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                <button type="submit" name="changePassword" >Change</button>-->
+                            </form>
+                        </div>
+                        <br>
+                        <br>
+
+                    </div>
+
+
+                    <div class="col-lg-4">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="blog_right_sidebar">
+                            <aside class="single_sidebar_widget author_widget">
+                                <br>
+                                <br>
+                                <img class="author_img rounded-circle" src={{current_user.img_url}} alt="">
+                                <h4>{{current_user.username}}</h4>
+                                <p>{{current_user.email}}</p>
+<!--                                <div class="social_icon">-->
+<!--                                    <a href="#"><i class="fa fa-facebook"></i></a>-->
+<!--                                    <a href="#"><i class="fa fa-twitter"></i></a>-->
+<!--                                    <a href="#"><i class="fa fa-github"></i></a>-->
+<!--                                    <a href="#"><i class="fa fa-behance"></i></a>-->
+<!--                                </div>-->
+<!--                                <p>...</p>-->
+                                <div class="br"></div>
+<!--                                <form>-->
+<!--                                    <input type="file" id="myfile" name="myfile"><br><br>-->
+<!--                                    <input type="submit">-->
+<!--                                </form>-->
+                                <br>
+                                <br>
+                            </aside>
+                        </div>
+                    <br>
+                    <br>
+                    <br>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================Blog Area =================-->
+
+        <!--================ start footer Area  =================-->
+        <footer class="footer-area p_120"style="text-align:center">
+            <div class="container"style="text-align:center">
+                <div class="row">
+                    <div class="col-lg-2  col-md-6 col-sm-6" >
+                        <div class="single-footer-widget tp_widgets" >
+                           <h6 class="footer_title"style="text-align:center">Categories</h6>
+                            <ul class="list">
+                            	<li>Computer Engineering</li>
+                            	<li>Electrical Engineering</li>
+                            	<li>Physics</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2  col-md-6 col-sm-6">
+                        <div class="single-footer-widget tp_widgets">
+                           <h6 class="footer_title">Features</h6>
+                            <ul class="list">
+                            	<li>Search by name</li>
+                            	<li>Search by Description</li>
+                            	<li>See Goals</a></li>
+                            	<li>See Study Chart</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-2  col-md-6 col-sm-6">
+                        <div class="single-footer-widget tp_widgets">
+                           <h6 class="footer_title">Resources</h6>
+                            <ul class="list">
+                            	<li>YouTube</li>
+                            	<li>Wikipedia</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row footer-bottom d-flex justify-content-between align-items-center">
+<!--                    <p class="col-lg-8 col-md-8 footer-text m-0">&lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;-->
+<!--Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>-->
+<!--&lt;!&ndash; Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. &ndash;&gt;</p>-->
+
+                </div>
+            </div>
+        </footer>
+		<!--================ End footer Area  =================-->
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="../static/assets/landing_page/js/jquery-3.3.1.min.js"></script>
+        <script src="../static/assets/landing_page/js/popper.js"></script>
+        <script src="../static/assets/landing_page/js/bootstrap.min.js"></script>
+        <script src="../static/assets/landing_page/js/stellar.js"></script>
+        <script src="../static/assets/landing_page/vendors/lightbox/simpleLightbox.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/isotope/isotope.pkgd.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/owl-carousel/owl.carousel.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/jquery-ui/jquery-ui.js"></script>
+        <script src="../static/assets/landing_page/js/jquery.ajaxchimp.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/popup/jquery.magnific-popup.min.js"></script>
+        <script src="../static/assets/landing_page/js/mail-script.js"></script>
+        <script src="../static/assets/landing_page/vendors/counter-up/jquery.waypoints.min.js"></script>
+        <script src="../static/assets/landing_page/vendors/counter-up/jquery.counterup.js"></script>
+        <script src="../static/assets/landing_page/js/theme.js"></script>
+    </body>
+</html>
