@@ -26,7 +26,7 @@ def about_us():
     return render_template('landing_page/about_us.html', title='About_us' )
 
 
-def calc_avg_rate(course_id, user_id):
+def calc_avg_rate(course_id,user_id):
     avg_rate = 0
     video_rate = VideoRates.query.filter_by(course_id=course_id).all()
     if len(video_rate):

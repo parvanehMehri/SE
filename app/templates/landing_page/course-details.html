@@ -4,8 +4,9 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
         <link rel="icon" href="../static/assets/landing_page/img/icon/logo1.png" type="image/png">
-        <title>{{course.name}}</title>
+        <title>MY COURSES</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../static/assets/landing_page/css/bootstrap.css">
         <link rel="stylesheet" href="../static/assets/landing_page/vendors/linericon/style.css">
@@ -42,7 +43,7 @@
             	<nav class="navbar navbar-expand-lg navbar-light">
 					<div class="container">
 						<!-- Brand and toggle get grouped for better mobile display -->
-						<a class="navbar-brand logo_h" href="index.html"><img src="../static/assets/landing_page/img/icon/logo1.png" alt=""></a>
+						<a class="navbar-brand logo_h" href="{{ url_for('landing_page')}}"><img src="../static/assets/landing_page/img/icon/logo1.png" alt=""></a>
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
@@ -54,29 +55,28 @@
 								<li class="nav-item"><a class="nav-link" href="{{ url_for('logout')}}">Logout</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url_for('landing_page')}}">Home</a></li>
 								<li class="nav-item"><a class="nav-link" href="{{ url_for('about_us')}}">About</a></li>
-								<li class="nav-item submenu dropdown">
-									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MyCourses</a>
-									<ul class="dropdown-menu">
-										<li class="nav-item"><a class="nav-link" href="{{ url_for('index')}}">Enrolled Courses</a>
-										<li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Goals</a></li>
-									</ul>
-								</li>
-                                <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Friends</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Activity</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">AllCourses</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ url_for('allFriends')}}">Friends</a></li>
 							</ul>
 						</div>
 					</div>
-            	</nav>++
+            	</nav>
             </div>
         </header>
+
         <!--================Header Menu Area =================-->
 
         <!--================Home Banner Area =================-->
         <section class="banner_area">
-            <div class="banner_inner d-flex align-items-center " >
-            	<!--<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>-->
+            <div class="banner_inner d-flex align-items-center">
+            	<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background="" ></div>
+                <img class="overlay bg-parallax" src="../static/assets/landing_page/img/banner/profesor-nativo-aleman-skype.png">
+
 				<div class="container">
-					<div class="banner_content text-center ">
-						<h2 style="color: #ececf6 ";> Course Details  </h2>
+					<div class="banner_content text-center">
+						<h2>{{course.name}}</h2>
+
 					</div>
 				</div>
             </div>
@@ -84,6 +84,8 @@
         <!--================End Home Banner Area =================-->
 
         <!--================Course Details Area =================-->
+                  <section class="blog_area">
+
         <section class="course_details_area p_120">
         	<div class="container">
         		<div class="row course_details_inner">
@@ -103,10 +105,10 @@
 									<h5> {{course.name}}  : {{course.description}}</h5>
                                     <br></br>
 							        <form method="POST" action="">
-                                        <button type="submit" name="enroll">Enroll me</button>
+                                        <button class="submit_btn" style="width:190px"  type="submit" name="enroll">Enroll me</button>
 <!--                                        <a href="{{url_for('viewCourse' , courseId=course.id)}}" class="submit_btn"style="width: 210px;  ">Enroll Me</button>-->
 <!--                                        <a href="{{url_for('my_courses')}}" class="submit_btn" style="width: 210px;">Remind Me Later</a>-->
-                                        <button type="submit" name="remind">Remind me later</button>
+                                        <button class="submit_btn" type="submit" name="remind">Remind me later</button>
                                     </form>
 						            <br></br>
 								</div>
@@ -161,6 +163,7 @@
         	</div>
 
         </section>
+                  </section>
         <!--================End Course Details Area =================-->
 
         <!--================ start footer Area  =================-->
