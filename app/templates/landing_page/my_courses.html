@@ -18,6 +18,8 @@
         <!-- main css -->
         <link rel="stylesheet" href="../static/assets/landing_page/css/style.css">
         <link rel="stylesheet" href="../static/assets/landing_page/css/responsive.css">
+        <script type="text/javascript" src="../static/assets/landing_page/js/chart_loader.js"></script>
+
     </head>
     <body>
 
@@ -88,9 +90,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
+
                         <br>
                         <br>
                         <div class="blog_left_sidebar">
+                            <div id="pie_div"></div>
+                        <div id="columnchart_values"></div>
                             {% for course in enrolled_courses %}
                             <article class="row blog_item">
                                 <div class="col-md-3">
@@ -115,10 +120,12 @@
                                             <a href="{{url_for('viewCourse', courseId=course.id)}}" class="white_bg_btn">View More</a>
                                             <a href="{{url_for('allFriends')}}" class="white_bg_btn">Suggest to friends</a>
                                         </div>
+
                                     </div>
                                 </div>
                             </article>
                             {% endfor %}
+
                         </div>
                     </div>
 
@@ -364,5 +371,7 @@
         <script src="../static/assets/landing_page/vendors/counter-up/jquery.waypoints.min.js"></script>
         <script src="../static/assets/landing_page/vendors/counter-up/jquery.counterup.js"></script>
         <script src="../static/assets/landing_page/js/theme.js"></script>
+        <script type="text/javascript" src="../static/assets/landing_page/js/dashboard_scripts.js"></script>
+
     </body>
 </html>
