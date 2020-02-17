@@ -76,7 +76,8 @@
             	<!--<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>-->
 				<div class="container">
 					<div class="banner_content text-center ">
-						<h2 style="color: #ececf6 ";> Course Details  </h2>
+						<h2 style="color: #b9bbbe ";> What is this course about?  </h2>
+                        <img class="overlay " src="../../static/assets/landing_page/img/course-d-banner.jpg" height="1034" width="1600"  alt="">
 					</div>
 				</div>
             </div>
@@ -103,10 +104,10 @@
 									<h5> {{course.name}}  : {{course.description}}</h5>
                                     <br></br>
 							        <form method="POST" action="">
-                                        <button type="submit" name="enroll">Enroll me</button>
+                                        <button type="submit" class="primary-btn submit_btn" name="enroll">Enroll me</button>
 <!--                                        <a href="{{url_for('viewCourse' , courseId=course.id)}}" class="submit_btn"style="width: 210px;  ">Enroll Me</button>-->
 <!--                                        <a href="{{url_for('my_courses')}}" class="submit_btn" style="width: 210px;">Remind Me Later</a>-->
-                                        <button type="submit" name="remind">Remind me later</button>
+                                        <button type="submit" class="primary-btn submit_btn" name="remind">Remind me later</button>
                                     </form>
 						            <br></br>
 								</div>
