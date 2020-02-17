@@ -4,7 +4,7 @@ from flask import render_template, flash, url_for, request, send_from_directory
 from sqlalchemy import and_
 from werkzeug.utils import redirect
 from app import app , db
-from app.forms import LoginForm, RegistrationForm, SendMassage_addFriend
+from app.forms import LoginForm, RegistrationForm, SendMassage_addFriend, ProfileForm
 from flask_login import current_user, login_user, login_required , logout_user
 from app.models import User, Course ,Category, Post , Enrollment, Comment, VideoViews, VideoRates
 from werkzeug.urls import url_parse
@@ -183,7 +183,8 @@ def comments3():
 @app.route('/index')  # manzoor az index va home hamon dashboard ast ... :)
 @login_required
 def index():
-    return render_template('index.html', title='Index')
+    form = ProfileForm()
+    return render_template('profile.html', title='Index' ,form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -222,6 +223,29 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('landing_page'))
+
+@app.route('/profile' , methods=['GET', 'POST'])
+@login_required
+def profile():
+    # form = ProfileForm()
+    if request.method=='POST' :
+        if 'submitProfile' in request.form  :
+            current_user.firstName = request.form['firstname']
+            current_user.lastName = request.form['lastname']
+            current_user.studyField = request.form['field_selection']
+            print(request.form['field_selection'])
+            current_user.university = request.form['university_selection']
+            print(request.form['university_selection'])
+            current_user.bio = request.form['bio']
+            current_user.complete = True
+            db.session.add(current_user)
+            db.session.commit()
+            # if 'changePassword' in request.form :
+            #     current_user.set_password(form.password.data)
+            #     db.session.add(current_user)
+            #     db.session.commit()
+
+    return render_template('landing_page/profile.html', title='Friends' )
 
 @app.route('/dashboard' , methods=['GET', 'POST'])
 @login_required
