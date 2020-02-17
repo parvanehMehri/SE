@@ -12,7 +12,9 @@ body {
   color: #222;
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-  background: url(img/b5.jpg) repeat scroll center center;
+  background: url(img/pic.jpg);
+  background-size: 1350px 800px;
+
 
 }
 
@@ -36,6 +38,7 @@ body {
   background: #FFF;
   border-radius: 2px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+
 }
 
 
@@ -127,13 +130,33 @@ input[type="submit"]:active {
   padding: 40px;
   width: 300px;
   height: 400px;
-  background: url('https://goo.gl/YbktSj');
+  background: url(img/login-background.jpg);
+  background-size: cover;
+  background-position: center;
+  border-radius: 0 2px 2px 0;
+}
+.right_register{
+  position: absolute;
+  top: 0;
+  right: 0;
+  box-sizing: border-box;
+  padding: 40px;
+  width: 300px;
+  height: 500px;
+  background: url(img/login-background.jpg);
   background-size: cover;
   background-position: center;
   border-radius: 0 2px 2px 0;
 }
 
-.right .loginwith {
+.right .loginwith  {
+  display: block;
+  margin-bottom: 40px;
+  font-size: 28px;
+  color: #FFF;
+  text-align: center;
+}
+.right_register .loginwith  {
   display: block;
   margin-bottom: 40px;
   font-size: 28px;
