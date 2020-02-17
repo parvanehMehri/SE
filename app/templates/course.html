@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1> {{ coursename  }} </h1>
+
+<form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.enroll.lable }}<br>
+            {{ form.enroll }}<br>
+        <p>
+            {{ form.remind.lable }}<br>
+            {{ form.remind}}<br>
+
+</form>
+
+{% endblock %}

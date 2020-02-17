@@ -34,5 +34,8 @@ class SendMassage_addFriend(FlaskForm):
     add = SubmitField('add')
     submit = SubmitField('Send')
 
+class CourseForm(FlaskForm) :
+    enroll = SubmitField('Enroll Me')
+    remind = SubmitField('Remind Me Later')
 
 
