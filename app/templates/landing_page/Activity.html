@@ -58,7 +58,14 @@
                                 <li class="nav-item"><a class="nav-link" href="{{ url_for('landing_page')}}">Home</a></li>
 								<li class="nav-item"><a class="nav-link" href="{{ url_for('about_us')}}">About</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">Activity</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">AllCourses</a></li>
+								<li class="nav-item submenu dropdown">
+									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses</a>
+									<ul class="dropdown-menu">
+										<li class="nav-item"><a class="nav-link" href="{{ url_for('all_courses')}}">All Courses</a>
+                                        <li class="nav-item"><a class="nav-link" href="{{ url_for('my_courses')}}">Enrolled Courses</a>
+										<li class="nav-item"><a class="nav-link" href="{{ url_for('my_courses')}}">Goals</a></li>
+									</ul>
+								</li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url_for('allFriends')}}">Friends</a></li>
 							</ul>
 						</div>
@@ -138,153 +145,8 @@
                                 <img class="author_img rounded-circle" src={{current_user.img_url}} alt="">
                                 <h4>{{current_user.username}}</h4>
                                 <p>{{current_user.email}}</p>
-                                <a href="{{url_for('profile')}}"> Complete your profile</a>
                                 <div class="br"></div>
                             </aside>
-
-                            <form method="POST" action="" >
-                                <aside class="single_sidebar_widget search_widget">
-                                    <div class="input-group">
-
-                                            <input name="course_name_filter" type="text" class="form-control" size="35" placeholder="Search Course by name">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-default" type="submit"><i class="lnr lnr-magnifier"></i></button>
-                                            </span>
-                                     </div><!-- /input-group -->
-<!--                                    <div class="br"></div>-->
-                                </aside>
-                                <p>_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_</p>
-                                <aside class="single_sidebar_widget search_widget">
-                                    <div class="input-group">
-                                        <input name="course_name_desc_filter" type="text" class="form-control" size="35" placeholder="Search Course by name & description">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="submit"><i class="lnr lnr-magnifier"></i></button>
-                                        </span>
-                                    </div><!-- /input-group -->
-                                    <div class="br"></div>
-                                </aside>
-                            </form>
-
-                            <aside class="single_sidebar_widget popular_post_widget">
-                                <h3 class="widget_title">Goals</h3>
-                                {% for goal in goals %}
-                                <div class="media post_item">
-                                    <img class="author_img rounded-circle" width="70" height="70" src={{goal.img_url}} alt="">
-<!--                                    <a href="#" class="d-flex justify-content-between">-->
-<!--                                        <p>{{goal.name}}</p>-->
-<!--                                    </a>-->
-                                    <div class="media-body">
-                                        <a href="{{url_for('course', courseId=goal.id)}}"><h3>{{goal.name}}</h3></a>
-<!--                                        <a href="{{url_for('all_courses')}}" class="white_bg_btn">Cancel</a>-->
-                                        <form  method="POST" action="" >
-                                            <input name="goal_name_cancel" type="hidden" id="goal_id" name="goal_id" value={{goal.id}}>
-                                            <button name='goal_name_btn' class="btn btn-default" type="submit">Cancel</button>
-<!--                                        <p>02 Hours ago</p>-->  <!-- To Do -->
-                                        </form>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                                <div class="br"></div>
-                            </aside>
-
-                            <aside class="single_sidebar_widget post_category_widget">
-                                <h4 class="widget_title">Friends</h4>
-                                <ul class="list cat-list">
-                                    {% for friend in friends %}
-                                    <li>
-                                        <form  method="POST" action="" >
-                                            <img class="author_img rounded-circle" width="70" height="70" src={{friend.img_url}} alt="">
-                                            <a href="{{url_for('chat', username=friend.username)}}" class="d-flex justify-content-between">
-                                                <span>{{friend.username}}</span>
-                                            </a>
-                                            <input name="friend_name_unfollow" type="hidden" id="friend_id" name="friend_id" value={{friend.id}}>
-                                            <button name='unfollow_btn' class="btn btn-default" type="submit" style="float: right;">UnFollow</button>
-                                            <br>
-
-<!--                                        <p>02 Hours ago</p>-->  <!-- To Do -->
-                                        </form>
-                                    </li>
-                                    {% endfor %}
-
-                                </ul>
-                                <div class="br"></div>
-                            </aside>
-<!-- bar chart -->
-                            <aside class="single-sidebar-widget tag_cloud_widget">
-                                <h4 class="widget_title">Activity</h4>
-                                <center>
-                                    <canvas id="bar_chart" width="250" height="300"></canvas>
-                                    <script>
-                                      // bar chart data
-                                      var barData = {
-                                        labels : [
-                                          {% for item in labels %}
-                                           "{{ item }}",
-                                          {% endfor %}
-                                    ],
-
-                                        datasets : [{
-                                          fillColor: "rgba(151,187,205,0.2)",
-                                          strokeColor: "rgba(151,187,205,1)",
-                                          pointColor: "rgba(151,187,205,1)",
-                                          data : [
-                                            {% for item in values %}
-                                               "{{ item }}",
-                                              {% endfor %}
-                                        ]
-                                          }
-                                        ]
-                                      }
-
-                                     // get bar chart canvas
-                                     var bar_chart = document.getElementById("bar_chart").getContext("2d");
-
-                                       steps = 10
-                                       max = {{max}}
-
-                                     // draw bar chart
-                                     new Chart(bar_chart).Bar(barData, {
-                                       scaleOverride: true,
-                                       scaleSteps: steps,
-                                       scaleStepWidth: Math.ceil(max / steps),
-                                       scaleStartValue: 0,
-                                       scaleShowVerticalLines: true,
-                                       scaleShowGridLines : true,
-                                       barShowStroke : true,
-                                       scaleShowLabels: true
-                                       }
-                                     );
-
-                                    </script>
-                                  </center>
-                            </aside>
-<!-- bar chart -->
-<!-- pie chart -->
-<!--                            <aside class="single-sidebar-widget tag_cloud_widget">-->
-<!--                                <h4 class="widget_title">Pie Chart</h4>-->
-<!--                                    <canvas id="pie_chart" width="250" height="300"></canvas>-->
-<!--                                        <script>-->
-<!--                                          var pieData = [-->
-<!--                                            {% for item, label, colors in set %}-->
-<!--                                              {-->
-<!--                                                value: {{item}},-->
-<!--                                                label: "{{label}}",-->
-<!--                                                color : "{{colors}}"-->
-<!--                                              },-->
-<!--                                            {% endfor %}-->
-<!--                                          ];-->
-
-<!--                                          // get bar chart canvas-->
-<!--                                          var pie_chart = document.getElementById("pie_chart").getContext("2d");-->
-<!--                                          steps = 10-->
-<!--                                          max = {{ max }}-->
-
-<!--                                          // draw pie chart-->
-<!--                                          new Chart(document.getElementById("pie_chart").getContext("2d")).Pie(pieData);-->
-
-<!--                                        </script>-->
-<!--                            </aside>-->
-<!-- pie chart -->
 
                         </div>
                            <br>

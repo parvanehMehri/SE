@@ -592,7 +592,7 @@ def allFriends():
     if current_user.complete == True and uni!='university' and field!='studyField':
         users = User.query.all()
         for user in users:
-            if user is not current_user:
+            if user!=current_user and user not in friends_list:
                 if user.complete==True and user.university==uni and user.studyField==field:
                     suggested.append(user)
 
@@ -617,6 +617,8 @@ def allFriends():
           flash('not find!')
           state='notfind'
           return redirect(url_for('allFriends'))
+
+
 
     return render_template('landing_page/Friends.html', title='Friends' , Friends=friends_list, form=form , state=state , suggested=suggested)
 
