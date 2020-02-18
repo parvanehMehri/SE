@@ -596,31 +596,27 @@ def allFriends():
                 if user.complete==True and user.university==uni and user.studyField==field:
                     suggested.append(user)
 
+    error = ''
     if (request.method=='POST') and ('add' in request.form ) :
+
         friendusername =request.form['addfriend']
         new_friend = User.query.filter_by(username=friendusername).first()
+
         if (new_friend):
             if new_friend.id not in friends_id:
                 User.add_friend(current_user,new_friend.id)
                 db.session.commit()
                 flash('Friend aded!')
-                state='add'
-                redirect(url_for('allFriends'))
+                # redirect(url_for('allFriends'))
                 return redirect(url_for('allFriends'))
 
             else:
                 flash('Friend already exists!')
-                state='exists'
-                return redirect(url_for('allFriends'))
-
+                error='exists'
         else:
-          flash('not find!')
-          state='notfind'
-          return redirect(url_for('allFriends'))
+            error = 'there is no account with this username !!'
 
-
-
-    return render_template('landing_page/Friends.html', title='Friends' , Friends=friends_list, form=form , state=state , suggested=suggested)
+    return render_template('landing_page/Friends.html', title='Friends' , Friends=friends_list, form=form ,error=error, state=state , suggested=suggested)
 
 
 @app.route('/friends/<username>' , methods=['GET', 'POST'])
