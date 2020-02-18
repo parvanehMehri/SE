@@ -471,20 +471,9 @@ def course(courseId) :
 @app.route('/viewCourse/<int:courseId>', methods=['GET','POST'])
 @login_required
 def viewCourse(courseId) :
-
     course = Course.query.get(courseId)
-
-    if (course) :
-        if (courseId==1):
-            return render_template('landing_page/AI.html', title = 'ArtificialIntelligence', courseId=course.id, course=course)
-
-        if(courseId==2):
-            return render_template('landing_page/NLP.html', courseId=course.id)
-        if(courseId==3):
-            return render_template('landing_page/LogicalCircuits.html', courseId=course.id)
-        if(courseId==4):
-            return render_template('landing_page/Signals.html', courseId=course.id)
-    return render_template('landing_page/AI.html', title='Artificial Intelligence', courseId=course.id, course=course)
+    #if (course) :
+    return render_template('landing_page/learn-course.html', courseId=course.id, course=course)
 
 @app.route('/favicon.ico')
 def favicon():

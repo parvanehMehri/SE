@@ -73,6 +73,17 @@ class Course(db.Model):
     img_url = db.Column(db.String(140))
     enrollments = db.relationship('Enrollment', backref='related_course', lazy='dynamic')
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    p1 = db.Column(db.String(140))
+    p2 = db.Column(db.String(140))
+    p3 = db.Column(db.String(140))
+    bannerimg_url = db.Column(db.String(140))
+    upimg_url = db.Column(db.String(140))
+    leftimg_url = db.Column(db.String(140))
+    downimg_url = db.Column(db.String(140))
+    quoteimg_url = db.Column(db.String(140))
+    qname = db.Column(db.String(140))
+    qjob = db.Column(db.String(140))
+    quote = db.Column(db.String(140))
 
     def __repr__(self):
         return '<Course {}>'.format(self.name)
