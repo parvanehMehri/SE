@@ -99,7 +99,7 @@
                             <div class="categories_details">
                                 <div class="categories_text">
                                     {% if category.ctg_name == 'Physics' %}
-                                        <a href={{url_for('filtered_courses' ,category_id=category.id)}}><h5>{{ category.ctg_name }}</h5></a>
+                                    <a href={{url_for('filtered_courses' ,category_id=category.id)}}><h5>{{ category.ctg_name }}</h5></a>
                                     {% endif%}
                                     {% if category.ctg_name == 'Computer Engineering' %}
                                     <a href={{url_for('filtered_courses' ,category_id=category.id)}}><h5>{{ category.ctg_name }}</h5></a>

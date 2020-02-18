@@ -104,12 +104,20 @@
                         <div class="comment-form">
                             <h4>Edit Profile</h4>
                             <form action="" method="POST">
+                                {{ form.hidden_tag() }}
+
                                 <div class="form-group form-inline">
                                   <div class="form-group col-lg-6 col-md-6 name">
-                                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'">
+                                      <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'">
+                                      {% for error in form.firstname.errors %}
+                                      <span style="color: red;">[{{ error }}]</span>
+                                      {% endfor %}
                                   </div>
                                   <div class="form-group col-lg-6 col-md-6 email">
-                                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'">
+                                      <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'">
+                                      {% for error in form.lastname.errors %}
+                                      <span style="color: red;">[{{ error }}]</span>
+                                      {% endfor %}
                                   </div>
                                 </div>
                                 <div class="form-group form-inline">
@@ -119,6 +127,9 @@
                                             <option value="computerEngineering">Computer Engineering</option>
                                             <option value="electricalEngineering">Electrical Engineering</option>
                                         </select>
+                                         {% for error in form.field_selection.errors %}
+                                         <span style="color: red;">[{{ error }}]</span>
+                                         {% endfor %}
                                      </div>
 <!--                                  <div class="form-group col-lg-6 col-md-6 name">-->
 <!--                                    <input type="text" class="form-control" id="studyField" placeholder="Study Field" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Study Field'">-->
@@ -133,27 +144,40 @@
                                             <option value="university of tehran">university of tehran</option>
                                             <option value="university of qazvin">university of qazvin</option>
                                         </select>
+                                        {% for error in form.university_selection.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="bio" name="bio" placeholder="Bio" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Bio'">
+                                    {% for error in form.bio.errors %}
+                                    <span style="color: red;">[{{ error }}]</span>
+                                    {% endfor %}
                                 </div>
 <!--                                <div class="form-group">-->
 <!--                                    <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>-->
 <!--                                </div>-->
                                 <button type="submit" id="submitProfile" name="submitProfile" >Submit</button>
-
+                                <p style="color:green;"> {{label1}} </p>
                                 <div class="br"></div>
 
-<!--                                <div class="form-group form-inline">-->
-<!--                                  <div class="form-group col-lg-6 col-md-6 name">-->
-<!--                                    <input type="text" class="form-control" id="password" name="password" placeholder="New Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'New Password'">-->
-<!--                                  </div>-->
+                                <div class="form-group form-inline">
+                                  <div class="form-group col-lg-6 col-md-6 name">
+                                    <input type="text" class="form-control" id="password" name="password" placeholder="New Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'New Password'">
+                                  </div>
 <!--                                  <div class="form-group col-lg-6 col-md-6 email">-->
 <!--                                    <input type="text" class="form-control" id="password2" name="password2" placeholder="Repeat New Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Repeat New Password'">-->
 <!--                                  </div>-->
-<!--                                </div>-->
-<!--                                <button type="submit" name="changePassword" >Change</button>-->
+                                </div>
+                                <button type="submit" name="changePassword" >Change</button>
+                                {% if flag == false %}
+                                <p style="color:green;"> {{label2}} </p>
+                                {% endif%}
+                                {% if flag == True %}
+                                <p style="color:red;"> {{label2}} </p>
+                                {% endif%}
+
                             </form>
                         </div>
                         <br>

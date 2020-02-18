@@ -181,12 +181,6 @@ def comments3():
         db.session.commit()
         return redirect(url_for('comments3'))
 
-@app.route('/index')  # manzoor az index va home hamon dashboard ast ... :)
-@login_required
-def index():
-    form = ProfileForm()
-    return render_template('profile.html', title='Index' ,form=form)
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -228,25 +222,35 @@ def logout():
 @app.route('/profile' , methods=['GET', 'POST'])
 @login_required
 def profile():
-    # form = ProfileForm()
+    form = ProfileForm()
+    label1 =''
+    label2 = ''
+    flag =False
     if request.method=='POST' :
-        if 'submitProfile' in request.form  :
-            current_user.firstName = request.form['firstname']
-            current_user.lastName = request.form['lastname']
-            current_user.studyField = request.form['field_selection']
-            print(request.form['field_selection'])
-            current_user.university = request.form['university_selection']
-            print(request.form['university_selection'])
-            current_user.bio = request.form['bio']
-            current_user.complete = True
-            db.session.add(current_user)
-            db.session.commit()
-            # if 'changePassword' in request.form :
-            #     current_user.set_password(form.password.data)
-            #     db.session.add(current_user)
-            #     db.session.commit()
+        if 'submitProfile' in request.form:
+            if form.validate_on_submit()  :
+                current_user.firstName = request.form['firstname']
+                current_user.lastName = request.form['lastname']
+                current_user.studyField = request.form['field_selection']
+                print(request.form['field_selection'])
+                current_user.university = request.form['university_selection']
+                print(request.form['university_selection'])
+                current_user.bio = request.form['bio']
+                current_user.complete = True
+                db.session.add(current_user)
+                db.session.commit()
+                label1 = 'your information submitted successfully ... '
+        if 'changePassword' in request.form :
+            if request.form['password'] !='':
+                current_user.set_password(request.form['password'])
+                db.session.add(current_user)
+                db.session.commit()
+                label2 = 'your password changed successfully ... '
+            else:
+                flag = True
+                label2 = 'please enter correct password !! '
 
-    return render_template('landing_page/profile.html', title='Friends' )
+    return render_template('landing_page/profile.html', label1 = label1, label2 = label2 ,flag=flag,title='Friends' ,form=form)
 
 @app.route('/dashboard' , methods=['GET', 'POST'])
 @login_required
@@ -582,6 +586,16 @@ def allFriends():
      friend=User.query.get(id)
      friends_list.append(friend)
 
+    uni = current_user.university
+    field = current_user.studyField
+    suggested=[]
+    if current_user.complete == True and uni!='university' and field!='studyField':
+        users = User.query.all()
+        for user in users:
+            if user is not current_user:
+                if user.complete==True and user.university==uni and user.studyField!=field:
+                    suggested.append(user)
+
     if (request.method=='POST') and ('add' in request.form ) :
         friendusername =request.form['addfriend']
         new_friend = User.query.filter_by(username=friendusername).first()
@@ -604,7 +618,7 @@ def allFriends():
           state='notfind'
           return redirect(url_for('allFriends'))
 
-    return render_template('landing_page/Friends.html', title='Friends' , Friends=friends_list, form=form , state=state)
+    return render_template('landing_page/Friends.html', title='Friends' , Friends=friends_list, form=form , state=state , suggested=suggested)
 
 
 @app.route('/friends/<username>' , methods=['GET', 'POST'])

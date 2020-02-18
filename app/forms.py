@@ -39,16 +39,16 @@ class CourseForm(FlaskForm) :
     remind = SubmitField('Remind Me Later')
 
 class ProfileForm(FlaskForm):
-    firstName = StringField('firstname', validators=[DataRequired()])
-    lastName = StringField('lastname', validators=[DataRequired()])
-    studyField = StringField('field_selection', validators=[DataRequired()])
-    university = StringField('university_select', validators=[DataRequired()])
+    firstname = StringField('firstname', validators=[DataRequired()])
+    lastname = StringField('lastname', validators=[DataRequired()])
+    field_selection = StringField('field_selection', validators=[DataRequired()])
+    university_selection = StringField('university_selection', validators=[DataRequired()])
     bio = StringField('bio', validators=[DataRequired()])
     submitProfile = SubmitField('submitProfile')
 
-    password = PasswordField('password', validators=[DataRequired()])
-    password2 = PasswordField(
-        'Password2', validators=[DataRequired(), EqualTo('password')])
+    password = PasswordField('password')
+    # password2 = PasswordField(
+    #     'Password2', validators=[DataRequired(), EqualTo('password')])
     changePassword = SubmitField('changePassword')
 
 
