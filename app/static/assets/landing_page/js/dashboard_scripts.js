@@ -8,12 +8,7 @@ $(document).ready(function () {
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Topping');
             data.addColumn('number', 'Slices');
-            data.addRows([
-                ['Artificial inteligence', my_views[0]],
-                ['Natural Language Processing', my_views[1]],
-                ['Logical circuits', my_views[2]],
-                ['Signals and Systems', my_views[3]],
-            ]);
+            data.addRows(my_views);
             var options = {
                 'title': 'Pie Chart',
                 'width': '100%',
@@ -22,14 +17,12 @@ $(document).ready(function () {
             var chart = new google.visualization.PieChart(document.getElementById('pie_div'));
             chart.draw(data, options);
 
+            var temp_data = [["Element", "Density", {role: "style"}]];
+            my_views.forEach(function (item, index) {
+                temp_data.push(item.concat('silver'));
+            });
 
-            var data2 = google.visualization.arrayToDataTable([
-                ["Element", "Density", {role: "style"}],
-                ["Artificial inteligence", my_views[0], "#b87333"],
-                ["Natural Language Processing", my_views[1], "silver"],
-                ["Logical circuits", my_views[2], "gold"],
-                ["Signals and Systems", my_views[3], "color: #e5e4e2"]
-            ]);
+            var data2 = google.visualization.arrayToDataTable(temp_data);
 
             var view2 = new google.visualization.DataView(data2);
             view2.setColumns([0, 1,

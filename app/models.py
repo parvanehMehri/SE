@@ -106,6 +106,14 @@ class Comment(db.Model):
     course_id = db.Column(db.Integer)
 
 
+class CourseVideo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+    timestamp = db.Column(db.DateTime(), default=datetime.utcnow, index=True)
+    video_link = db.Column(db.String(400))
+    video_link_id = db.Column(db.String(400))
+
+
 class VideoViews(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     course_id = db.Column(db.Integer)

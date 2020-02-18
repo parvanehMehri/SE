@@ -81,7 +81,7 @@
                 <div class="container">
                     <div class="banner_content text-center">
                         <img class="overlay" src="../static/assets/landing_page/img/AI-pg/AI_Banner.jpg" height="1034" width="1550"  alt="">
-                        <h2 style="color: white;">Artificial <br> Intelligence</h2>
+                        <h2 style="color: white;">{{course.name}}</h2>
                     </div>
                 </div>
             </div>
@@ -129,9 +129,9 @@
                         <div class="single-post row">
                             <div class="col-lg-12">
                                 <div class="feature-img">
-                                    <div id="73869378651">
+                                    <div id="{{video.video_link_id}}">
                                         <script type="text/JavaScript"
-                                                src="https://www.aparat.com/embed/i2mYb?data[rnddiv]=73869378651&data[responsive]=yes"></script>
+                                                src="{{video.video_link}}"></script>
                                     </div>
                                 </div>
                             </div>
@@ -234,8 +234,8 @@
                 </div>
                 <div class="comment-form">
                     <h4>Leave a Reply</h4>
-                    <form action="{{url_for('comments')}}" method="post">
-                        <input type="hidden" name="course_id" value="0"/>
+                    <form action="{{url_for('comments', course_id=course_id)}}" method="post">
+                        <input type="hidden" name="course_id" value="{{course_id}}"/>
                         <div class="form-group form-inline">
                             <div class="form-group col-lg-6 col-md-6 name">
                                 <input type="text" class="form-control" id="name" placeholder="Enter Name" name="author"
