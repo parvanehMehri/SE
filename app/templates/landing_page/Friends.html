@@ -176,10 +176,33 @@
                                 <h4>{{current_user.username}}</h4>
                                 <p>{{current_user.email}}</p>
                             </aside>
+                                <div class="br"></div>
+
+                            <aside class="single_sidebar_widget post_category_widget">
+                                <h4 class="widget_title">Friends Suggestion</h4>
+                                <ul class="list cat-list">
+                                    {% for user in suggested %}
+                                    <li>
+                                        <form  method="POST" action="" >
+                                            <img class="author_img rounded-circle" width="70" height="70" src={{friend.img_url}} alt="">
+                                            <a href="{{url_for('chat', username=friend.username)}}" class="d-flex justify-content-between">
+                                                <span>{{user.username}}</span>
+                                            </a>
+                                            <input name="friend_name_unfollow" type="hidden" id="friend_id" name="friend_id" value={{friend.id}}>
+                                            <button name='unfollow_btn' class="btn btn-default" type="submit" style="float: right;">UnFollow</button>
+                                            <br>
+
+<!--                                        <p>02 Hours ago</p>-->  <!-- To Do -->
+                                        </form>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </aside>
                         </div>
                     <br>
                     <br>
                     <br>
+
 
                     </div>
 

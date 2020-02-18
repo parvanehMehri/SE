@@ -593,7 +593,7 @@ def allFriends():
         users = User.query.all()
         for user in users:
             if user is not current_user:
-                if user.complete==True and user.university==uni and user.studyField!=field:
+                if user.complete==True and user.university==uni and user.studyField==field:
                     suggested.append(user)
 
     if (request.method=='POST') and ('add' in request.form ) :
@@ -648,6 +648,10 @@ def chat(username):
     return render_template('landing_page/Chats.html',posts=posts,form=form,user=current_user,friend=friend)
 
 
+@app.route('/activity' , methods=['GET'])
+@login_required
+def activity():
+        return render_template('landing_page/Activity.html')
 
 
 
