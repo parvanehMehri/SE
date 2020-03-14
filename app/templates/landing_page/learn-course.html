@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" href="../static/assets/landing_page/img/icon/logo1.png" type="image/png">
-        <title>Signals and Systems</title>
+        <title>AI</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="../static/assets/landing_page/css/bootstrap.css">
         <link rel="stylesheet" href="../static/assets/landing_page/vendors/linericon/style.css">
@@ -48,13 +48,12 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<!-- Collect the nav links, forms, and other content for toggling -->
+                        <!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 							<ul class="nav navbar-nav menu_nav ml-auto">
 								<li class="nav-item"><a class="nav-link" href="{{ url_for('logout')}}">Logout</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{{ url_for('landing_page')}}">Home</a></li>
 								<li class="nav-item"><a class="nav-link" href="{{ url_for('about_us')}}">About</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ url_for('activity')}}">Activity</a></li>
 								<li class="nav-item submenu dropdown">
 									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses</a>
 									<ul class="dropdown-menu">
@@ -63,7 +62,6 @@
 										<li class="nav-item"><a class="nav-link" href="{{ url_for('my_courses')}}">Goals</a></li>
 									</ul>
 								</li>
-                                <li class="nav-item"><a class="nav-link" href="{{ url_for('allFriends')}}">Friends</a></li>
 							</ul>
 						</div>
 					</div>
@@ -76,8 +74,7 @@
         <section class="banner_area">
             <div class="banner_inner d-flex align-items-center">
             	<!--<div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>-->
-				<img class="overlay " src="../static/assets/landing_page/img/Sig-pg/sig-banner.png"
-					 img width="1550">
+				<img class="overlay " src={{course.bannerimg_url}}  height="1034" width="1550"  alt="">
             </div>
         </section>
         <!--================End Home Banner Area =================-->
@@ -90,43 +87,27 @@
                         <div class="single-post row">
                             <div class="col-lg-12">
                                 <div class="feature-img">
-                                    <img class="img-fluid" style="width: 700px" src="../static/assets/landing_page/img/Sig-pg/LTI-up.png" alt="">
+                                    <img class="img-fluid"  style="height: 330px; width: 700px" src={{course.upimg_url}} alt="">
                                 </div>
                             </div>
                             <div class="col-lg-3  col-md-3">
                                 <div class="blog_info text-right">
-                                    <img class="img-fluid" style="height: 270px;width:190px" src="../static/assets/landing_page/img/Sig-pg/leftsmall.jpg" alt="">
+                                    <img class="img-fluid" style="height: 330px; width:100px;" src={{course.leftimg_url}} alt="">
                                 </div>
                             </div>
 
                             <div class="col-lg-9 col-md-9 blog_details">
-                                <h2>Signals and Systems</h2>
+                                <h2>{{course.name}}</h2>
                                 <p class="excert">
-                                    In electrical engineering, the fundamental quantity of representing some information is called a signal.
-                                    It does not matter what the information is i-e: Analog or digital information. In mathematics,
-                                    a signal is a function that conveys some information. In fact any quantity measurable through
-                                    time over space or any higher dimension can be taken as a signal.
-                                    A signal could be of any dimension and could be of any form.
+                                    {{course.p1}}
                                 <p>
-                                  A system is a defined by the type of input and output it deals with. Since we are dealing with
-                                signals, so in our case, our system would be a mathematical model, a piece of code/software, or a physical
-                                device, or a black box whose input is a signal and it performs some processing on that signal, and the output
-                                is a signal. The input is known as excitation and the output is known as response.
-                                </div>
+                                   {{course.p2}}</div>
                             <div class="col-lg-12">
                                 <div class="quotes">
-                                    NLP entails applying algorithms to identify and extract the natural language rules such that the unstructured language data
-                                    is converted into a form that computers can understand.When the text has been provided, the computer will utilize algorithms to
-                                    extract meaning associated with every sentence and collect the essential data from them.</div>
+                                    {{course.p3}}</div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <img class="img-fluid" src="../static/assets/landing_page/img/Sig-pg/system-down.jpg" alt="">
-                                    </div>
-                                    <div class="text-justify">
-                                        <p style="font-size: smaller">
-                                            <br>In this figure a system has been shown whose<br> input and output both re signals but the input is <br>an
-                                            analog signal. And the output is an digital <br>signal.It means our system is actually aconversion<br>system
-                                            that converts analog signals to digital<br> signals.<br></p>
+                                        <img class="img-fluid" src={{course.downimg_url}} alt="">
                                     </div>
                                 </div>
                                 <br></br>
@@ -137,7 +118,7 @@
                                     </h5>
                                     <br>
                                     <div class="text-center">
-                                        <a href="{{url_for('comments3')}}" class="primary-btn submit_btn" name="watch">Watch Video</a>
+                                        <a href="{{url_for('comments', course_id=courseId)}}" class="primary-btn submit_btn" name="watch">Watch Video</a>
                                     </div>
                                 </div>
                             </div>
@@ -154,11 +135,11 @@
                                 <div class="br"></div>
                             </aside>
                             <aside class="single_sidebar_widget author_widget">
-                                <img height="200px" width="200px" class="author_img rounded-circle"  src="../static/assets/landing_page/img/Sig-pg/stvjbs.jpeg" alt="">
-                                <h4> Steve Jobs </h4>
-                                <p>co-founder of apple</p>
+                                <img height="200px" width="200px" class="author_img rounded-circle"  src={{course.quoteimg_url}} alt="">
+                                <h4> {{course.qname}} </h4>
+                                <p>{{course.qjob}}</p>
                                 <br></br>
-                                <p style="color: black; font-family:'Gill Sans MT Ext Condensed Bold'"> “The best way to create value in 21st century is to connect Creativity with Technology.” </p>
+                                <p style="color: black; font-family:'Gill Sans MT Ext Condensed Bold'"> “{{course.quote}}” </p>
                                 <div class="br"></div>
                             </aside>
 
@@ -170,7 +151,7 @@
         <!--================End Course Details Area =================-->
 
         <!--================ start footer Area  =================-->
- <footer class="footer-area p_120"style="text-align:center">
+       <footer class="footer-area p_120"style="text-align:center">
             <div class="container"style="text-align:center">
                 <div class="row">
                     <div class="col-lg-2  col-md-6 col-sm-6" >
@@ -213,7 +194,7 @@
                 </div>
             </div>
         </footer>
-        <!--================ End footer Area  =================-->
+		<!--================ End footer Area  =================-->
 
 
 

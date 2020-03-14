@@ -7,7 +7,7 @@ from app import app , db
 from app.forms import LoginForm, RegistrationForm, SendMassage_addFriend, ProfileForm
 from app.forms import LoginForm, RegistrationForm, SendMassage_addFriend, CourseForm
 from flask_login import current_user, login_user, login_required , logout_user
-from app.models import User, Course ,Category, Post , Enrollment, Comment, VideoViews, VideoRates
+from app.models import User, Course ,Category, Post , Enrollment, Comment, VideoViews, VideoRates, CourseVideo
 from werkzeug.urls import url_parse
 
 # @app.route('/home' , methods=['GET', 'POST'])  # bayad bere to home page(site landing page)
@@ -26,7 +26,7 @@ def about_us():
     return render_template('landing_page/about_us.html', title='About_us' )
 
 
-def calc_avg_rate(course_id,user_id):
+def calc_avg_rate(course_id):
     avg_rate = 0
     video_rate = VideoRates.query.filter_by(course_id=course_id).all()
     if len(video_rate):
@@ -50,37 +50,43 @@ def rate_video():
         db.session.add(temp_rate)
         db.session.commit()
 
-    return calc_avg_rate(request.form['course_id'], current_user.id)
+    return calc_avg_rate(request.form['course_id'])
 
 
 @app.route('/my_course_views', methods=['GET'])
 @login_required
 def my_course_views():
-    all_views = VideoViews.query.filter_by(user_id=current_user.id).all()
-    views_list = [0, 0, 0, 0]
-    for view in all_views:
-        views_list[view.course_id] += 1
+    all_courses = Course.query.all()
+    views_list = []
+    for course in all_courses:
+        all_views = VideoViews.query.filter_by(user_id=current_user.id, course_id=course.id).all()
+        views_list.append([course.name, len(all_views)])
     return json.dumps(views_list)
 
 
-@app.route('/course_video', methods=['GET', 'POST'])
+@app.route('/course_video/<int:course_id>', methods=['GET', 'POST'])
 @login_required
-def comments():
+def comments(course_id):
     if request.method == 'GET':
-        temp_rate = VideoRates.query.filter_by(course_id=0, user_id=current_user.id).all()
+        temp_rate = VideoRates.query.filter_by(course_id=course_id, user_id=current_user.id).all()
         if len(temp_rate):
             temp_rate = temp_rate[0].rate
         else:
             temp_rate = 0
-        temp_view = VideoViews(course_id=0, user_id=current_user.id)
+        temp_view = VideoViews(course_id=course_id, user_id=current_user.id)
         db.session.add(temp_view)
         db.session.commit()
-        all_views = VideoViews.query.filter_by(course_id=0).all()
-        temp_comments = Comment.query.filter_by(course_id=0).all()
+        all_views = VideoViews.query.filter_by(course_id=course_id).all()
+        temp_comments = Comment.query.filter_by(course_id=course_id).all()
+        course = Course.query.filter_by(id=course_id).first()
+        video = CourseVideo.query.filter_by(course_id=course_id).first()
         return render_template('landing_page/video.html', title='course_video', temp_comments=temp_comments,
                                all_views=all_views,
                                temp_rate=temp_rate,
-                               avg_rate=calc_avg_rate(0, current_user.id))
+                               avg_rate=calc_avg_rate(course_id),
+                               course_id=course_id,
+                               course=course,
+                               video=video)
     elif request.method == 'POST':
         course_id = request.form['course_id']
         email = request.form['email']
@@ -89,97 +95,8 @@ def comments():
         temp_comment = Comment(text=text, author=author, email=email, course_id=course_id)
         db.session.add(temp_comment)
         db.session.commit()
-        return redirect(url_for('comments'))
+        return redirect(url_for('comments', course_id=course_id))
 
-
-@app.route('/course_video1', methods=['GET', 'POST'])
-@login_required
-def comments1():
-    if request.method == 'GET':
-        temp_rate = VideoRates.query.filter_by(course_id=1, user_id=current_user.id).all()
-        if len(temp_rate):
-            temp_rate = temp_rate[0].rate
-        else:
-            temp_rate = 0
-        temp_view = VideoViews(course_id=1, user_id=current_user.id)
-        db.session.add(temp_view)
-        db.session.commit()
-        all_views = VideoViews.query.filter_by(course_id=1).all()
-        temp_comments = Comment.query.filter_by(course_id=1).all()
-        return render_template('landing_page/video1.html', title='course_video',
-                               temp_comments=temp_comments,
-                               all_views=all_views,
-                               temp_rate=temp_rate,
-                               avg_rate=calc_avg_rate(1, current_user.id))
-    elif request.method == 'POST':
-        course_id = request.form['course_id']
-        email = request.form['email']
-        author = request.form['author']
-        text = request.form['text']
-        temp_comment = Comment(text=text, author=author, email=email, course_id=course_id)
-        db.session.add(temp_comment)
-        db.session.commit()
-        return redirect(url_for('comments1'))
-
-
-@app.route('/course_video2', methods=['GET', 'POST'])
-@login_required
-def comments2():
-    if request.method == 'GET':
-        temp_rate = VideoRates.query.filter_by(course_id=2, user_id=current_user.id).all()
-        if len(temp_rate):
-            temp_rate = temp_rate[0].rate
-        else:
-            temp_rate = 0
-        temp_view = VideoViews(course_id=2, user_id=current_user.id)
-        db.session.add(temp_view)
-        db.session.commit()
-        all_views = VideoViews.query.filter_by(course_id=2).all()
-        temp_comments = Comment.query.filter_by(course_id=2).all()
-        return render_template('landing_page/video2.html', title='course_video',
-                               temp_comments=temp_comments,
-                               all_views=all_views,
-                               temp_rate=temp_rate,
-                               avg_rate=calc_avg_rate(2, current_user.id))
-    elif request.method == 'POST':
-        course_id = request.form['course_id']
-        email = request.form['email']
-        author = request.form['author']
-        text = request.form['text']
-        temp_comment = Comment(text=text, author=author, email=email, course_id=course_id)
-        db.session.add(temp_comment)
-        db.session.commit()
-        return redirect(url_for('comments2'))
-
-
-@app.route('/course_video3', methods=['GET', 'POST'])
-@login_required
-def comments3():
-    if request.method == 'GET':
-        temp_rate = VideoRates.query.filter_by(course_id=3, user_id=current_user.id).all()
-        if len(temp_rate):
-            temp_rate = temp_rate[0].rate
-        else:
-            temp_rate = 0
-        temp_view = VideoViews(course_id=3, user_id=current_user.id)
-        db.session.add(temp_view)
-        db.session.commit()
-        all_views = VideoViews.query.filter_by(course_id=3).all()
-        temp_comments = Comment.query.filter_by(course_id=3).all()
-        return render_template('landing_page/video3.html', title='course_video',
-                               temp_comments=temp_comments,
-                               all_views=all_views,
-                               temp_rate=temp_rate,
-                               avg_rate=calc_avg_rate(3, current_user.id))
-    elif request.method == 'POST':
-        course_id = request.form['course_id']
-        email = request.form['email']
-        author = request.form['author']
-        text = request.form['text']
-        temp_comment = Comment(text=text, author=author, email=email, course_id=course_id)
-        db.session.add(temp_comment)
-        db.session.commit()
-        return redirect(url_for('comments3'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -554,20 +471,9 @@ def course(courseId) :
 @app.route('/viewCourse/<int:courseId>', methods=['GET','POST'])
 @login_required
 def viewCourse(courseId) :
-
     course = Course.query.get(courseId)
-
-    if (course) :
-        if (courseId==1):
-            return render_template('landing_page/AI.html', title = 'ArtificialIntelligence', courseId=course.id , course=course)
-
-        if(courseId==2):
-            return render_template('landing_page/NLP.html')
-        if(courseId==3):
-            return render_template('landing_page/LogicalCircuits.html')
-        if(courseId==4):
-            return render_template('landing_page/Signals.html')
-    return render_template('landing_page/AI.html', title='Artificial Intelligence', courseId=course.id, course=course)
+    #if (course) :
+    return render_template('landing_page/learn-course.html', courseId=course.id, course=course)
 
 @app.route('/favicon.ico')
 def favicon():

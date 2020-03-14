@@ -73,6 +73,17 @@ class Course(db.Model):
     img_url = db.Column(db.String(140))
     enrollments = db.relationship('Enrollment', backref='related_course', lazy='dynamic')
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    p1 = db.Column(db.String(140))
+    p2 = db.Column(db.String(140))
+    p3 = db.Column(db.String(140))
+    bannerimg_url = db.Column(db.String(140))
+    upimg_url = db.Column(db.String(140))
+    leftimg_url = db.Column(db.String(140))
+    downimg_url = db.Column(db.String(140))
+    quoteimg_url = db.Column(db.String(140))
+    qname = db.Column(db.String(140))
+    qjob = db.Column(db.String(140))
+    quote = db.Column(db.String(140))
 
     def __repr__(self):
         return '<Course {}>'.format(self.name)
@@ -104,6 +115,14 @@ class Comment(db.Model):
     email = db.Column(db.String(100))
     timestamp = db.Column(db.DateTime(), default=datetime.utcnow, index=True)
     course_id = db.Column(db.Integer)
+
+
+class CourseVideo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+    timestamp = db.Column(db.DateTime(), default=datetime.utcnow, index=True)
+    video_link = db.Column(db.String(400))
+    video_link_id = db.Column(db.String(400))
 
 
 class VideoViews(db.Model):
